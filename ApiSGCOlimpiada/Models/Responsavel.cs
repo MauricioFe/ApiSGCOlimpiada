@@ -10,6 +10,7 @@ namespace ApiSGCOlimpiada.Models
         public int Id { get; set; }
         public string  Nome { get; set; }
         public string  Cargo { get; set; }
+        public int EscolaId { get; set; }
         public Escola Escola { get; set; }
     }
 }

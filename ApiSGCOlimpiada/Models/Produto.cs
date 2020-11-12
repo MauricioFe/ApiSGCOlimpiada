@@ -10,6 +10,7 @@ namespace ApiSGCOlimpiada.Models
         public int Id { get; set; }
         public int CodigoProtheus { get; set; }
         public string Descricao { get; set; }
+        public int GrupoId { get; set; }
         public Grupo Grupo { get; set; }
     }
 }

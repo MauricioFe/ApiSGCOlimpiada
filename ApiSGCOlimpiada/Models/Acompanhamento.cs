@@ -10,6 +10,9 @@ namespace ApiSGCOlimpiada.Models
         public int Id { get; set; }
         public string Observacao { get; set; }
         public DateTime Date { get; set; }
+        public int StatusId { get; set; }
+        public int UsuarioId { get; set; }
+        public int SolicitacaoCompraId { get; set; }
         public Status Status { get; set; }
         public Usuario Usuario { get; set; }
         public SolicitacaoCompra SolicitacaoCompra { get; set; }

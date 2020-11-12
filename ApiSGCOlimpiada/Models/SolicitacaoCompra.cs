@@ -10,6 +10,8 @@ namespace ApiSGCOlimpiada.Models
         public int Id { get; set; }
         public string ResponsavelEntrega { get; set; }
         public DateTime Data { get; set; }
+        public int TipoCompraId { get; set; }
+        public int EscolaId { get; set; }
         public TipoCompra TipoCompra { get; set; }
         public Escola Escola { get; set; }
         public string Justificativa { get; set; }
