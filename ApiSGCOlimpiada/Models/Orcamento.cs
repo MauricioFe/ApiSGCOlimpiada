@@ -7,5 +7,12 @@ namespace ApiSGCOlimpiada.Models
 {
     public class Orcamento
     {
+        public int Id { get; set; }
+        public string Fornecedor { get; set; }
+        public double ValorTotal { get; set; }
+        public double TotalIpi { get; set; }
+        public double TotalProdutos { get; set; }
+        public byte Anexo { get; set; }
+        public DateTime Data { get; set; }
     }
 }

@@ -7,5 +7,9 @@ namespace ApiSGCOlimpiada.Models
 {
     public class Produto
     {
+        public int Id { get; set; }
+        public int CodigoProtheus { get; set; }
+        public string Descricao { get; set; }
+        public Grupo Grupo { get; set; }
     }
 }
