@@ -7,10 +7,10 @@ namespace ApiSGCOlimpiada.Models
 {
     public class Produto
     {
-        public int Id { get; set; }
-        public int CodigoProtheus { get; set; }
+        public long Id { get; set; }
+        public long CodigoProtheus { get; set; }
         public string Descricao { get; set; }
-        public int GrupoId { get; set; }
+        public long GrupoId { get; set; }
         public Grupo Grupo { get; set; }
     }
 }
