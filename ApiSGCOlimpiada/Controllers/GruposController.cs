@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetGrupo")]
-        public IActionResult GetGrupoById(int id)
+        public IActionResult GetGrupoById(long id)
         {
             var grupo = dao.Find(id);
             if (grupo == null)

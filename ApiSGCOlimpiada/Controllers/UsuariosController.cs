@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetUsuario")]
-        public IActionResult GetUsuarioById(int id)
+        public IActionResult GetUsuarioById(long id)
         {
             var usuario = dao.Find(id);
             if (usuario == null)
@@ -81,7 +81,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Usuario usuario, int id)
+        public IActionResult Put([FromBody] Usuario usuario, long id)
         {
             if (usuario == null)
             {
@@ -111,7 +111,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             var usuario = dao.Find(id);
             if (usuario == null)

@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetResponsavel")]
-        public IActionResult GetResponsavelById(int id)
+        public IActionResult GetResponsavelById(long id)
         {
             var responsavel = dao.Find(id);
             if (responsavel == null)

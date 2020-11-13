@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetLog")]
-        public IActionResult GetLogById(int id)
+        public IActionResult GetLogById(long id)
         {
             var log = dao.Find(id);
             if (log == null)
@@ -57,7 +57,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Log log, int id)
+        public IActionResult Put([FromBody] Log log, long id)
         {
             if (log == null)
             {
@@ -86,7 +86,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             var log = dao.Find(id);
             if (log == null)

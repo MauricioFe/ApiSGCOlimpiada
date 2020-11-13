@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetEscola")]
-        public IActionResult GetEscolaById(int id)
+        public IActionResult GetEscolaById(long id)
         {
             var escola = dao.Find(id);
             if (escola == null)

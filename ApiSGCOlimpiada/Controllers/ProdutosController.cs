@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetProduto")]
-        public IActionResult GetProdutoById(int id)
+        public IActionResult GetProdutoById(long id)
         {
             var produto = dao.Find(id);
             if (produto == null)

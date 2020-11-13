@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA0JALyL4s20WYhKCU+OX5VQAAAAACAAAAAAAQZgAAAAEAACAAAAClKa0OW2A3GC1rTD4uUAmwGjgJChYqfqRFrlYgQQrV4gAAAAAOgAAAAAIAACAAAACK1OpyNm+afwpwY0AkpmmNDql+ao8rRNPf1vfzqL94i4AAAACok00Kq94PKvxgs9Z3eWpPR45brk0Y01h4lMk/jFSv8570Pjy019FWj20k0LHhpWnRA2zOxtP9SqS2pbpPPjvwk1LZn+Y9E3AzKZZK+03CXQssBDMA4aFLaioaEVx5Hzf72GGiiuIR/olOR57GUSg9xt4F4Y04GterSv2w50pbhkAAAACypqXF8C+RxL7rfxpvkL/TTvBLn6Qg8wHF6/d+/ca90jKP9ODVYn0M66xafa8zVrjQgR4tPDEGtUAeOCC5VowX</EncryptedPassword>
+    <_PublishTargetUrl>ftps://waws-prod-cq1-017.ftp.azurewebsites.windows.net/site/wwwroot/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="ApiSGCOlimpiada.deps.json">
+      <publishTime>11/13/2020 16:55:33</publishTime>
+    </File>
+    <File Include="ApiSGCOlimpiada.dll">
+      <publishTime>11/13/2020 16:55:33</publishTime>
+    </File>
+    <File Include="ApiSGCOlimpiada.exe">
+      <publishTime>11/13/2020 16:55:33</publishTime>
+    </File>
+    <File Include="ApiSGCOlimpiada.pdb">
+      <publishTime>11/13/2020 16:55:33</publishTime>
+    </File>
+    <File Include="ApiSGCOlimpiada.runtimeconfig.json">
+      <publishTime>11/13/2020 16:55:34</publishTime>
+    </File>
+    <File Include="appsettings.Development.json">
+      <publishTime>11/13/2020 09:04:28</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>11/13/2020 13:21:01</publishTime>
+    </File>
+    <File Include="BouncyCastle.Crypto.dll">
+      <publishTime>05/28/2018 16:12:20</publishTime>
+    </File>
+    <File Include="Google.Protobuf.dll">
+      <publishTime>02/16/2020 13:04:38</publishTime>
+    </File>
+    <File Include="K4os.Compression.LZ4.dll">
+      <publishTime>07/03/2019 22:59:30</publishTime>
+    </File>
+    <File Include="K4os.Compression.LZ4.Streams.dll">
+      <publishTime>07/03/2019 22:59:30</publishTime>
+    </File>
+    <File Include="K4os.Hash.xxHash.dll">
+      <publishTime>07/03/2019 20:39:02</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Authentication.JwtBearer.dll">
+      <publishTime>10/26/2020 22:59:54</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Authentication.OpenIdConnect.dll">
+      <publishTime>10/26/2020 23:00:10</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>06/30/2020 01:04:58</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>06/30/2020 01:05:58</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>06/30/2020 01:06:48</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>06/30/2020 01:13:54</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>06/30/2020 01:09:50</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>08/29/2020 20:14:12</publishTime>
+    </File>
+    <File Include="MySql.Data.dll">
+      <publishTime>09/18/2020 18:21:54</publishTime>
+    </File>
+    <File Include="Renci.SshNet.dll">
+      <publishTime>10/16/2017 20:53:06</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 10:01:34</publishTime>
+    </File>
+    <File Include="SshNet.Security.Cryptography.dll">
+      <publishTime>07/14/2016 20:47:20</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>09/23/2020 12:47:20</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>09/23/2020 12:47:22</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>09/23/2020 12:47:24</publishTime>
+    </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>11/20/2017 18:09:04</publishTime>
+    </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>06/30/2020 01:03:46</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 10:01:34</publishTime>
+    </File>
+    <File Include="System.Xml.XPath.XmlDocument.dll">
+      <publishTime>06/11/2016 23:15:02</publishTime>
+    </File>
+    <File Include="Ubiety.Dns.Core.dll">
+      <publishTime>09/18/2020 18:20:50</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>11/13/2020 16:55:36</publishTime>
+    </File>
+    <File Include="Zstandard.Net.dll">
+      <publishTime>09/18/2020 18:20:50</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
