@@ -27,12 +27,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Insert into Usuarios values({usuario.Nome}, {usuario.Email}, {usuario.Senha}, {usuario.FuncaoId})", conn);
+                cmd = new MySqlCommand($"Insert into Usuarios values(null, '{usuario.Nome}', '{usuario.Email}', '{usuario.Senha}', {usuario.FuncaoId})", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             finally
             {
@@ -54,6 +54,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 Usuario usuario = new Usuario();
                 foreach (DataRow item in dt.Rows)
                 {
+                    usuario.Id = Convert.ToInt32(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
@@ -85,6 +86,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     Usuario usuario = new Usuario();
+                    usuario.Id = Convert.ToInt32(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
@@ -110,7 +112,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
 
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select Nome, Email, Senha, funcaoId from Usuarios where Email = {usuario.Email} and Senha = {usuario.Senha}", conn);
+                cmd = new MySqlCommand($"Select id, Nome, Email, Senha, funcaoId from Usuarios where Email = '{usuario.Email}' and Senha = '{usuario.Senha}'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -132,7 +134,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
             catch
             {
-                return null;
+                throw new Exception();
             }
             finally
             {
@@ -149,9 +151,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 cmd = new MySqlCommand($"Delete from Usuarios where id = {id}", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             finally
             {
@@ -165,12 +167,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Update Usuarios set Nome = {usuario.Nome}, email = {usuario.Email}, senha = {usuario.Senha} where id = {id}", conn);
+                cmd = new MySqlCommand($"Update Usuarios set Nome ='{usuario.Nome}', email = '{usuario.Email}', senha = '{usuario.Senha}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             finally
             {
