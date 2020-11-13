@@ -1,5 +1,4 @@
-﻿using ApiSGCOlimpiada.Data.FuncaoDAO;
-using ApiSGCOlimpiada.Models;
+﻿using ApiSGCOlimpiada.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
@@ -22,12 +21,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        IEnumerable<Funcao> GetAll()
+        public IEnumerable<Funcao> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        Funcao Find(int id)
+        public Funcao Find(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,6 +37,11 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         }
 
         public void Update(Funcao funcao, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
         {
             throw new NotImplementedException();
         }
