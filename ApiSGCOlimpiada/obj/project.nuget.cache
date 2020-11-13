@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d+x3sz9gO8InsJNPuDlHaZd910aeVb7zcYMC+QaHIv/6D7RJtKyhfxmZa8MQRHLucyU4WQZhjQijh+LemPI/wA==",
+  "dgSpecHash": "EiTII+YaHhj9FZdyHJ9XDI5foCAjWlbqubIZpjj3iz0MB8LZ6E/W90FuZOz6wvJJezjtuzB/mnooHu5GCvTPrA==",
   "success": true,
-  "projectFilePath": "D:\\Estudos\\Treinamento\\Projeto Solicitação de compra\\WebApi\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+  "projectFilePath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compra\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mauri\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.0\\microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\5.0.0\\microsoft.aspnetcore.authentication.openidconnect.5.0.0.nupkg.sha512",
