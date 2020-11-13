@@ -7,7 +7,7 @@ namespace ApiSGCOlimpiada.Models
 {
     public class Ocupacao
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Nome { get; set; }
         public string Numero { get; set; }
     }
