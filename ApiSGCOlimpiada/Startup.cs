@@ -44,7 +44,7 @@ namespace ApiSGCOlimpiada
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiSGCOlimpiada", Version = "v1" });
             });
-            services.AddTransient<IUsuarioDAO, UsuarioDAO>();
+            services.AddTransient<IUsuarioDAO, FuncaoDAO>();
             services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
             services.AddTransient<IEscolaDAO, EscolaDAO>();
             services.AddTransient<IGrupoDAO, GrupoDAO>();
