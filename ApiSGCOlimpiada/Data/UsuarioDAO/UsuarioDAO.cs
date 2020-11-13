@@ -23,85 +23,159 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
 
         public void Add(Usuario usuario)
         {
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Insert into Usuarios values({usuario.Nome}, {usuario.Email}, {usuario.Senha}, {usuario.FuncaoId})", conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Insert into Usuarios values({usuario.Nome}, {usuario.Email}, {usuario.Senha}, {usuario.FuncaoId})", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
 
         public Usuario Find(int id)
         {
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Select * from Usuarios where id = {id}", conn);
-            adapter = new MySqlDataAdapter(cmd);
-            dt = new DataTable();
-            adapter.Fill(dt);
-            Usuario usuario = new Usuario();
-            foreach (DataRow item in dt.Rows)
+            try
             {
-                usuario.Nome = item["Nome"].ToString();
-                usuario.Email = item["Email"].ToString();
-                usuario.Senha = item["Senha"].ToString();
-                usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Usuarios where id = {id}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Usuario usuario = new Usuario();
+                foreach (DataRow item in dt.Rows)
+                {
+                    usuario.Nome = item["Nome"].ToString();
+                    usuario.Email = item["Email"].ToString();
+                    usuario.Senha = item["Senha"].ToString();
+                    usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                }
+                return usuario;
             }
-            return usuario;
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public IEnumerable<Usuario> GetAll()
         {
-            List<Usuario> usuarios = new List<Usuario>();
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Select * from Usuarios", conn);
-            adapter = new MySqlDataAdapter(cmd);
-            dt = new DataTable();
-            adapter.Fill(dt);
-            foreach (DataRow item in dt.Rows)
+            try
             {
-                Usuario usuario = new Usuario();
-                usuario.Nome = item["Nome"].ToString();
-                usuario.Email = item["Email"].ToString();
-                usuario.Senha = item["Senha"].ToString();
-                usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
-                usuarios.Add(usuario);
+                List<Usuario> usuarios = new List<Usuario>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Usuarios", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Nome = item["Nome"].ToString();
+                    usuario.Email = item["Email"].ToString();
+                    usuario.Senha = item["Senha"].ToString();
+                    usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    usuarios.Add(usuario);
+                }
+                return usuarios;
             }
-            return usuarios;
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public Usuario Login(Usuario usuario)
         {
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Select Nome, Email, Senha, funcaoId from Usuarios where Email = {usuario.Email} and Senha = {usuario.Senha}", conn);
-            adapter = new MySqlDataAdapter(cmd);
-            dt = new DataTable();
-            adapter.Fill(dt);
-            Usuario usuarioLogado = new Usuario();
-            if (dt.Rows.Count > 0)
+            try
             {
 
-                foreach (DataRow item in dt.Rows)
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select Nome, Email, Senha, funcaoId from Usuarios where Email = {usuario.Email} and Senha = {usuario.Senha}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Usuario usuarioLogado = new Usuario();
+                if (dt.Rows.Count > 0)
                 {
-                    usuarioLogado.Id = Convert.ToInt32(item["Id"]);
-                    usuarioLogado.Nome = item["Nome"].ToString();
-                    usuarioLogado.Email = item["Email"].ToString();
-                    usuarioLogado.Senha = item["Senha"].ToString();
-                    usuarioLogado.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        usuarioLogado.Id = Convert.ToInt32(item["Id"]);
+                        usuarioLogado.Nome = item["Nome"].ToString();
+                        usuarioLogado.Email = item["Email"].ToString();
+                        usuarioLogado.Senha = item["Senha"].ToString();
+                        usuarioLogado.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    }
+                    return usuarioLogado;
                 }
-                return usuarioLogado;
+                return null;
             }
-            return null;
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Remove(int id)
         {
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Delete from Usuarios where id = {id}", conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Delete from Usuarios where id = {id}", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Update(Usuario usuario, int id)
         {
-            conn = new MySqlConnection(_conn);
-            cmd = new MySqlCommand($"Update Usuarios set Nome = {usuario.Nome}, email = {usuario.Email}, senha = {usuario.Senha} where id = {id}", conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Update Usuarios set Nome = {usuario.Nome}, email = {usuario.Email}, senha = {usuario.Senha} where id = {id}", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
