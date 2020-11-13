@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.OcupacaoSolicitacaoCompraDAO
 {
-    public class OcupacaoSolicitacaoCompraDAO
+    public class OcupacaoSolicitacaoCompraDAO : IOcupacaoSolicitacaoCompraDAO
     {
     }
 }

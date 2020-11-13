@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
 {
-    public class ProdutoPedidoOrcamentoDAO
+    public class ProdutoPedidoOrcamentoDAO : IProdutoPedidoOrcamentoDAO
     {
     }
 }

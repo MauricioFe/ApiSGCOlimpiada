@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.OcupacaoDAO
 {
-    public class OcupacaoDAO
+    public class OcupacaoDAO : IOcupacaoDAO
     {
     }
 }

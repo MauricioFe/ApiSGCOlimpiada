@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.GrupoDAO
 {
-    public class GrupoDAO
+    public class GrupoDAO : IGrupoDAO
     {
     }
 }

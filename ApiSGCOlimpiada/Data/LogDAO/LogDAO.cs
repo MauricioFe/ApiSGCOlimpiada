@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.LogDAO
 {
-    public class LogDAO
+    public class LogDAO : ILogDAO
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
 {
-    public class AcompanhamentoDAO
+    public class AcompanhamentoDAO: IAcompanhamentoDAO
     {
     }
 }

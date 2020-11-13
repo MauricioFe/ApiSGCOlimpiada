@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.UsuarioDAO
 {
-    public class UsuarioDAO
+    public class UsuarioDAO : IUsuarioDAO
     {
     }
 }

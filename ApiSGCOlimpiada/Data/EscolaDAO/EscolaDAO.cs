@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.EscolaDAO
 {
-    public class EscolaDAO
+    public class EscolaDAO : IEscolaDAO
     {
     }
 }

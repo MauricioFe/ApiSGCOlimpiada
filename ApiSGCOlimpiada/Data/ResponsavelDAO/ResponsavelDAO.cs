@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.ResponsavelDAO
 {
-    public class ResponsavelDAO
+    public class ResponsavelDAO : IResponsavelDAO
     {
     }
 }

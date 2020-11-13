@@ -1,3 +1,16 @@
+using ApiSGCOlimpiada.Data.AcompanhamentoDAO;
+using ApiSGCOlimpiada.Data.EscolaDAO;
+using ApiSGCOlimpiada.Data.GrupoDAO;
+using ApiSGCOlimpiada.Data.LogDAO;
+using ApiSGCOlimpiada.Data.OcupacaoDAO;
+using ApiSGCOlimpiada.Data.OcupacaoSolicitacaoCompraDAO;
+using ApiSGCOlimpiada.Data.ProdutoDAO;
+using ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO;
+using ApiSGCOlimpiada.Data.ResponsavelDAO;
+using ApiSGCOlimpiada.Data.SolicitacaoCompraDAO;
+using ApiSGCOlimpiada.Data.StatusDAO;
+using ApiSGCOlimpiada.Data.TipoCompraDAO;
+using ApiSGCOlimpiada.Data.UsuarioDAO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +44,19 @@ namespace ApiSGCOlimpiada
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiSGCOlimpiada", Version = "v1" });
             });
+            services.AddTransient<IUsuarioDAO, UsuarioDAO>();
+            services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
+            services.AddTransient<IEscolaDAO, EscolaDAO>();
+            services.AddTransient<IGrupoDAO, GrupoDAO>();
+            services.AddTransient<ILogDAO, LogDAO>();
+            services.AddTransient<IOcupacaoDAO, OcupacaoDAO>();
+            services.AddTransient<IOcupacaoSolicitacaoCompraDAO, OcupacaoSolicitacaoCompraDAO>();
+            services.AddTransient<IResponsavelDAO, ResponsavelDAO>();
+            services.AddTransient<IProdutoDAO, ProdutoDAO>();
+            services.AddTransient<IProdutoPedidoOrcamentoDAO, ProdutoPedidoOrcamentoDAO>();
+            services.AddTransient<ISolicitacaoCompraDAO, SolicitacaoCompraDAO>();
+            services.AddTransient<IStatusDAO, StatusDAO>();
+            services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

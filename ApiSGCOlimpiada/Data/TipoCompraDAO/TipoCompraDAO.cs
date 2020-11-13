@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.TipoCompraDAO
 {
-    public class TipoCompraDAO
+    public class TipoCompraDAO : ITipoCompraDAO
     {
     }
 }

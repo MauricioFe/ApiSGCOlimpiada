@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Data.StatusDAO
 {
-    public class StatusDAO
+    public class StatusDAO : IStatusDAO
     {
     }
 }
