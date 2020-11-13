@@ -41,7 +41,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
 
         }
 
-        public Usuario Find(int id)
+        public Usuario Find(long id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 Usuario usuario = new Usuario();
                 foreach (DataRow item in dt.Rows)
                 {
-                    usuario.Id = Convert.ToInt32(item["Id"]);
+                    usuario.Id = Convert.ToInt64(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
@@ -86,7 +86,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     Usuario usuario = new Usuario();
-                    usuario.Id = Convert.ToInt32(item["Id"]);
+                    usuario.Id = Convert.ToInt64(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
@@ -122,7 +122,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
 
                     foreach (DataRow item in dt.Rows)
                     {
-                        usuarioLogado.Id = Convert.ToInt32(item["Id"]);
+                        usuarioLogado.Id = Convert.ToInt64(item["Id"]);
                         usuarioLogado.Nome = item["Nome"].ToString();
                         usuarioLogado.Email = item["Email"].ToString();
                         usuarioLogado.Senha = item["Senha"].ToString();
@@ -142,7 +142,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Remove(int id)
+        public void Remove(long id)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Update(Usuario usuario, int id)
+        public void Update(Usuario usuario, long id)
         {
             try
             {

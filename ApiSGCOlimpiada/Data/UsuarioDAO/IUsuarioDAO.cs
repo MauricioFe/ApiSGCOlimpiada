@@ -9,11 +9,11 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
     public interface IUsuarioDAO
     {
         IEnumerable<Usuario> GetAll();
-        Usuario Find(int id);
+        Usuario Find(long id);
         Usuario Login(Usuario usuario);
         void Add(Usuario usuario);
-        void Update(Usuario usuario, int id);
-        void Remove(int id);
+        void Update(Usuario usuario, long id);
+        void Remove(long id);
 
     }
 }
