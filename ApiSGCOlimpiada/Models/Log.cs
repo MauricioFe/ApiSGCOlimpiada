@@ -7,10 +7,10 @@ namespace ApiSGCOlimpiada.Models
 {
     public class Log
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime Data { get; set; }
         public string Descricao { get; set; }
-        public int UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
     }
 }
