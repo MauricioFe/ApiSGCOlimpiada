@@ -5929,25 +5929,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mauri\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\mauri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compra\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+      "projectUniqueName": "D:\\Estudos\\Treinamento\\Projeto Solicitação de compra\\WebApi\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
       "projectName": "ApiSGCOlimpiada",
-      "projectPath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compra\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+      "projectPath": "D:\\Estudos\\Treinamento\\Projeto Solicitação de compra\\WebApi\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
       "packagesPath": "C:\\Users\\mauri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compra\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\obj\\",
+      "outputPath": "D:\\Estudos\\Treinamento\\Projeto Solicitação de compra\\WebApi\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\mauri\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
