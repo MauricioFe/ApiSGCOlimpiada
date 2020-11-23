@@ -89,7 +89,13 @@ namespace ApiSGCOlimpiada.Controllers
             }
             Escola escolaUpdated = new Escola();
             escolaUpdated.Id = id;
-
+            escolaUpdated.Nome = escola.Nome;
+            escolaUpdated.Bairro = escola.Bairro;
+            escolaUpdated.Cep = escola.Cep;
+            escolaUpdated.Cidade = escola.Cidade;
+            escolaUpdated.Estado = escola.Estado;
+            escolaUpdated.Logradouro = escola.Logradouro;
+            escolaUpdated.Numero = escola.Numero;
             try
             {
                 dao.Update(escolaUpdated, id);
@@ -119,6 +125,7 @@ namespace ApiSGCOlimpiada.Controllers
             }
             try
             {
+                dao.Remove(id);
                 return Ok(
                         new
                         {
@@ -132,7 +139,6 @@ namespace ApiSGCOlimpiada.Controllers
                     Message = "Erro interno no servidor"
                 });
             }
-            dao.Remove(id);
         }
     }
 }

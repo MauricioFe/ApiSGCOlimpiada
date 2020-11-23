@@ -91,8 +91,18 @@ namespace ApiSGCOlimpiada.Controllers
             grupoUpdated.Id = id;
             grupoUpdated.CodigoProtheus = grupo.CodigoProtheus;
             grupoUpdated.Descricao = grupo.Descricao;
-            dao.Update(grupoUpdated, id);
-            return CreatedAtRoute("GetGrupo", new { id = grupoUpdated.Id }, grupoUpdated);
+            try
+            {
+                dao.Update(grupoUpdated, id);
+                return CreatedAtRoute("GetGrupo", new { id = grupoUpdated.Id }, grupoUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -108,14 +118,23 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-
-            dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
+            try
+            {
+                dao.Remove(id);
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        }
+                    );
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
     }
 }
