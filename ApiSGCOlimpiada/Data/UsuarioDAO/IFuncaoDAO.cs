@@ -9,10 +9,10 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
     public interface IFuncaoDAO
     {
         IEnumerable<Funcao> GetAll();
-        Funcao Find(int id);
+        Funcao Find(long id);
         void Add(Funcao funcao);
-        void Update(Funcao funcao, int id);
-        void Remove(int id);
+        void Update(Funcao funcao, long id);
+        void Remove(long id);
 
     }
 }

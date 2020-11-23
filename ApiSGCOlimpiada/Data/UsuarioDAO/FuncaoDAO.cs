@@ -20,30 +20,120 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         MySqlDataAdapter adapter;
         MySqlCommand cmd;
         DataTable dt;
+        public void Add(Funcao funcao)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Insert into Funcao values(null, '{funcao.funcao}')", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+        public Funcao Find(long id)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Funcao where id = {id}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Funcao funcao = new Funcao();
+                foreach (DataRow item in dt.Rows)
+                {
+                    funcao.Id = Convert.ToInt64(item["Id"]);
+                    funcao.funcao = item["funcao"].ToString();
+                }
+                return funcao;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
         public IEnumerable<Funcao> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Funcao> funcaos = new List<Funcao>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Funcao", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Funcao funcao = new Funcao();
+                    funcao.Id = Convert.ToInt64(item["Id"]);
+                    funcao.funcao = item["funcao"].ToString();
+                    funcaos.Add(funcao);
+                }
+                return funcaos;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
-        public Funcao Find(int id)
+        public void Remove(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Delete from Funcao where id = {id}", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
-        public void Add(Funcao funcao)
+        public void Update(Funcao funcao, long id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Funcao funcao, int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Update Funcao set Funcao = {funcao.funcao}  where id = {id}", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
