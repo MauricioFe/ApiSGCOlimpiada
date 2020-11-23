@@ -39,6 +39,7 @@ namespace ApiSGCOlimpiada.Controllers
                 );
             }
             return new ObjectResult(log);
+
         }
         [HttpPost]
         public IActionResult Create([FromBody] Log log)
@@ -51,9 +52,18 @@ namespace ApiSGCOlimpiada.Controllers
                       Message = "Todos os campos são obrigatórios"
                   });
             }
-
-            dao.Add(log);
-            return CreatedAtRoute("GetLog", new { id = log.Id }, log);
+            try
+            {
+                dao.Add(log);
+                return CreatedAtRoute("GetLog", new { id = log.Id }, log);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpPut("{id}")]
@@ -81,8 +91,18 @@ namespace ApiSGCOlimpiada.Controllers
             logUpdated.Id = id;
             logUpdated.Descricao = log.Descricao;
             logUpdated.UsuarioId = log.UsuarioId;
-            dao.Update(logUpdated, id);
-            return CreatedAtRoute("GetLog", new { id = logUpdated.Id }, logUpdated);
+            try
+            {
+                dao.Update(logUpdated, id);
+                return CreatedAtRoute("GetLog", new { id = logUpdated.Id }, logUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -98,14 +118,23 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-
-            dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
+            try
+            {
+                dao.Remove(id);
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        }
+                    );
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
     }
 }
