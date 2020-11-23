@@ -52,8 +52,18 @@ namespace ApiSGCOlimpiada.Controllers
                   });
             }
 
-            dao.Add(tipoCompra);
-            return CreatedAtRoute("GetTipoCompra", new { id = tipoCompra.Id }, tipoCompra);
+            try
+            {
+                dao.Add(tipoCompra);
+                return CreatedAtRoute("GetTipoCompra", new { id = tipoCompra.Id }, tipoCompra);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpPut("{id}")]
@@ -80,8 +90,18 @@ namespace ApiSGCOlimpiada.Controllers
             TipoCompra tipoCompraUpdated = new TipoCompra();
             tipoCompraUpdated.Id = id;
             tipoCompraUpdated.Descricao = tipoCompra.Descricao;
-            dao.Update(tipoCompraUpdated, id);
-            return CreatedAtRoute("GetTipoCompra", new { id = tipoCompraUpdated.Id }, tipoCompraUpdated);
+            try
+            {
+                dao.Update(tipoCompraUpdated, id);
+                return CreatedAtRoute("GetTipoCompra", new { id = tipoCompraUpdated.Id }, tipoCompraUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -98,13 +118,24 @@ namespace ApiSGCOlimpiada.Controllers
                   );
             }
 
-            dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
+            try
+            {
+                dao.Remove(id);
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        }
+                    );
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
+
         }
     }
 }
