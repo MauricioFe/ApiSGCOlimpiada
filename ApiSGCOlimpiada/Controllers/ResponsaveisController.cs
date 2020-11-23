@@ -52,8 +52,18 @@ namespace ApiSGCOlimpiada.Controllers
                   });
             }
 
-            dao.Add(responsavel);
-            return CreatedAtRoute("GetResponsavel", new { id = responsavel.Id }, responsavel);
+            try
+            {
+                dao.Add(responsavel);
+                return CreatedAtRoute("GetResponsavel", new { id = responsavel.Id }, responsavel);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpPut("{id}")]
@@ -82,8 +92,18 @@ namespace ApiSGCOlimpiada.Controllers
             responsavelUpdated.Nome = responsavel.Nome;
             responsavelUpdated.Cargo = responsavel.Cargo;
             responsavelUpdated.EscolaId = responsavel.EscolaId;
-            dao.Update(responsavelUpdated, id);
-            return CreatedAtRoute("GetResponsavel", new { id = responsavelUpdated.Id }, responsavelUpdated);
+            try
+            {
+                dao.Update(responsavelUpdated, id);
+                return CreatedAtRoute("GetResponsavel", new { id = responsavelUpdated.Id }, responsavelUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -100,13 +120,23 @@ namespace ApiSGCOlimpiada.Controllers
                   );
             }
 
-            dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
+            try
+            {
+                dao.Remove(id);
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        }
+                    );
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
     }
 }
