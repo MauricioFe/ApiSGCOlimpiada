@@ -51,9 +51,19 @@ namespace ApiSGCOlimpiada.Controllers
                       Message = "Todos os campos são obrigatórios"
                   });
             }
+            try
+            {
+                dao.Add(escola);
+                return CreatedAtRoute("GetEscola", new { id = escola.Id }, escola);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
 
-            dao.Add(escola);
-            return CreatedAtRoute("GetEscola", new { id = escola.Id }, escola);
         }
 
         [HttpPut("{id}")]
@@ -80,8 +90,18 @@ namespace ApiSGCOlimpiada.Controllers
             Escola escolaUpdated = new Escola();
             escolaUpdated.Id = id;
 
-            dao.Update(escolaUpdated, id);
-            return CreatedAtRoute("GetEscola", new { id = escolaUpdated.Id }, escolaUpdated);
+            try
+            {
+                dao.Update(escolaUpdated, id);
+                return CreatedAtRoute("GetEscola", new { id = escolaUpdated.Id }, escolaUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -97,14 +117,22 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-
+            try
+            {
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        });
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
             dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
         }
     }
 }

@@ -52,8 +52,18 @@ namespace ApiSGCOlimpiada.Controllers
                   });
             }
 
-            dao.Add(grupo);
-            return CreatedAtRoute("GetGrupo", new { id = grupo.Id }, grupo);
+            try
+            {
+                dao.Add(grupo);
+                return CreatedAtRoute("GetGrupo", new { id = grupo.Id }, grupo);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    Message = "Erro interno no servidor"
+                });
+            }
         }
 
         [HttpPut("{id}")]
