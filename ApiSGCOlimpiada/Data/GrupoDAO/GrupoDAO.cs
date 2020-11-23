@@ -41,13 +41,13 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
 
         }
 
-        public Grupo Find(long id)
+        public Grupo FindBySearch(string filtro)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Grupos where id = {id}", conn);
+                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like %{filtro}% or Descricao Like %{filtro}%", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -139,5 +139,33 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             }
         }
 
+        public Grupo Find(long id)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Grupos where id = {id}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Grupo grupo = new Grupo();
+                foreach (DataRow item in dt.Rows)
+                {
+                    grupo.Id = Convert.ToInt64(item["Id"]);
+                    grupo.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
+                    grupo.Descricao = item["Descricao"].ToString();
+                }
+                return grupo;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

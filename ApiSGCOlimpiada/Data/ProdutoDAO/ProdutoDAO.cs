@@ -41,6 +41,35 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
 
         }
 
+        public Produto FindByProtheus(long codigoProtheus)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus = {codigoProtheus}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Produto produto = new Produto();
+                foreach (DataRow item in dt.Rows)
+                {
+                    produto.Id = Convert.ToInt64(item["Id"]);
+                    produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
+                    produto.Descricao = item["Descricao"].ToString();
+                    produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                }
+                return produto;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public Produto Find(long id)
         {
             try

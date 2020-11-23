@@ -9,7 +9,8 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
     public interface IProdutoDAO
     {
         IEnumerable<Produto> GetAll();
-        Produto Find(long id);
+        Produto Find(long codigoProtheus);
+        Produto FindByProtheus(long codigoProtheus);
         void Add(Produto produto);
         void Update(Produto produto, long id);
         void Remove(long id);
