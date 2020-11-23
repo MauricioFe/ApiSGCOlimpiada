@@ -40,6 +40,22 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(usuario);
         }
+
+        [HttpGet("{nome}", Name = "GetUsuarioByName")]
+        public IActionResult GetUsuarioByName([FromQuery] string nome)
+        {
+            var usuario = dao.FindByName(nome);
+            if (usuario == null)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Usuário não encontrado"
+                    }
+                );
+            }
+            return new ObjectResult(usuario);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] Usuario usuario)
         {
@@ -51,9 +67,19 @@ namespace ApiSGCOlimpiada.Controllers
                       Message = "Todos os campos são obrigatórios"
                   });
             }
-
-            dao.Add(usuario);
-            return CreatedAtRoute("GetUsuario", new { id = usuario.Id }, usuario);
+            try
+            {
+                dao.Add(usuario);
+                return CreatedAtRoute("GetUsuario", new { id = usuario.Id }, usuario);
+            }
+            catch (Exception)
+            {
+                return BadRequest(
+                  new
+                  {
+                      Message = "Erro interno no servirdor"
+                  });
+            }
         }
         [HttpPost]
         [Route("login")]
@@ -106,8 +132,19 @@ namespace ApiSGCOlimpiada.Controllers
             usuarioUpdated.Nome = usuario.Nome;
             usuarioUpdated.Email = usuario.Email;
             usuarioUpdated.Senha = usuario.Senha;
-            dao.Update(usuarioUpdated, id);
-            return CreatedAtRoute("GetUsuario", new { id = usuarioUpdated.Id }, usuarioUpdated);
+            try
+            {
+                dao.Update(usuarioUpdated, id);
+                return CreatedAtRoute("GetUsuario", new { id = usuarioUpdated.Id }, usuarioUpdated);
+            }
+            catch (Exception)
+            {
+                return BadRequest(
+                  new
+                  {
+                      Message = "Erro interno no servirdor"
+                  });
+            }
         }
 
         [HttpDelete("{id}")]
@@ -124,13 +161,25 @@ namespace ApiSGCOlimpiada.Controllers
                   );
             }
 
-            dao.Remove(id);
-            return Ok(
-                    new
-                    {
-                        Message = "Excluído com sucesso"
-                    }
-                );
+            try
+            {
+                dao.Remove(id);
+                return Ok(
+                        new
+                        {
+                            Message = "Excluído com sucesso"
+                        }
+                    );
+            }
+            catch (Exception)
+            {
+                return BadRequest(
+                  new
+                  {
+                      Message = "Erro interno no servirdor"
+                  });
+            }
+
         }
     }
 }

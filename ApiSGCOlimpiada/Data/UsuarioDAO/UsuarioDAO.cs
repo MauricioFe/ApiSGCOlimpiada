@@ -179,5 +179,37 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 conn.Close();
             }
         }
+
+        public Usuario FindByName(string Nome)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Usuarios where id Like %{Nome}%", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Usuario usuario = new Usuario();
+                foreach (DataRow item in dt.Rows)
+                {
+                    usuario.Id = Convert.ToInt64(item["Id"]);
+                    usuario.Nome = item["Nome"].ToString();
+                    usuario.Email = item["Email"].ToString();
+                    usuario.Senha = item["Senha"].ToString();
+                    usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                }
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
