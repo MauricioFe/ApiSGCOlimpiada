@@ -41,8 +41,8 @@ namespace ApiSGCOlimpiada.Controllers
             return new ObjectResult(usuario);
         }
 
-        [HttpGet("{nome}", Name = "GetUsuarioByName")]
-        public IActionResult GetUsuarioByName([FromQuery] string nome)
+        [HttpGet("search", Name = "GetUsuarioByName")]
+        public IActionResult GetUsuarioByName([FromQuery(Name = "nome")] string nome)
         {
             var usuario = dao.FindByName(nome);
             if (usuario == null)

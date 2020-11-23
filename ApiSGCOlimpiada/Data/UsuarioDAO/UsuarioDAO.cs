@@ -30,7 +30,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 cmd = new MySqlCommand($"Insert into Usuarios values(null, '{usuario.Nome}', '{usuario.Email}', '{usuario.Senha}', {usuario.FuncaoId})", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -51,9 +51,10 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Usuario usuario = new Usuario();
+                Usuario usuario = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    usuario = new Usuario();
                     usuario.Id = Convert.ToInt64(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
@@ -170,7 +171,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 cmd = new MySqlCommand($"Update Usuarios set Nome ='{usuario.Nome}', email = '{usuario.Email}', senha = '{usuario.Senha}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -186,13 +187,14 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Usuarios where id Like %{Nome}%", conn);
+                cmd = new MySqlCommand($"Select * from Usuarios where nome Like '%{Nome}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Usuario usuario = new Usuario();
+                Usuario usuario = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    usuario = new Usuario();
                     usuario.Id = Convert.ToInt64(item["Id"]);
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();

@@ -47,13 +47,14 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like %{filtro}% or Descricao Like %{filtro}%", conn);
+                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like '%{filtro}%' or Descricao Like '%{filtro}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Grupo grupo = new Grupo();
+                Grupo grupo = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    grupo = new Grupo();
                     grupo.Id = Convert.ToInt64(item["Id"]);
                     grupo.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     grupo.Descricao = item["Descricao"].ToString();
@@ -149,9 +150,10 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Grupo grupo = new Grupo();
+                Grupo grupo = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    grupo = new Grupo();
                     grupo.Id = Convert.ToInt64(item["Id"]);
                     grupo.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     grupo.Descricao = item["Descricao"].ToString();

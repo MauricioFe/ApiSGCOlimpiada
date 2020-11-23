@@ -40,6 +40,21 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(produto);
         }
+        [HttpGet("search", Name = "GetProdutoByProtheus")]
+        public IActionResult GetProdutoByProtheus([FromQuery (Name = "codigoProtheus")]long codigoProtheus)
+        {
+            var produto = dao.FindByProtheus(codigoProtheus);
+            if (produto == null)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Produto não encontrado"
+                    }
+                );
+            }
+            return new ObjectResult(produto);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] Produto produto)
         {

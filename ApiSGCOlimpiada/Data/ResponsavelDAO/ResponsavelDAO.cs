@@ -51,9 +51,10 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Responsavel responsavel = new Responsavel();
+                Responsavel responsavel = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    responsavel = new Responsavel();
                     responsavel.Id = Convert.ToInt64(item["Id"]);
                     responsavel.Nome = item["Nome"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();

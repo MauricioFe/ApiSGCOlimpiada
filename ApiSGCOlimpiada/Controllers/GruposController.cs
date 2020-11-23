@@ -40,6 +40,22 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(grupo);
         }
+
+        [HttpGet ("search",Name = "GetGrupoSearch")]
+        public IActionResult GetGrupoBySearch([FromQuery (Name = "filtro")]string filtro)
+        {
+            var grupo = dao.FindBySearch(filtro);
+            if (grupo == null)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Grupo não encontrado"
+                    }
+                );
+            }
+            return new ObjectResult(grupo);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] Grupo grupo)
         {

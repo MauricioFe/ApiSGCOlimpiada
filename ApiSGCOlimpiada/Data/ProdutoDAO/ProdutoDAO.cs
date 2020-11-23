@@ -51,9 +51,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Produto produto = new Produto();
+                Produto produto = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    produto = new Produto();
                     produto.Id = Convert.ToInt64(item["Id"]);
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
@@ -80,9 +81,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Produto produto = new Produto();
+                Produto produto = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    produto = new Produto();
                     produto.Id = Convert.ToInt64(item["Id"]);
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
