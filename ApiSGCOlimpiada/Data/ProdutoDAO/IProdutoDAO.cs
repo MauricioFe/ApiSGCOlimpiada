@@ -10,7 +10,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
     {
         IEnumerable<Produto> GetAll();
         Produto Find(long codigoProtheus);
-        Produto FindByProtheus(long codigoProtheus);
+        List<Produto> FindBySearch(string search);
         void Add(Produto produto);
         void Update(Produto produto, long id);
         void Remove(long id);

@@ -41,13 +41,14 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
 
         }
 
-        public Produto FindByProtheus(long codigoProtheus)
+        public List<Produto> FindBySearch(string search)
         {
             try
             {
+                List<Produto> produtos = new List<Produto>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus = {codigoProtheus}", conn);
+                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus LIKE '%{search}%' or descricao like '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -59,8 +60,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
                     produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                    produtos.Add(produto);
                 }
-                return produto;
+                return produtos;
             }
             catch
             {

@@ -58,7 +58,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Produto produto)
         {
-            if (produto == null)
+            if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
             {
                 return BadRequest(
                   new
@@ -84,7 +84,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Produto produto, long id)
         {
-            if (produto == null)
+            if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
             {
                 return BadRequest(
                    new
