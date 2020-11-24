@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Produto produto)
+        public bool Add(Produto produto)
         {
             try
             {
@@ -29,10 +29,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Produtos values(null, {produto.CodigoProtheus}, '{produto.Descricao}', {produto.GrupoId})", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -64,8 +66,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 }
                 return produtos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -94,8 +97,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 }
                 return produto;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -126,8 +130,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 }
                 return produtos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -136,7 +141,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -144,10 +149,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Produtos where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -155,7 +162,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
             }
         }
 
-        public void Update(Produto produto, long id)
+        public bool Update(Produto produto, long id)
         {
             try
             {
@@ -163,10 +170,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Update Produtos set CodigoProtheus = {produto.CodigoProtheus}, descricao = '{produto.Descricao}', GruposId = {produto.GrupoId}where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

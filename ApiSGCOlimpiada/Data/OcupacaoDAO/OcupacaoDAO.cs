@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Ocupacao ocupacao)
+        public bool Add(Ocupacao ocupacao)
         {
             try
             {
@@ -29,11 +29,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Ocupacoes values(null, '{ocupacao.Nome}', '{ocupacao.Numero}')", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {
@@ -62,8 +63,9 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 }
                 return ocupacao;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -93,8 +95,9 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 }
                 return ocupacaos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -125,8 +128,9 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 }
                 return ocupacaos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -135,7 +139,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -143,11 +147,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Ocupacoes where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {
@@ -155,7 +160,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             }
         }
 
-        public void Update(Ocupacao ocupacao, long id)
+        public bool Update(Ocupacao ocupacao, long id)
         {
             try
             {
@@ -163,11 +168,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Update Ocupacoes set Nome = {ocupacao.Nome}, Numero = '{ocupacao.Numero}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {

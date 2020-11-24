@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Grupo grupo)
+        public bool Add(Grupo grupo)
         {
             try
             {
@@ -29,11 +29,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Grupos values(null, {grupo.CodigoProtheus}, '{grupo.Descricao}')", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {
@@ -64,8 +65,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 }
                 return grupos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -95,8 +97,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 }
                 return grupos;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -105,7 +108,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -113,11 +116,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Grupos where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {
@@ -125,7 +129,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             }
         }
 
-        public void Update(Grupo grupo, long id)
+        public bool Update(Grupo grupo, long id)
         {
             try
             {
@@ -133,11 +137,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Update Grupos set CodigoProtheus = {grupo.CodigoProtheus}, descricao = '{grupo.Descricao}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return;
+                return false;
             }
             finally
             {
@@ -165,8 +170,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 }
                 return grupo;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally

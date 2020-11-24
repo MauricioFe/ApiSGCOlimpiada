@@ -11,9 +11,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
         IEnumerable<Grupo> GetAll();
         List<Grupo> FindBySearch(string search);
         Grupo Find(long id);
-        void Add(Grupo grupo);
-        void Update(Grupo grupo, long id);
-        void Remove(long id);
+        bool Add(Grupo grupo);
+        bool Update(Grupo grupo, long id);
+        bool Remove(long id);
 
     }
 }

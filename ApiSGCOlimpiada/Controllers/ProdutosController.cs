@@ -31,12 +31,7 @@ namespace ApiSGCOlimpiada.Controllers
             var produto = dao.Find(id);
             if (produto == null)
             {
-                return NotFound(
-                    new
-                    {
-                        Message = "Produto não encontrado"
-                    }
-                );
+                return NotFound(new { Message = "Produto não encontrado" });
             }
             return new ObjectResult(produto);
         }
@@ -46,12 +41,7 @@ namespace ApiSGCOlimpiada.Controllers
             var produto = dao.FindBySearch(search);
             if (produto.Count <= 0)
             {
-                return NotFound(
-                    new
-                    {
-                        Message = "Produto não encontrado"
-                    }
-                );
+                return NotFound(new { Message = "Produto não encontrado" });
             }
             return new ObjectResult(produto);
         }
@@ -60,25 +50,14 @@ namespace ApiSGCOlimpiada.Controllers
         {
             if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
             {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Todos os campos são obrigatórios"
-                  });
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             }
-
-            try
+            if (dao.Add(produto))
             {
-                dao.Add(produto);
                 return CreatedAtRoute("GetProduto", new { id = produto.Id }, produto);
             }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
+
         }
 
         [HttpPut("{id}")]
@@ -86,39 +65,23 @@ namespace ApiSGCOlimpiada.Controllers
         {
             if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
             {
-                return BadRequest(
-                   new
-                   {
-                       Message = "Todos os campos são obrigatórios"
-                   });
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             }
-
             if (dao.Find(id) == null)
             {
-                return NotFound(
-                      new
-                      {
-                          Message = "Produto não encontrado"
-                      }
-                  );
+                return NotFound(new { Message = "Produto não encontrado" });
             }
             Produto produtoUpdated = new Produto();
             produtoUpdated.Id = id;
             produtoUpdated.CodigoProtheus = produto.CodigoProtheus;
             produtoUpdated.Descricao = produto.Descricao;
             produtoUpdated.GrupoId = produto.GrupoId;
-            try
+            if (dao.Update(produtoUpdated, id))
             {
-                dao.Update(produtoUpdated, id);
+
                 return CreatedAtRoute("GetProduto", new { id = produtoUpdated.Id }, produtoUpdated);
             }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpDelete("{id}")]
@@ -127,31 +90,13 @@ namespace ApiSGCOlimpiada.Controllers
             var produto = dao.Find(id);
             if (produto == null)
             {
-                return NotFound(
-                      new
-                      {
-                          Message = "Produto não encontrado"
-                      }
-                  );
+                return NotFound(new { Message = "Produto não encontrado" });
             }
-
-            try
+            if (dao.Remove(id))
             {
-                dao.Remove(id);
-                return Ok(
-                        new
-                        {
-                            Message = "Excluído com sucesso"
-                        }
-                    );
+                return Ok(new { Message = "Excluído com sucesso" });
             }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
     }
 }

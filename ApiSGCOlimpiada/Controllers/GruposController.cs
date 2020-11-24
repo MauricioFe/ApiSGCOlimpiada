@@ -30,14 +30,8 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var grupo = dao.Find(id);
             if (grupo == null)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Grupo não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Grupo não encontrado" });
+
             return new ObjectResult(grupo);
         }
 
@@ -46,81 +40,39 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var grupo = dao.FindBySearch(search);
             if (grupo == null)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Grupo não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Grupo não encontrado" });
+
             return new ObjectResult(grupo);
         }
         [HttpPost]
         public IActionResult Create([FromBody] Grupo grupo)
         {
             if (grupo.CodigoProtheus == 0 || string.IsNullOrEmpty(grupo.Descricao))
-            {
-                grupo = null;
-                return BadRequest(
-                  new
-                  {
-                      Message = "Todos os campos são obrigatórios"
-                  });
-            }
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
-            try
-            {
-                dao.Add(grupo);
+            if (dao.Add(grupo))
                 return CreatedAtRoute("GetGrupo", new { id = grupo.Id }, grupo);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Grupo grupo, long id)
         {
             if (grupo.CodigoProtheus == 0 || string.IsNullOrEmpty(grupo.Descricao))
-            {
-                grupo = null;
-                return BadRequest(
-                   new
-                   {
-                       Message = "Todos os campos são obrigatórios"
-                   });
-            }
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
             if (dao.Find(id) == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Grupo não encontrado"
-                      }
-                  );
-            }
+                return NotFound(new { Message = "Grupo não encontrado" });
+
             Grupo grupoUpdated = new Grupo();
             grupoUpdated.Id = id;
             grupoUpdated.CodigoProtheus = grupo.CodigoProtheus;
             grupoUpdated.Descricao = grupo.Descricao;
-            try
-            {
-                dao.Update(grupoUpdated, id);
+
+            if (dao.Update(grupoUpdated, id))
                 return CreatedAtRoute("GetGrupo", new { id = grupoUpdated.Id }, grupoUpdated);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpDelete("{id}")]
@@ -128,31 +80,12 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var grupo = dao.Find(id);
             if (grupo == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Grupo não encontrado"
-                      }
-                  );
-            }
-            try
-            {
-                dao.Remove(id);
-                return Ok(
-                        new
-                        {
-                            Message = "Excluído com sucesso"
-                        }
-                    );
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+                return NotFound(new { Message = "Grupo não encontrado" });
+
+            if (dao.Remove(id))
+                return Ok(new { Message = "Excluído com sucesso" });
+
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
     }
 }
