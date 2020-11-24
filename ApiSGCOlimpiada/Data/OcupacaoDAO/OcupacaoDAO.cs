@@ -27,12 +27,13 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Insert into Ocupacoes values(null, {ocupacao.Nome}, '{ocupacao.Numero}')", conn);
+                cmd = new MySqlCommand($"Insert into Ocupacoes values(null, '{ocupacao.Nome}', '{ocupacao.Numero}')", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {
@@ -51,9 +52,10 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Ocupacao ocupacao = new Ocupacao();
+                Ocupacao ocupacao = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    ocupacao = new Ocupacao();
                     ocupacao.Id = Convert.ToInt64(item["Id"]);
                     ocupacao.Nome = item["Nome"].ToString();
                     ocupacao.Numero = item["Numero"].ToString();
@@ -69,6 +71,38 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn.Close();
             }
         }
+        public List<Ocupacao> FindBySearch(string search)
+        {
+            List<Ocupacao> ocupacaos = new List<Ocupacao>();
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from Ocupacoes where nome LIKE '%{search}%' or numero LIKE '%{search}%'", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Ocupacao ocupacao = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    ocupacao = new Ocupacao();
+                    ocupacao.Id = Convert.ToInt64(item["Id"]);
+                    ocupacao.Nome = item["Nome"].ToString();
+                    ocupacao.Numero = item["Numero"].ToString();
+                    ocupacaos.Add(ocupacao);
+                }
+                return ocupacaos;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
         public IEnumerable<Ocupacao> GetAll()
         {
@@ -113,6 +147,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {
@@ -132,6 +167,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {

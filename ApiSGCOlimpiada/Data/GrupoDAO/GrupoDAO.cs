@@ -41,13 +41,13 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
 
         }
 
-        public Grupo FindBySearch(string filtro)
+        public Grupo FindBySearch(string search)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like '%{filtro}%' or Descricao Like '%{filtro}%'", conn);
+                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like '%{search}%' or Descricao Like '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);

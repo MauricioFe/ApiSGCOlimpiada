@@ -42,9 +42,9 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet ("search",Name = "GetGrupoSearch")]
-        public IActionResult GetGrupoBySearch([FromQuery (Name = "filtro")]string filtro)
+        public IActionResult GetGrupoBySearch([FromQuery (Name = "search")]string search)
         {
-            var grupo = dao.FindBySearch(filtro);
+            var grupo = dao.FindBySearch(search);
             if (grupo == null)
             {
                 return NotFound(

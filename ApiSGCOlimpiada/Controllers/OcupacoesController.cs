@@ -40,6 +40,22 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(ocupacao);
         }
+
+        [HttpGet("search", Name = "GetOcupacaoBySearch")]
+        public IActionResult GetOcupacaoBySearch([FromQuery(Name = "search")] string search)
+        {
+            var ocupacao = dao.FindBySearch(search);
+            if (ocupacao == null)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Ocupação não encontrada"
+                    }
+                );
+            }
+            return new ObjectResult(ocupacao);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] Ocupacao ocupacao)
         {
