@@ -10,6 +10,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
     {
         IEnumerable<Responsavel> GetAll();
         Responsavel Find(long id);
+        List<Responsavel> FindBySearch(string search);
         void Add(Responsavel responsavel);
         void Update(Responsavel responsavel, long id);
         void Remove(long id);

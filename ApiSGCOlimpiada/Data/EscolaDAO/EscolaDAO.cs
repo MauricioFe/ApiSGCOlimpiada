@@ -29,7 +29,7 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Escolas values(null, '{escola.Nome}', '{escola.Cep}', '{escola.Logradouro}', " +
-                    $"'{escola.Bairro}', '{escola.Numero}', {escola.Cidade}, {escola.Estado})", conn);
+                    $"'{escola.Bairro}', '{escola.Numero}', '{escola.Estado}', '{escola.Cidade}')", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -67,8 +67,9 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 }
                 return escola;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -103,8 +104,9 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 }
                 return escolas;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally

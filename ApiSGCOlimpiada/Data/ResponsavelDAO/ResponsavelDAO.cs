@@ -47,7 +47,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Responsaveis where id = {id}", conn);
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -55,12 +55,62 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     responsavel = new Responsavel();
-                    responsavel.Id = Convert.ToInt64(item["Id"]);
-                    responsavel.Nome = item["Nome"].ToString();
+                    responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
+                    responsavel.Nome = item["responsavelNome"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
-                    responsavel.EscolaId = Convert.ToInt64(item["EscolaId"]);
+                    responsavel.Escola = new Escola();
+                    responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
+                    responsavel.Escola.Id = Convert.ToInt64(item["Id"]);
+                    responsavel.Escola.Nome = item["Nome"].ToString();
+                    responsavel.Escola.Cep = item["Cep"].ToString();
+                    responsavel.Escola.Logradouro = item["Logradouro"].ToString();
+                    responsavel.Escola.Bairro = item["Bairro"].ToString();
+                    responsavel.Escola.Numero = item["Numero"].ToString();
+                    responsavel.Escola.Cidade = item["Cidade"].ToString();
+                    responsavel.Escola.Estado = item["Estado"].ToString();
                 }
                 return responsavel;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public List<Responsavel> FindBySearch(string search)
+        {
+            try
+            {
+                List<Responsavel> responsaveis = new List<Responsavel>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Nome LIKE '%{search}%' or e.Nome LIKE '%{search}%'", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Responsavel responsavel = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    responsavel = new Responsavel();
+                    responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
+                    responsavel.Nome = item["responsavelNome"].ToString();
+                    responsavel.Cargo = item["Cargo"].ToString();
+                    responsavel.Escola = new Escola();
+                    responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
+                    responsavel.Escola.Id = Convert.ToInt64(item["Id"]);
+                    responsavel.Escola.Nome = item["Nome"].ToString();
+                    responsavel.Escola.Cep = item["Cep"].ToString();
+                    responsavel.Escola.Logradouro = item["Logradouro"].ToString();
+                    responsavel.Escola.Bairro = item["Bairro"].ToString();
+                    responsavel.Escola.Numero = item["Numero"].ToString();
+                    responsavel.Escola.Cidade = item["Cidade"].ToString();
+                    responsavel.Escola.Estado = item["Estado"].ToString();
+                    responsaveis.Add(responsavel);
+                }
+                return responsaveis;
             }
             catch
             {
@@ -76,23 +126,32 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
         {
             try
             {
-                List<Responsavel> responsavels = new List<Responsavel>();
+                List<Responsavel> responsaveis = new List<Responsavel>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Responsaveis", conn);
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
                 foreach (DataRow item in dt.Rows)
                 {
                     Responsavel responsavel = new Responsavel();
-                    responsavel.Id = Convert.ToInt64(item["Id"]);
-                    responsavel.Nome = item["Nome"].ToString();
+                    responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
+                    responsavel.Nome = item["responsavelNome"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
-                    responsavel.EscolaId = Convert.ToInt64(item["EscolaId"]);
-                    responsavels.Add(responsavel);
+                    responsavel.Escola = new Escola();
+                    responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
+                    responsavel.Escola.Id = Convert.ToInt64(item["Id"]);
+                    responsavel.Escola.Nome = item["Nome"].ToString();
+                    responsavel.Escola.Cep = item["Cep"].ToString();
+                    responsavel.Escola.Logradouro = item["Logradouro"].ToString();
+                    responsavel.Escola.Bairro = item["Bairro"].ToString();
+                    responsavel.Escola.Numero = item["Numero"].ToString();
+                    responsavel.Escola.Cidade = item["Cidade"].ToString();
+                    responsavel.Escola.Estado = item["Estado"].ToString();
+                    responsaveis.Add(responsavel);
                 }
-                return responsavels;
+                return responsaveis;
             }
             catch
             {

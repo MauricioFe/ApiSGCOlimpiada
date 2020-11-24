@@ -40,6 +40,23 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(responsavel);
         }
+
+        [HttpGet("search", Name = "GetResponsavelBySearch")]
+        public IActionResult GetResponsavelBySearch([FromQuery(Name = "search")] string search)
+        {
+            var responsavel = dao.FindBySearch(search);
+            if (responsavel == null)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Responsavel não encontrado"
+                    }
+                );
+            }
+            return new ObjectResult(responsavel);
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] Responsavel responsavel)
         {
