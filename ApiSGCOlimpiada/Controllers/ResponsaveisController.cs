@@ -45,7 +45,7 @@ namespace ApiSGCOlimpiada.Controllers
         public IActionResult GetResponsavelBySearch([FromQuery(Name = "search")] string search)
         {
             var responsavel = dao.FindBySearch(search);
-            if (responsavel == null)
+            if (responsavel.Count <= 0)
             {
                 return NotFound(
                     new
@@ -60,7 +60,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Responsavel responsavel)
         {
-            if (responsavel == null)
+            if (string.IsNullOrEmpty(responsavel.Nome) || string.IsNullOrEmpty(responsavel.Cargo) || responsavel.EscolaId == 0)
             {
                 return BadRequest(
                   new
@@ -86,7 +86,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Responsavel responsavel, long id)
         {
-            if (responsavel == null)
+            if (string.IsNullOrEmpty(responsavel.Nome) || string.IsNullOrEmpty(responsavel.Cargo) || responsavel.EscolaId == 0)
             {
                 return BadRequest(
                    new
