@@ -59,7 +59,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Usuario usuario)
         {
-            if (usuario == null)
+            if (string.IsNullOrEmpty(usuario.Nome) || string.IsNullOrEmpty(usuario.Email)|| string.IsNullOrEmpty(usuario.Senha))
             {
                 return BadRequest(
                   new
@@ -85,7 +85,7 @@ namespace ApiSGCOlimpiada.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] Usuario usuario)
         {
-            if (usuario == null)
+            if (string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha))
             {
                 return BadRequest(
                     new
@@ -109,7 +109,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Usuario usuario, long id)
         {
-            if (usuario == null)
+            if (string.IsNullOrEmpty(usuario.Nome) || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha))
             {
                 return BadRequest(
                    new

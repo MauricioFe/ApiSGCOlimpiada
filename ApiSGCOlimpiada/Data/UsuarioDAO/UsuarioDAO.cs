@@ -181,10 +181,11 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public Usuario FindByName(string Nome)
+        public List<Usuario> FindByName(string Nome)
         {
             try
             {
+                List<Usuario> usuarios = new List<Usuario>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Select * from Usuarios where nome Like '%{Nome}%'", conn);
@@ -200,8 +201,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
                     usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    usuarios.Add(usuario);
                 }
-                return usuario;
+                return usuarios;
             }
             catch (Exception e)
             {

@@ -10,7 +10,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
     {
         IEnumerable<Usuario> GetAll();
         Usuario Find(long id);
-        Usuario FindByName(string Nome);
+        List<Usuario> FindByName(string Nome);
         Usuario Login(Usuario usuario);
         void Add(Usuario usuario);
         void Update(Usuario usuario, long id);
