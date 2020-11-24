@@ -10,8 +10,8 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
     {
         IEnumerable<Escola> GetAll();
         Escola Find(long id);
-        void Add(Escola escola);
-        void Update(Escola escola, long id);
-        void Remove(long id);
+        bool Add(Escola escola);
+        bool Update(Escola escola, long id);
+        bool Remove(long id);
     }
 }

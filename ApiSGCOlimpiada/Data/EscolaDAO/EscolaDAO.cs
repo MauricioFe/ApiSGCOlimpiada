@@ -22,7 +22,7 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Escola escola)
+        public bool Add(Escola escola)
         {
             try
             {
@@ -31,10 +31,12 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 cmd = new MySqlCommand($"Insert into Escolas values(null, '{escola.Nome}', '{escola.Cep}', '{escola.Logradouro}', " +
                     $"'{escola.Bairro}', '{escola.Numero}', '{escola.Estado}', '{escola.Cidade}')", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -115,7 +117,7 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -123,10 +125,12 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Escolas where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -134,7 +138,7 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
             }
         }
 
-        public void Update(Escola escola, long id)
+        public bool Update(Escola escola, long id)
         {
             try
             {
@@ -143,10 +147,12 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 cmd = new MySqlCommand($"Update Escolas set Nome = '{escola.Nome}',  Cep = '{escola.Cep}', Logradouro = '{escola.Logradouro}', " +
                     $"Bairro = '{escola.Bairro}', Numero = '{escola.Numero}', Cidade = {escola.Cidade}, Estado = {escola.Estado} where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

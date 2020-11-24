@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(TipoCompra tipoCompra)
+        public bool Add(TipoCompra tipoCompra)
         {
             try
             {
@@ -29,10 +29,12 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into TipoCompras values(null, '{tipoCompra.Descricao}')", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -60,8 +62,9 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 }
                 return tipoCompra;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -89,8 +92,9 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 }
                 return tipoCompras;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -129,7 +133,7 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -137,10 +141,12 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from TipoCompras where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -148,7 +154,7 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
             }
         }
 
-        public void Update(TipoCompra tipoCompra, long id)
+        public bool Update(TipoCompra tipoCompra, long id)
         {
             try
             {
@@ -156,10 +162,12 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Update TipoCompras set  descricao = '{tipoCompra.Descricao}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

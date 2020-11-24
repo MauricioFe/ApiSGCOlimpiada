@@ -11,8 +11,8 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
         IEnumerable<TipoCompra> GetAll();
         List<TipoCompra> FindBySearch(string search);
         TipoCompra Find(long id);
-        void Add(TipoCompra grupo);
-        void Update(TipoCompra grupo, long id);
-        void Remove(long id);
+        bool Add(TipoCompra grupo);
+        bool Update(TipoCompra grupo, long id);
+        bool Remove(long id);
     }
 }

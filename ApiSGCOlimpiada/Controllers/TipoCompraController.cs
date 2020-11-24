@@ -30,14 +30,7 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var tipoCompra = dao.Find(id);
             if (tipoCompra == null)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Tipo de compra não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Tipo de compra não encontrado" });
             return new ObjectResult(tipoCompra);
         }
 
@@ -46,78 +39,38 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var tipoCompra = dao.FindBySearch(search);
             if (tipoCompra.Count <= 0)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Tipo de compra não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Tipo de compra não encontrado" });
             return new ObjectResult(tipoCompra);
         }
         [HttpPost]
         public IActionResult Create([FromBody] TipoCompra tipoCompra)
         {
             if (tipoCompra == null)
-            {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Todos os campos são obrigatórios"
-                  });
-            }
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
-            try
-            {
-                dao.Add(tipoCompra);
+            if (dao.Add(tipoCompra))
                 return CreatedAtRoute("GetTipoCompra", new { id = tipoCompra.Id }, tipoCompra);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] TipoCompra tipoCompra, long id)
         {
             if (tipoCompra == null)
-            {
-                return BadRequest(
-                   new
-                   {
-                       Message = "Todos os campos são obrigatórios"
-                   });
-            }
+
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
             if (dao.Find(id) == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Tipo de compra não encontrado"
-                      }
-                  );
-            }
+                return NotFound(new { Message = "Tipo de compra não encontrado" });
+
             TipoCompra tipoCompraUpdated = new TipoCompra();
             tipoCompraUpdated.Id = id;
             tipoCompraUpdated.Descricao = tipoCompra.Descricao;
-            try
-            {
-                dao.Update(tipoCompraUpdated, id);
+            if (dao.Update(tipoCompraUpdated, id))
                 return CreatedAtRoute("GetTipoCompra", new { id = tipoCompraUpdated.Id }, tipoCompraUpdated);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
+
         }
 
         [HttpDelete("{id}")]
@@ -125,33 +78,11 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var tipoCompra = dao.Find(id);
             if (tipoCompra == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Tipo de compra não encontrado"
-                      }
-                  );
-            }
+                return NotFound(new { Message = "Tipo de compra não encontrado" });
 
-            try
-            {
-                dao.Remove(id);
-                return Ok(
-                        new
-                        {
-                            Message = "Excluído com sucesso"
-                        }
-                    );
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
-
+            if (dao.Remove(id))
+                return Ok(new { Message = "Excluído com sucesso" });
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
     }
 }

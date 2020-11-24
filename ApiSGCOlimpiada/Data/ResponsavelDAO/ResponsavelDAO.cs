@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Responsavel responsavel)
+        public bool Add(Responsavel responsavel)
         {
             try
             {
@@ -29,10 +29,12 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Responsaveis values(null, '{responsavel.Nome}', '{responsavel.Cargo}', {responsavel.EscolaId})", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -71,8 +73,9 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 }
                 return responsavel;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -112,8 +115,9 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 }
                 return responsaveis;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -153,9 +157,10 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 }
                 return responsaveis;
             }
-            catch
+            catch (Exception e)
             {
-                return null;
+                Console.WriteLine(e.Message);
+                return null; 
             }
             finally
             {
@@ -163,7 +168,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -171,10 +176,12 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Responsaveis where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -182,7 +189,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             }
         }
 
-        public void Update(Responsavel responsavel, long id)
+        public bool Update(Responsavel responsavel, long id)
         {
             try
             {
@@ -191,10 +198,12 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 cmd = new MySqlCommand($"Update Responsaveis set Nome = {responsavel.Nome}, Cargo = '{responsavel.Cargo}', " +
                     $"EscolaId = {responsavel.EscolaId} where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

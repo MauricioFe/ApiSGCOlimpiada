@@ -30,14 +30,7 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var responsavel = dao.Find(id);
             if (responsavel == null)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Responsavel não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Responsavel não encontrado" });
             return new ObjectResult(responsavel);
         }
 
@@ -46,14 +39,7 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var responsavel = dao.FindBySearch(search);
             if (responsavel.Count <= 0)
-            {
-                return NotFound(
-                    new
-                    {
-                        Message = "Responsavel não encontrado"
-                    }
-                );
-            }
+                return NotFound(new { Message = "Responsavel não encontrado" });
             return new ObjectResult(responsavel);
         }
 
@@ -61,99 +47,38 @@ namespace ApiSGCOlimpiada.Controllers
         public IActionResult Create([FromBody] Responsavel responsavel)
         {
             if (string.IsNullOrEmpty(responsavel.Nome) || string.IsNullOrEmpty(responsavel.Cargo) || responsavel.EscolaId == 0)
-            {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Todos os campos são obrigatórios"
-                  });
-            }
-
-            try
-            {
-                dao.Add(responsavel);
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
+            if (dao.Add(responsavel))
                 return CreatedAtRoute("GetResponsavel", new { id = responsavel.Id }, responsavel);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Responsavel responsavel, long id)
         {
             if (string.IsNullOrEmpty(responsavel.Nome) || string.IsNullOrEmpty(responsavel.Cargo) || responsavel.EscolaId == 0)
-            {
-                return BadRequest(
-                   new
-                   {
-                       Message = "Todos os campos são obrigatórios"
-                   });
-            }
-
+                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Find(id) == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Responsavel não encontrado"
-                      }
-                  );
-            }
+                return NotFound(new { Message = "Responsavel não encontrado" });
+
             Responsavel responsavelUpdated = new Responsavel();
             responsavelUpdated.Id = id;
             responsavelUpdated.Nome = responsavel.Nome;
             responsavelUpdated.Cargo = responsavel.Cargo;
             responsavelUpdated.EscolaId = responsavel.EscolaId;
-            try
-            {
-                dao.Update(responsavelUpdated, id);
+            if (dao.Update(responsavelUpdated, id))
                 return CreatedAtRoute("GetResponsavel", new { id = responsavelUpdated.Id }, responsavelUpdated);
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
             var responsavel = dao.Find(id);
-            if (responsavel == null)
-            {
-                return NotFound(
-                      new
-                      {
-                          Message = "Responsavel não encontrado"
-                      }
-                  );
-            }
-
-            try
-            {
-                dao.Remove(id);
-                return Ok(
-                        new
-                        {
-                            Message = "Excluído com sucesso"
-                        }
-                    );
-            }
-            catch (Exception)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro interno no servidor"
-                });
-            }
+            if (responsavel == null) return NotFound(new { Message = "Responsavel não encontrado" });
+            if (dao.Remove(id))
+                return Ok(new { Message = "Excluído com sucesso" });
+            return BadRequest(new { Message = "Erro interno no servidor" });
         }
     }
 }
