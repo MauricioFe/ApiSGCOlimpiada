@@ -40,6 +40,22 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(tipoCompra);
         }
+
+        [HttpGet("search", Name = "GetTipoCompraSearch")]
+        public IActionResult GetTipoCompraBySearch([FromQuery(Name = "search")] string search)
+        {
+            var tipoCompra = dao.FindBySearch(search);
+            if (tipoCompra.Count <= 0)
+            {
+                return NotFound(
+                    new
+                    {
+                        Message = "Tipo de compra não encontrado"
+                    }
+                );
+            }
+            return new ObjectResult(tipoCompra);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] TipoCompra tipoCompra)
         {

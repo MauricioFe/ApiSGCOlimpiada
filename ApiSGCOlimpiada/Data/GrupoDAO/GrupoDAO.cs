@@ -49,7 +49,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like '%{search}%' or Descricao Like '%{search}%'", conn);
+                cmd = new MySqlCommand($"Select * from Grupos where codigoProtheus Like '{search}%' or Descricao Like '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);

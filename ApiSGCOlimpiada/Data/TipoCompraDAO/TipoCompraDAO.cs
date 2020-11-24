@@ -51,9 +51,10 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                TipoCompra tipoCompra = new TipoCompra();
+                TipoCompra tipoCompra = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    tipoCompra = new TipoCompra();
                     tipoCompra.Id = Convert.ToInt64(item["Id"]);
                     tipoCompra.Descricao = item["Descricao"].ToString();
                 }
@@ -68,7 +69,35 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 conn.Close();
             }
         }
-
+        public List<TipoCompra> FindBySearch(string search)
+        {
+            try
+            {
+                List<TipoCompra> tipoCompras = new List<TipoCompra>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select * from TipoCompras where descricao LIKE '%{search}%'", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    TipoCompra tipoCompra = new TipoCompra();
+                    tipoCompra.Id = Convert.ToInt64(item["Id"]);
+                    tipoCompra.Descricao = item["Descricao"].ToString();
+                    tipoCompras.Add(tipoCompra);
+                }
+                return tipoCompras;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public IEnumerable<TipoCompra> GetAll()
         {
             try
@@ -89,8 +118,9 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
                 }
                 return tipoCompras;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally

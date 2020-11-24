@@ -48,7 +48,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 List<Produto> produtos = new List<Produto>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus LIKE '%{search}%' or descricao like '%{search}%'", conn);
+                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus LIKE '{search}%' or descricao like '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);

@@ -40,11 +40,11 @@ namespace ApiSGCOlimpiada.Controllers
             }
             return new ObjectResult(produto);
         }
-        [HttpGet("search", Name = "GetProdutoByProtheus")]
-        public IActionResult GetProdutoByProtheus([FromQuery (Name = "codigoProtheus")]long codigoProtheus)
+        [HttpGet("search", Name = "GetProdutoBySearch")]
+        public IActionResult GetProdutoBySearch([FromQuery(Name = "search")] string search)
         {
-            var produto = dao.FindByProtheus(codigoProtheus);
-            if (produto == null)
+            var produto = dao.FindBySearch(search);
+            if (produto.Count <= 0)
             {
                 return NotFound(
                     new

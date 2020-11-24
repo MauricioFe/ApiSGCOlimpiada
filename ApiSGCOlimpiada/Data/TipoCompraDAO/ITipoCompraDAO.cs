@@ -9,6 +9,7 @@ namespace ApiSGCOlimpiada.Data.TipoCompraDAO
     public interface ITipoCompraDAO
     {
         IEnumerable<TipoCompra> GetAll();
+        List<TipoCompra> FindBySearch(string search);
         TipoCompra Find(long id);
         void Add(TipoCompra grupo);
         void Update(TipoCompra grupo, long id);
