@@ -59,7 +59,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Usuario usuario)
         {
-            if (string.IsNullOrEmpty(usuario.Nome) || string.IsNullOrEmpty(usuario.Email)|| string.IsNullOrEmpty(usuario.Senha))
+            if (string.IsNullOrEmpty(usuario.Nome) || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha))
             {
                 return BadRequest(
                   new
@@ -67,19 +67,11 @@ namespace ApiSGCOlimpiada.Controllers
                       Message = "Todos os campos são obrigatórios"
                   });
             }
-            try
+            if (dao.Add(usuario))
             {
-                dao.Add(usuario);
                 return CreatedAtRoute("GetUsuario", new { id = usuario.Id }, usuario);
             }
-            catch (Exception)
-            {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Erro interno no servirdor"
-                  });
-            }
+            return BadRequest(new { Message = "Erro interno no servirdor" });
         }
         [HttpPost]
         [Route("login")]
@@ -132,19 +124,12 @@ namespace ApiSGCOlimpiada.Controllers
             usuarioUpdated.Nome = usuario.Nome;
             usuarioUpdated.Email = usuario.Email;
             usuarioUpdated.Senha = usuario.Senha;
-            try
+
+            if (dao.Update(usuarioUpdated, id))
             {
-                dao.Update(usuarioUpdated, id);
                 return CreatedAtRoute("GetUsuario", new { id = usuarioUpdated.Id }, usuarioUpdated);
             }
-            catch (Exception)
-            {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Erro interno no servirdor"
-                  });
-            }
+            return BadRequest(new { Message = "Erro interno no servirdor" });
         }
 
         [HttpDelete("{id}")]
@@ -160,26 +145,11 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-
-            try
+            if (dao.Remove(id))
             {
-                dao.Remove(id);
-                return Ok(
-                        new
-                        {
-                            Message = "Excluído com sucesso"
-                        }
-                    );
+                return Ok(new { Message = "Excluído com sucesso" });
             }
-            catch (Exception)
-            {
-                return BadRequest(
-                  new
-                  {
-                      Message = "Erro interno no servirdor"
-                  });
-            }
-
+            return BadRequest(new { Message = "Erro interno no servirdor" });
         }
     }
 }

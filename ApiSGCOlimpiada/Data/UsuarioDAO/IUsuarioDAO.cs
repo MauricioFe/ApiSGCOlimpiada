@@ -12,9 +12,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         Usuario Find(long id);
         List<Usuario> FindByName(string Nome);
         Usuario Login(Usuario usuario);
-        void Add(Usuario usuario);
-        void Update(Usuario usuario, long id);
-        void Remove(long id);
+        bool Add(Usuario usuario);
+        bool Update(Usuario usuario, long id);
+        bool Remove(long id);
 
     }
 }

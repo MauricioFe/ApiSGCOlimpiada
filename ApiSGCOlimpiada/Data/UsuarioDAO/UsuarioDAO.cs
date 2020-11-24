@@ -21,7 +21,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Usuario usuario)
+        public bool Add(Usuario usuario)
         {
             try
             {
@@ -29,10 +29,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Usuarios values(null, '{usuario.Nome}', '{usuario.Email}', '{usuario.Senha}', {usuario.FuncaoId})", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -63,8 +65,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 }
                 return usuario;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -96,8 +99,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 }
                 return usuarios;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
             finally
@@ -110,17 +114,16 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         {
             try
             {
-
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Select id, Nome, Email, Senha, funcaoId from Usuarios where Email = '{usuario.Email}' and Senha = '{usuario.Senha}'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
-                Usuario usuarioLogado = new Usuario();
+                Usuario usuarioLogado = null;
                 if (dt.Rows.Count > 0)
                 {
-
+                    usuarioLogado = new Usuario();
                     foreach (DataRow item in dt.Rows)
                     {
                         usuarioLogado.Id = Convert.ToInt64(item["Id"]);
@@ -129,13 +132,13 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                         usuarioLogado.Senha = item["Senha"].ToString();
                         usuarioLogado.FuncaoId = Convert.ToInt32(item["funcaoId"]);
                     }
-                    return usuarioLogado;
                 }
-                return null;
+                return usuarioLogado;
             }
-            catch
+            catch (Exception e)
             {
-                throw new Exception();
+                Console.WriteLine(e.Message);
+                return null;
             }
             finally
             {
@@ -143,7 +146,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
@@ -151,10 +154,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Usuarios where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -162,7 +167,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Update(Usuario usuario, long id)
+        public bool Update(Usuario usuario, long id)
         {
             try
             {
@@ -170,10 +175,12 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 conn.Open();
                 cmd = new MySqlCommand($"Update Usuarios set Nome ='{usuario.Nome}', email = '{usuario.Email}', senha = '{usuario.Senha}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
