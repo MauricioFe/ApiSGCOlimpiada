@@ -145,7 +145,7 @@ namespace ApiSGCOlimpiada.Data.EscolaDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Escolas set Nome = '{escola.Nome}',  Cep = '{escola.Cep}', Logradouro = '{escola.Logradouro}', " +
-                    $"Bairro = '{escola.Bairro}', Numero = '{escola.Numero}', Cidade = {escola.Cidade}, Estado = {escola.Estado} where id = {id}", conn);
+                    $"Bairro = '{escola.Bairro}', Numero = '{escola.Numero}', Cidade = '{escola.Cidade}', Estado = '{escola.Estado}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
                 return true;
             }

@@ -195,8 +195,8 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Update Responsaveis set Nome = {responsavel.Nome}, Cargo = '{responsavel.Cargo}', " +
-                    $"EscolaId = {responsavel.EscolaId} where id = {id}", conn);
+                cmd = new MySqlCommand($"Update Responsaveis set Nome = '{responsavel.Nome}', Cargo = '{responsavel.Cargo}', " +
+                    $"EscolasId = {responsavel.EscolaId} where id = {id}", conn);
                 cmd.ExecuteNonQuery();
                 return true;
             }
