@@ -166,7 +166,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Update Ocupacoes set Nome = {ocupacao.Nome}, Numero = '{ocupacao.Numero}' where id = {id}", conn);
+                cmd = new MySqlCommand($"Update Ocupacoes set Nome = '{ocupacao.Nome}', Numero = '{ocupacao.Numero}' where id = {id}", conn);
                 cmd.ExecuteNonQuery();
                 return true;
             }

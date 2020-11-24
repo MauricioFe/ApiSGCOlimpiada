@@ -168,7 +168,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Update Produtos set CodigoProtheus = {produto.CodigoProtheus}, descricao = '{produto.Descricao}', GruposId = {produto.GrupoId}where id = {id}", conn);
+                cmd = new MySqlCommand($"Update Produtos set CodigoProtheus = {produto.CodigoProtheus}, descricao = '{produto.Descricao}', GruposId = {produto.GrupoId} where id = {id}", conn);
                 cmd.ExecuteNonQuery();
                 return true;
             }

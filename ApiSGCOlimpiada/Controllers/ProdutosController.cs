@@ -30,9 +30,8 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var produto = dao.Find(id);
             if (produto == null)
-            {
                 return NotFound(new { Message = "Produto não encontrado" });
-            }
+
             return new ObjectResult(produto);
         }
         [HttpGet("search", Name = "GetProdutoBySearch")]
@@ -40,22 +39,19 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var produto = dao.FindBySearch(search);
             if (produto.Count <= 0)
-            {
                 return NotFound(new { Message = "Produto não encontrado" });
-            }
+
             return new ObjectResult(produto);
         }
         [HttpPost]
         public IActionResult Create([FromBody] Produto produto)
         {
             if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
-            {
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            }
+
             if (dao.Add(produto))
-            {
                 return CreatedAtRoute("GetProduto", new { id = produto.Id }, produto);
-            }
+
             return BadRequest(new { Message = "Erro interno no servidor" });
 
         }
@@ -64,23 +60,19 @@ namespace ApiSGCOlimpiada.Controllers
         public IActionResult Put([FromBody] Produto produto, long id)
         {
             if (produto.CodigoProtheus == 0 || string.IsNullOrEmpty(produto.Descricao))
-            {
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            }
+
             if (dao.Find(id) == null)
-            {
                 return NotFound(new { Message = "Produto não encontrado" });
-            }
+
             Produto produtoUpdated = new Produto();
             produtoUpdated.Id = id;
             produtoUpdated.CodigoProtheus = produto.CodigoProtheus;
             produtoUpdated.Descricao = produto.Descricao;
             produtoUpdated.GrupoId = produto.GrupoId;
             if (dao.Update(produtoUpdated, id))
-            {
-
                 return CreatedAtRoute("GetProduto", new { id = produtoUpdated.Id }, produtoUpdated);
-            }
+
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
@@ -89,13 +81,11 @@ namespace ApiSGCOlimpiada.Controllers
         {
             var produto = dao.Find(id);
             if (produto == null)
-            {
                 return NotFound(new { Message = "Produto não encontrado" });
-            }
+
             if (dao.Remove(id))
-            {
                 return Ok(new { Message = "Excluído com sucesso" });
-            }
+
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
     }
