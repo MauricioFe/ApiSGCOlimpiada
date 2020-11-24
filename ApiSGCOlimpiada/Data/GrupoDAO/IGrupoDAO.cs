@@ -9,7 +9,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
     public interface IGrupoDAO
     {
         IEnumerable<Grupo> GetAll();
-        Grupo FindBySearch(string search);
+        List<Grupo> FindBySearch(string search);
         Grupo Find(long id);
         void Add(Grupo grupo);
         void Update(Grupo grupo, long id);

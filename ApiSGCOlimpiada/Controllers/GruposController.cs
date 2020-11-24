@@ -41,8 +41,8 @@ namespace ApiSGCOlimpiada.Controllers
             return new ObjectResult(grupo);
         }
 
-        [HttpGet ("search",Name = "GetGrupoSearch")]
-        public IActionResult GetGrupoBySearch([FromQuery (Name = "search")]string search)
+        [HttpGet("search", Name = "GetGrupoSearch")]
+        public IActionResult GetGrupoBySearch([FromQuery(Name = "search")] string search)
         {
             var grupo = dao.FindBySearch(search);
             if (grupo == null)
@@ -59,8 +59,9 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Grupo grupo)
         {
-            if (grupo == null)
+            if (grupo.CodigoProtheus == 0 || string.IsNullOrEmpty(grupo.Descricao))
             {
+                grupo = null;
                 return BadRequest(
                   new
                   {
@@ -85,8 +86,9 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Grupo grupo, long id)
         {
-            if (grupo == null)
+            if (grupo.CodigoProtheus == 0 || string.IsNullOrEmpty(grupo.Descricao))
             {
+                grupo = null;
                 return BadRequest(
                    new
                    {

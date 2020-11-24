@@ -33,6 +33,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {
@@ -41,8 +42,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
 
         }
 
-        public Grupo FindBySearch(string search)
+        public List<Grupo> FindBySearch(string search)
         {
+            List<Grupo> grupos = new List<Grupo>();
             try
             {
                 conn = new MySqlConnection(_conn);
@@ -58,8 +60,9 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                     grupo.Id = Convert.ToInt64(item["Id"]);
                     grupo.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     grupo.Descricao = item["Descricao"].ToString();
+                    grupos.Add(grupo);
                 }
-                return grupo;
+                return grupos;
             }
             catch
             {
@@ -114,6 +117,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {
@@ -133,6 +137,7 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
             }
             finally
             {

@@ -59,8 +59,9 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Ocupacao ocupacao)
         {
-            if (ocupacao == null)
+            if (string.IsNullOrEmpty(ocupacao.Nome) || string.IsNullOrEmpty(ocupacao.Numero))
             {
+                ocupacao = null;
                 return BadRequest(
                   new
                   {
@@ -85,8 +86,9 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Ocupacao ocupacao, long id)
         {
-            if (ocupacao == null)
+            if (string.IsNullOrEmpty(ocupacao.Nome) || string.IsNullOrEmpty(ocupacao.Numero))
             {
+                ocupacao = null;
                 return BadRequest(
                    new
                    {
