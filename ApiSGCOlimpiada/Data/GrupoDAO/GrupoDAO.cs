@@ -28,8 +28,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Grupos values(null, {grupo.CodigoProtheus}, '{grupo.Descricao}')", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -115,8 +119,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Grupos where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -136,8 +144,12 @@ namespace ApiSGCOlimpiada.Data.GrupoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Grupos set CodigoProtheus = {grupo.CodigoProtheus}, descricao = '{grupo.Descricao}' where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
