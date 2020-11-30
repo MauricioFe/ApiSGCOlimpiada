@@ -12,7 +12,6 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
     public class SolicitacaoCompraDAO : ISolicitacaoCompraDAO
     {
         private readonly string _conn;
-
         public SolicitacaoCompraDAO(IConfiguration config)
         {
             _conn = config.GetConnectionString("conn");
@@ -26,8 +25,8 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"insert into SolicitacaoCompras values ('{solicitacaoCompra.ResponsavelEntrega}', " +
-                    $"'{solicitacaoCompra.Data}', '{solicitacaoCompra.Justificativa}', {solicitacaoCompra.TipoCompraId}, {solicitacaoCompra.EscolaId})", conn);
+                cmd = new MySqlCommand($"insert into SolicitacaoCompras values (null,'{solicitacaoCompra.ResponsavelEntrega}', " +
+                    $"'{solicitacaoCompra.Data.ToString("yyyy-MM-dd HH:mm")}', '{solicitacaoCompra.Justificativa}', {solicitacaoCompra.TipoCompraId}, {solicitacaoCompra.EscolaId})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
@@ -52,7 +51,7 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"Select * from where id = {id}", conn);
+                cmd = new MySqlCommand($"Select * from SolicitacaoCompras where id = {id}", conn);
                 conn.Open();
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
@@ -60,11 +59,12 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
                 SolicitacaoCompra solicitacaoCompra = null;
                 foreach (DataRow item in dt.Rows)
                 {
+                    solicitacaoCompra = new SolicitacaoCompra();
                     solicitacaoCompra.Id = Convert.ToInt32(item["id"]);
                     solicitacaoCompra.ResponsavelEntrega = item["responsavelEntrega"].ToString();
                     solicitacaoCompra.Data = Convert.ToDateTime(item["Data"]);
                     solicitacaoCompra.Justificativa = item["Justificativa"].ToString();
-                    solicitacaoCompra.TipoCompraId = Convert.ToInt32(item["tipoCompraId"]);
+                    solicitacaoCompra.TipoCompraId = Convert.ToInt32(item["tipoComprasId"]);
                     solicitacaoCompra.EscolaId = Convert.ToInt32(item["EscolasId"]);
                 }
                 return solicitacaoCompra;
@@ -86,7 +86,7 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             {
                 List<SolicitacaoCompra> solicitacaoCompras = new List<SolicitacaoCompra>();
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"Select * from", conn);
+                cmd = new MySqlCommand($"Select * from solicitacaocompras", conn);
                 conn.Open();
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
@@ -94,12 +94,13 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
                 SolicitacaoCompra solicitacaoCompra = null;
                 foreach (DataRow item in dt.Rows)
                 {
-                    solicitacaoCompra.Id = Convert.ToInt32(item["id"]);
+                    solicitacaoCompra = new SolicitacaoCompra();
+                    solicitacaoCompra.Id = Convert.ToInt64(item["id"]);
                     solicitacaoCompra.ResponsavelEntrega = item["responsavelEntrega"].ToString();
                     solicitacaoCompra.Data = Convert.ToDateTime(item["Data"]);
                     solicitacaoCompra.Justificativa = item["Justificativa"].ToString();
-                    solicitacaoCompra.TipoCompraId = Convert.ToInt32(item["tipoCompraId"]);
-                    solicitacaoCompra.EscolaId = Convert.ToInt32(item["EscolasId"]);
+                    solicitacaoCompra.TipoCompraId = Convert.ToInt64(item["tipoComprasId"]);
+                    solicitacaoCompra.EscolaId = Convert.ToInt64(item["EscolasId"]);
                     solicitacaoCompras.Add(solicitacaoCompra);
                 }
                 return solicitacaoCompras;
@@ -115,14 +116,14 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             }
         }
 
-        public bool Update(SolicitacaoCompra solicitacaoCompra)
+        public bool Update(SolicitacaoCompra solicitacaoCompra, int id)
         {
 
             try
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"Update SolicitacaoCompras set responsavelEntrega = '{solicitacaoCompra.ResponsavelEntrega}', " +
-                    $"data = '{solicitacaoCompra.Data}', justificativa = '{solicitacaoCompra.Justificativa}', tipoCompraId = {solicitacaoCompra.TipoCompraId}, escolasId = {solicitacaoCompra.EscolaId})", conn);
+                    $"data = '{solicitacaoCompra.Data.ToString("yyyy-MM-dd HH:mm")}', justificativa = '{solicitacaoCompra.Justificativa}', tipoComprasId = {solicitacaoCompra.TipoCompraId}, escolasId = {solicitacaoCompra.EscolaId} where id = {id}", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)

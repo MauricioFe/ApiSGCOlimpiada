@@ -11,6 +11,6 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
         IEnumerable<SolicitacaoCompra> GetAll();
         SolicitacaoCompra Find(int id);
         bool Add(SolicitacaoCompra solicitacaoCompra);
-        bool Update(SolicitacaoCompra solicitacaoCompra);
+        bool Update(SolicitacaoCompra solicitacaoCompra, int id);
     }
 }
