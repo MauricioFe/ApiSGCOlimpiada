@@ -27,7 +27,7 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{id}", Name = "GetSolicitacao")]
-        public IActionResult GetSolicitacaoById(int id)
+        public IActionResult GetSolicitacaoById(long id)
         {
             var solicitacao = dao.Find(id);
             if (solicitacao == null)
@@ -47,7 +47,7 @@ namespace ApiSGCOlimpiada.Controllers
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] SolicitacaoCompra solicitacaoCompra, int id)
+        public IActionResult Put([FromBody] SolicitacaoCompra solicitacaoCompra, long id)
         {
             if (string.IsNullOrEmpty(solicitacaoCompra.ResponsavelEntrega) && string.IsNullOrEmpty(solicitacaoCompra.Justificativa)
                 && string.IsNullOrEmpty(solicitacaoCompra.Data.ToString("dd/MM/yyyy HH:mm")) && solicitacaoCompra.EscolaId == 0

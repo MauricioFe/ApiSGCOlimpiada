@@ -46,7 +46,7 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             }
         }
 
-        public SolicitacaoCompra Find(int id)
+        public SolicitacaoCompra Find(long id)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             }
         }
 
-        public bool Update(SolicitacaoCompra solicitacaoCompra, int id)
+        public bool Update(SolicitacaoCompra solicitacaoCompra, long id)
         {
 
             try

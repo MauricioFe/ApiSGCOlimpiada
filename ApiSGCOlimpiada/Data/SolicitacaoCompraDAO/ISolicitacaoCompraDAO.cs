@@ -9,8 +9,8 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
     public interface ISolicitacaoCompraDAO
     {
         IEnumerable<SolicitacaoCompra> GetAll();
-        SolicitacaoCompra Find(int id);
+        SolicitacaoCompra Find(long id);
         bool Add(SolicitacaoCompra solicitacaoCompra);
-        bool Update(SolicitacaoCompra solicitacaoCompra, int id);
+        bool Update(SolicitacaoCompra solicitacaoCompra, long id);
     }
 }
