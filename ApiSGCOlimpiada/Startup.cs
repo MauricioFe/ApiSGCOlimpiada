@@ -54,7 +54,7 @@ namespace ApiSGCOlimpiada
             services.AddTransient<IOcupacaoSolicitacaoCompraDAO, OcupacaoSolicitacaoCompraDAO>();
             services.AddTransient<IResponsavelDAO, ResponsavelDAO>();
             services.AddTransient<IProdutoDAO, ProdutoDAO>();
-            services.AddTransient<IProdutoPedidoOrcamentoDAO, ProdutoPedidoOrcamentoDAO>();
+            services.AddTransient<IOrcamento, OrcamentoDAO>();
             services.AddTransient<ISolicitacaoCompraDAO, SolicitacaoCompraDAO>();
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();

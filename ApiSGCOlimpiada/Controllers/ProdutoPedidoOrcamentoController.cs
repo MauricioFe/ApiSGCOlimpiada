@@ -27,11 +27,11 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpGet("{solicitacaoId}/{produtosId}", Name = "GetProdutoPedidoOrcamento")]
-        public IActionResult GetSolicitacaoById(long solicitacaoId, long produtosId)
+        public IActionResult GetProdutoPedidoOrcamentoById(long solicitacaoId, long produtosId)
         {
             var ProdutoOrcamentoPedido = dao.Find(solicitacaoId, produtosId);
             if (ProdutoOrcamentoPedido == null)
-                return NotFound(new { Message = "Solicitação de compra não encontrada" });
+                return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             return new ObjectResult(ProdutoOrcamentoPedido);
         }
 
@@ -55,7 +55,7 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
             if (dao.Find(solicitacaoId, produtosId) == null)
-                return NotFound(new { Message = "Solicitação de compra não encontrada" });
+                return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
 
             ProdutoPedidoOrcamento produtoPedidoOrcamentoUpdated = new ProdutoPedidoOrcamento();
             produtoPedidoOrcamentoUpdated.SolicitacaoComprasId = solicitacaoId;
