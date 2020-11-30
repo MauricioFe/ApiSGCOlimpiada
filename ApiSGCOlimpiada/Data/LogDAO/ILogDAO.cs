@@ -10,8 +10,8 @@ namespace ApiSGCOlimpiada.Data.LogDAO
     {
         IEnumerable<Log> GetAll();
         Log Find(long id);
-        void Add(Log log);
-        void Update(Log log, long id);
-        void Remove(long id);
+        bool Add(Log log);
+        bool Update(Log log, long id);
+        bool Remove(long id);
     }
 }

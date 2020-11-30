@@ -20,18 +20,24 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         MySqlDataAdapter adapter;
         MySqlCommand cmd;
         DataTable dt;
-        public void Add(Funcao funcao)
+        public bool Add(Funcao funcao)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Funcao values(null, '{funcao.funcao}')", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -98,18 +104,24 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Funcao where id = {id}", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -117,18 +129,24 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             }
         }
 
-        public void Update(Funcao funcao, long id)
+        public bool Update(Funcao funcao, long id)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Funcao set Funcao = {funcao.funcao}  where id = {id}", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -137,3 +155,4 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
         }
     }
 }
+

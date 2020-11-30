@@ -21,18 +21,24 @@ namespace ApiSGCOlimpiada.Data.LogDAO
         MySqlCommand cmd;
         DataTable dt;
 
-        public void Add(Log log)
+        public bool Add(Log log)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Logs values(null, '{log.Data}', '{log.Descricao}', {log.UsuarioId})", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {
@@ -103,18 +109,24 @@ namespace ApiSGCOlimpiada.Data.LogDAO
             }
         }
 
-        public void Remove(long id)
+        public bool Remove(long id)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Log where id = {id}", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false ;
             }
             finally
             {
@@ -122,18 +134,24 @@ namespace ApiSGCOlimpiada.Data.LogDAO
             }
         }
 
-        public void Update(Log log, long id)
+        public bool Update(Log log, long id)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Log set data = '{log.Data}', descricao = '{log.Descricao}', usuarioId = {log.UsuarioId} where id = {id}", conn);
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

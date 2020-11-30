@@ -28,8 +28,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Produtos values(null, {produto.CodigoProtheus}, '{produto.Descricao}', {produto.GrupoId})", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -148,8 +152,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Produtos where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -169,8 +177,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Produtos set CodigoProtheus = {produto.CodigoProtheus}, descricao = '{produto.Descricao}', GruposId = {produto.GrupoId} where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {

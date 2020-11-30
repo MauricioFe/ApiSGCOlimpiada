@@ -28,8 +28,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Insert into Ocupacoes values(null, '{ocupacao.Nome}', '{ocupacao.Numero}')", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -146,8 +150,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Delete from Ocupacoes where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -167,8 +175,12 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Update Ocupacoes set Nome = '{ocupacao.Nome}', Numero = '{ocupacao.Numero}' where id = {id}", conn);
-                cmd.ExecuteNonQuery();
-                return true;
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != -1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
