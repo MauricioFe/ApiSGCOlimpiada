@@ -11,11 +11,11 @@ namespace ApiSGCOlimpiada.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrcamentoController : ControllerBase
+    public class OrcamentosController : ControllerBase
     {
         private readonly IOrcamentoDAO dao;
 
-        public OrcamentoController(IOrcamentoDAO dao)
+        public OrcamentosController(IOrcamentoDAO dao)
         {
             this.dao = dao;
         }

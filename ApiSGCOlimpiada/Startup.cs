@@ -4,6 +4,7 @@ using ApiSGCOlimpiada.Data.GrupoDAO;
 using ApiSGCOlimpiada.Data.LogDAO;
 using ApiSGCOlimpiada.Data.OcupacaoDAO;
 using ApiSGCOlimpiada.Data.OcupacaoSolicitacaoCompraDAO;
+using ApiSGCOlimpiada.Data.OrcamentoDAO;
 using ApiSGCOlimpiada.Data.ProdutoDAO;
 using ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO;
 using ApiSGCOlimpiada.Data.ResponsavelDAO;
@@ -54,7 +55,7 @@ namespace ApiSGCOlimpiada
             services.AddTransient<IOcupacaoSolicitacaoCompraDAO, OcupacaoSolicitacaoCompraDAO>();
             services.AddTransient<IResponsavelDAO, ResponsavelDAO>();
             services.AddTransient<IProdutoDAO, ProdutoDAO>();
-            services.AddTransient<IOrcamento, OrcamentoDAO>();
+            services.AddTransient<IOrcamentoDAO, OrcamentoDAO>();
             services.AddTransient<ISolicitacaoCompraDAO, SolicitacaoCompraDAO>();
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
