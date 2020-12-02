@@ -16,14 +16,14 @@ namespace ApiSGCOlimpiada.Utils
                 try
                 {
                     string[] permittedExtensions = { ".pdf" };
-                    var fileDirectory = $@"{Directory.GetCurrentDirectory()}\{path}\";
+                    var fileDirectory = $@"{Directory.GetCurrentDirectory()}\{path}";
                     if (!Directory.Exists(fileDirectory))
                     {
                         Directory.CreateDirectory(fileDirectory);
                     }
-                    var fileName = $"{fileDirectory}{DateTime.Now.ToString().Replace(" ", "T")}-{arquivo.FileName}";
+                    var fileName = $@"{path}\{DateTime.Now.ToString().Replace(" ", "T").Replace("/", "").Replace(":", "")}{arquivo.FileName}";
                     var extension = Path.GetExtension(fileName).ToLowerInvariant();
-                    if (string.IsNullOrEmpty(extension) && !permittedExtensions.Contains(extension))
+                    if ((!string.IsNullOrEmpty(extension)) && permittedExtensions.Contains(extension))
                     {
 
                         using (FileStream filestream = System.IO.File.Create(fileName))
