@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("6fea5e62-7697-4a78-a2b8-87e375fcebf8")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiSGCOlimpiada")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

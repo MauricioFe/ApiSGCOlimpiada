@@ -13,7 +13,7 @@ namespace ApiSGCOlimpiada.Models
         public double ValorTotal { get; set; }
         public double TotalIpi { get; set; }
         public double TotalProdutos { get; set; }
-        public byte[] Anexo { get; set; }
+        public string Anexo { get; set; }
         public DateTime Data { get; set; }
     }
 }
