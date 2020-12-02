@@ -36,18 +36,19 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] SolicitacaoCompra solicitacaoCompra)
+        public IActionResult CreateAsync([FromBody] SolicitacaoCompra solicitacaoCompra)
         {
             if (string.IsNullOrEmpty(solicitacaoCompra.ResponsavelEntrega) && string.IsNullOrEmpty(solicitacaoCompra.Justificativa)
                 && string.IsNullOrEmpty(solicitacaoCompra.Data.ToString("dd/MM/yyyy HH:mm")) && solicitacaoCompra.EscolaId == 0
                 && solicitacaoCompra.TipoCompraId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
+            solicitacaoCompra.Anexo = null;
             if (dao.Add(solicitacaoCompra))
                 return CreatedAtRoute("GetSolicitacao", new { id = solicitacaoCompra.Id }, solicitacaoCompra);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] SolicitacaoCompra solicitacaoCompra, long id)
+        public IActionResult PutAsync([FromBody] SolicitacaoCompra solicitacaoCompra, long id)
         {
             if (string.IsNullOrEmpty(solicitacaoCompra.ResponsavelEntrega) && string.IsNullOrEmpty(solicitacaoCompra.Justificativa)
                 && string.IsNullOrEmpty(solicitacaoCompra.Data.ToString("dd/MM/yyyy HH:mm")) && solicitacaoCompra.EscolaId == 0
@@ -55,15 +56,21 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Solicitação de compra não encontrada" });
-            SolicitacaoCompra solicitacaoUpdated = new SolicitacaoCompra();
-            solicitacaoUpdated.Id = id;
-            solicitacaoUpdated.Data = solicitacaoCompra.Data;
-            solicitacaoUpdated.Justificativa = solicitacaoCompra.Justificativa;
-            solicitacaoUpdated.ResponsavelEntrega = solicitacaoCompra.ResponsavelEntrega;
-            solicitacaoUpdated.TipoCompraId = solicitacaoCompra.TipoCompraId;
-            solicitacaoUpdated.EscolaId = solicitacaoCompra.EscolaId;
-            if (dao.Update(solicitacaoUpdated, id))
+            if (dao.Update(solicitacaoCompra, id))
                 return CreatedAtRoute("GetSolicitacao", new { id = solicitacaoCompra.Id }, solicitacaoCompra);
+
+            return BadRequest(new { Message = "Erro interno no servidor" });
+        }
+        [HttpPatch("{id}/notafiscal")]
+        public async Task<IActionResult> AnexarNotaFiscal([FromForm] IFormFile arquivo, long id)
+        {
+            if (dao.Find(id) == null)
+                return NotFound(new { Message = "Solicitação de compra não encontrada" });
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos");
+            if (fileName == null)
+                return BadRequest(new { Message = "Erro ao fazer upload" });
+            if (dao.AnexarNotaFiscal(fileName, id))
+                return new NoContentResult();
 
             return BadRequest(new { Message = "Erro interno no servidor" });
         }

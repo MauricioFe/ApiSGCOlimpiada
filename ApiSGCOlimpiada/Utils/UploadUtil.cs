@@ -11,7 +11,7 @@ namespace ApiSGCOlimpiada.Utils
     {
         public static async Task<string> UploadAnexosPdfAsync(IFormFile arquivo, string path)
         {
-            if (arquivo.Length > 0)
+            if (arquivo != null)
             {
                 try
                 {

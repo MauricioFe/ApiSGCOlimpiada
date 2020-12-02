@@ -127,7 +127,7 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"Update orcamentos set fornecedor = '{orcamento.Fornecedor}', cnpj = '{orcamento.Cnpj}', valorTotal = {orcamento.ValorTotal}," +
-                    $"totalIpi = {orcamento.TotalIpi}, totalProdutos = {orcamento.TotalProdutos}, anexo = '{orcamento.Anexo}', data = {orcamento.Data.ToString("yyyy-MM-dd HH:mm")}" +
+                    $"totalIpi = {orcamento.TotalIpi}, totalProdutos = {orcamento.TotalProdutos}, anexo = '{orcamento.Anexo}', data = '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}'" +
                     $" where id = {id}", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();

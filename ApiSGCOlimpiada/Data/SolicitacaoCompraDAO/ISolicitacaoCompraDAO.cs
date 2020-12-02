@@ -12,5 +12,6 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
         SolicitacaoCompra Find(long id);
         bool Add(SolicitacaoCompra solicitacaoCompra);
         bool Update(SolicitacaoCompra solicitacaoCompra, long id);
+        bool AnexarNotaFiscal(string fileName, long id);
     }
 }

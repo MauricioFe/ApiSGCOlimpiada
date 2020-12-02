@@ -15,5 +15,6 @@ namespace ApiSGCOlimpiada.Models
         public TipoCompra TipoCompra { get; set; }
         public Escola Escola { get; set; }
         public string Justificativa { get; set; }
+        public string  Anexo { get; set; }
     }
 }
