@@ -26,8 +26,8 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into ProdutoPedidoOrcamento values ({produtoPedidoOrcamento.ProdutoId}, " +
-                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.valor}, {produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
-                    $" {produtoPedidoOrcamento.Icms}, {produtoPedidoOrcamento.OrcamentoId})", conn);
+                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.OrcamentoId}, {produtoPedidoOrcamento.valor}, {produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
+                    $" {produtoPedidoOrcamento.Icms})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
