@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into ProdutoPedidoOrcamento values ({produtoPedidoOrcamento.ProdutoId}, " +
-                    $"'{produtoPedidoOrcamento.SolicitacaoComprasId}', {produtoPedidoOrcamento.valor}, {produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
+                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.valor}, {produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
                     $" {produtoPedidoOrcamento.Icms}, {produtoPedidoOrcamento.OrcamentoId})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
@@ -61,13 +61,13 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
-                    produtoPedidoOrcamento.ProdutoId = Convert.ToInt64(item["ProdutoId"]);
+                    produtoPedidoOrcamento.ProdutoId = Convert.ToInt64(item["ProdutosId"]);
                     produtoPedidoOrcamento.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
                     produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
                     produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["Quantidade"]);
                     produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["Ipi"]);
                     produtoPedidoOrcamento.Icms = Convert.ToDouble(item["Icms"]);
-                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["OrcamentoId"]);
+                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["OrcamentosId"]);
                 }
                 return produtoPedidoOrcamento;
             }
@@ -97,13 +97,13 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
-                    produtoPedidoOrcamento.ProdutoId = Convert.ToInt64(item["ProdutoId"]);
+                    produtoPedidoOrcamento.ProdutoId = Convert.ToInt64(item["ProdutosId"]);
                     produtoPedidoOrcamento.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
                     produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
                     produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["Quantidade"]);
-                    produtoPedidoOrcamento.Ipi= Convert.ToDouble(item["Ipi"]);
+                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["Ipi"]);
                     produtoPedidoOrcamento.Icms = Convert.ToDouble(item["Icms"]);
-                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["OrcamentoId"]);
+                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["OrcamentosId"]);
                     produtoPedidoOrcamentos.Add(produtoPedidoOrcamento);
                 }
                 return produtoPedidoOrcamentos;

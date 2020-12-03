@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Data.SolicitacaoCompraDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into SolicitacaoCompras values (null,'{solicitacaoCompra.ResponsavelEntrega}', " +
-                    $"'{solicitacaoCompra.Data.ToString("yyyy-MM-dd HH:mm")}', '{solicitacaoCompra.Justificativa}', {solicitacaoCompra.TipoCompraId}, {solicitacaoCompra.EscolaId}, '{solicitacaoCompra.Anexo}')", conn);
+                    $"'{solicitacaoCompra.Data.ToString("yyyy-MM-dd HH:mm")}', '{solicitacaoCompra.Justificativa}', '{solicitacaoCompra.Anexo}', {solicitacaoCompra.TipoCompraId}, {solicitacaoCompra.EscolaId})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)

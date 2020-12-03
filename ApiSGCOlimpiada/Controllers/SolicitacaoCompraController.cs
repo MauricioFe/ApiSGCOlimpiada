@@ -42,7 +42,6 @@ namespace ApiSGCOlimpiada.Controllers
                 && string.IsNullOrEmpty(solicitacaoCompra.Data.ToString("dd/MM/yyyy HH:mm")) && solicitacaoCompra.EscolaId == 0
                 && solicitacaoCompra.TipoCompraId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            solicitacaoCompra.Anexo = null;
             if (dao.Add(solicitacaoCompra))
                 return CreatedAtRoute("GetSolicitacao", new { id = solicitacaoCompra.Id }, solicitacaoCompra);
             return BadRequest(new { Message = "Erro interno no servidor" });

@@ -43,10 +43,10 @@ namespace ApiSGCOlimpiada.Controllers
                 && produtoPedidoOrcamento.OrcamentoId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Add(produtoPedidoOrcamento))
-                return CreatedAtRoute("GetProdutoPedidoOrcamento", produtoPedidoOrcamento);
+                return new NoContentResult();
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
-        [HttpPut("{id}")]
+        [HttpPut("{solicitacaoId}/{produtosId}")]
         public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtosId)
         {
             if (produtoPedidoOrcamento.SolicitacaoComprasId == 0 && produtoPedidoOrcamento.ProdutoId == 0
