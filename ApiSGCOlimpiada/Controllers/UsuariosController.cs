@@ -1,6 +1,7 @@
 ﻿using ApiSGCOlimpiada.Data.UsuarioDAO;
 using ApiSGCOlimpiada.Models;
 using ApiSGCOlimpiada.Services;
+using ApiSGCOlimpiada.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,8 @@ namespace ApiSGCOlimpiada.Controllers
         {
             if (string.IsNullOrEmpty(usuario.Nome) || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha))
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
+            string senhaHash = HashSenhaUtil.ComputePasswordSha256Hash(usuario.Senha);
+            usuario.Senha = senhaHash;
             if (dao.Add(usuario))
                 return CreatedAtRoute("GetUsuario", new { id = usuario.Id }, usuario);
             return BadRequest(new { Message = "Erro interno no servirdor" });
@@ -63,12 +66,14 @@ namespace ApiSGCOlimpiada.Controllers
             if (string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha))
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
+            string senhaHash = HashSenhaUtil.ComputePasswordSha256Hash(usuario.Senha);
+            usuario.Senha = senhaHash;
             var usuarioLogado = dao.Login(usuario);
             if (usuarioLogado == null)
                 return BadRequest(new { Message = "Erro ao realizar login. Verifique suas credenciais" });
             var token = TokenJwtServices.GerarToken(usuarioLogado);
             usuarioLogado.Senha = "";
-            return Ok(new {usuario = usuarioLogado, token = token});
+            return Ok(new { usuario = usuarioLogado, token = token });
         }
         [Authorize]
         [HttpPut("{id}")]
@@ -78,15 +83,10 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Usuário não encontrado" });
-
-            Usuario usuarioUpdated = new Usuario();
-            usuarioUpdated.Id = id;
-            usuarioUpdated.Nome = usuario.Nome;
-            usuarioUpdated.Email = usuario.Email;
-            usuarioUpdated.Senha = usuario.Senha;
-
-            if (dao.Update(usuarioUpdated, id))
-                return CreatedAtRoute("GetUsuario", new { id = usuarioUpdated.Id }, usuarioUpdated);
+            string senhaHash = HashSenhaUtil.ComputePasswordSha256Hash(usuario.Senha);
+            usuario.Senha = senhaHash;
+            if (dao.Update(usuario, id))
+                return CreatedAtRoute("GetUsuario", new { id = usuario.Id }, usuario);
 
             return BadRequest(new { Message = "Erro interno no servirdor" });
         }
