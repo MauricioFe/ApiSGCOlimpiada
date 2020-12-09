@@ -1,3 +1,15 @@
+ï»¿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ApiSGCOlimpiada.Data.AcompanhamentoDAO;
 using ApiSGCOlimpiada.Data.EscolaDAO;
 using ApiSGCOlimpiada.Data.GrupoDAO;
@@ -12,21 +24,9 @@ using ApiSGCOlimpiada.Data.SolicitacaoCompraDAO;
 using ApiSGCOlimpiada.Data.StatusDAO;
 using ApiSGCOlimpiada.Data.TipoCompraDAO;
 using ApiSGCOlimpiada.Data.UsuarioDAO;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada
 {
@@ -42,12 +42,7 @@ namespace ApiSGCOlimpiada
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiSGCOlimpiada", Version = "v1" });
-            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();
             services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
@@ -80,12 +75,12 @@ namespace ApiSGCOlimpiada
                 {
                     OnAuthenticationFailed = context =>
                     {
-                        Console.WriteLine("Token Inválido " + context.Exception.Message);
+                        Console.WriteLine("Token InvÃ¡lido " + context.Exception.Message);
                         return Task.CompletedTask;
                     },
                     OnTokenValidated = context =>
                     {
-                        Console.WriteLine("Token Válido " + context.SecurityToken);
+                        Console.WriteLine("Token VÃ¡lido " + context.SecurityToken);
                         return Task.CompletedTask;
                     }
                 };
@@ -93,23 +88,11 @@ namespace ApiSGCOlimpiada
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiSGCOlimpiada v1"));
-            }
-
-            app.UseRouting();
-
-            app.UseAuthorization();
             app.UseAuthentication();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseHttpsRedirection();
+            app.UseMvc();
         }
     }
 }
