@@ -1,5 +1,7 @@
 ﻿using ApiSGCOlimpiada.Data.UsuarioDAO;
 using ApiSGCOlimpiada.Models;
+using ApiSGCOlimpiada.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,12 +21,13 @@ namespace ApiSGCOlimpiada.Controllers
         {
             this.dao = dao;
         }
+        [Authorize]
         [HttpGet]
         public IEnumerable<Usuario> GetAll()
         {
             return dao.GetAll();
         }
-
+        [Authorize]
         [HttpGet("{id}", Name = "GetUsuario")]
         public IActionResult GetUsuarioById(long id)
         {
@@ -34,7 +37,7 @@ namespace ApiSGCOlimpiada.Controllers
 
             return new ObjectResult(usuario);
         }
-
+        [Authorize]
         [HttpGet("search", Name = "GetUsuarioByName")]
         public IActionResult GetUsuarioByName([FromQuery(Name = "nome")] string nome)
         {
@@ -43,6 +46,7 @@ namespace ApiSGCOlimpiada.Controllers
                 return NotFound(new { Message = "Usuário não encontrado" });
             return new ObjectResult(usuario);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult Create([FromBody] Usuario usuario)
         {
@@ -62,9 +66,11 @@ namespace ApiSGCOlimpiada.Controllers
             var usuarioLogado = dao.Login(usuario);
             if (usuarioLogado == null)
                 return BadRequest(new { Message = "Erro ao realizar login. Verifique suas credenciais" });
-            return new ObjectResult(usuarioLogado);
+            var token = TokenJwtServices.GerarToken(usuarioLogado);
+            usuarioLogado.Senha = "";
+            return Ok(new {usuario = usuarioLogado, token = token});
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Usuario usuario, long id)
         {
@@ -84,7 +90,7 @@ namespace ApiSGCOlimpiada.Controllers
 
             return BadRequest(new { Message = "Erro interno no servirdor" });
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

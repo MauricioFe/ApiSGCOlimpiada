@@ -1,5 +1,6 @@
 ﻿using ApiSGCOlimpiada.Data.GrupoDAO;
 using ApiSGCOlimpiada.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GruposController : ControllerBase
+    public class GruposController : Controller
     {
         private readonly IGrupoDAO dao;
 

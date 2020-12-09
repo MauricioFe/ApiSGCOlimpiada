@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,11 +64,7 @@ namespace ApiSGCOlimpiada
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
 
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = "JwtBearer";
-                opt.DefaultAuthenticateScheme = "JwtBearer";
-            }).AddJwtBearer("JwtBearer", opt =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -76,9 +73,21 @@ namespace ApiSGCOlimpiada
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("sistema-compras-olimpiadas-validacao-autenticacao")),
-                    ClockSkew = TimeSpan.FromMinutes(5),
                     ValidIssuer = "ApiSGCOlimpiada",
                     ValidAudience = "ServerDino",
+                };
+                opt.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine("Token Inválido " + context.Exception.Message);
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("Token Válido " + context.SecurityToken);
+                        return Task.CompletedTask;
+                    }
                 };
             });
         }
@@ -96,7 +105,7 @@ namespace ApiSGCOlimpiada
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

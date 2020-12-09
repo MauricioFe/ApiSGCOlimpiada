@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Services
 {
-    public class TokenJwtServices
+    public abstract class TokenJwtServices
     {
         //private IConfiguration _config;
 
@@ -20,7 +20,7 @@ namespace ApiSGCOlimpiada.Services
         //    this._config = config;
         //}
 
-        public string GerarToken(Usuario usuario)
+        public static string GerarToken(Usuario usuario)
         {
             var claims = new[]
             {
