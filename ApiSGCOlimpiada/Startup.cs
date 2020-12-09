@@ -19,10 +19,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada
@@ -60,6 +62,24 @@ namespace ApiSGCOlimpiada
             services.AddTransient<ISolicitacaoCompraDAO, SolicitacaoCompraDAO>();
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = "JwtBearer";
+                opt.DefaultAuthenticateScheme = "JwtBearer";
+            }).AddJwtBearer("JwtBearer", opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("sistema-compras-olimpiadas-validacao-autenticacao")),
+                    ClockSkew = TimeSpan.FromMinutes(5),
+                    ValidIssuer = "ApiSGCOlimpiada",
+                    ValidAudience = "ServerDino",
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
