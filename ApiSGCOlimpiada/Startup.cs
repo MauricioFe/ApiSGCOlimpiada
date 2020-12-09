@@ -74,6 +74,7 @@ namespace ApiSGCOlimpiada
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("sistema-compras-olimpiadas-validacao-autenticacao")),
                     ClockSkew = TimeSpan.FromMinutes(5),
                     ValidIssuer = "ApiSGCOlimpiada",
