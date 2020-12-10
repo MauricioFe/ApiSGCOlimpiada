@@ -17018,11 +17018,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mauri\\Desktop\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+      "projectUniqueName": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compras\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
       "projectName": "ApiSGCOlimpiada",
-      "projectPath": "C:\\Users\\mauri\\Desktop\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+      "projectPath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compras\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
       "packagesPath": "C:\\Users\\mauri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mauri\\Desktop\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\obj\\publish\\win-x64\\",
+      "outputPath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compras\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\obj\\publish\\win-x64\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

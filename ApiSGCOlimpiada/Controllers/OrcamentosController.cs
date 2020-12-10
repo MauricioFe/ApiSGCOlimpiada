@@ -46,7 +46,7 @@ namespace ApiSGCOlimpiada.Controllers
         {
             if (string.IsNullOrEmpty(orcamento.Fornecedor) && string.IsNullOrEmpty(orcamento.Cnpj)
                 && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && orcamento.ValorTotal == 0
-                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0)
+                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0 && string.IsNullOrEmpty(orcamento.FormaPagamento))
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos");
             if (fileName == null)

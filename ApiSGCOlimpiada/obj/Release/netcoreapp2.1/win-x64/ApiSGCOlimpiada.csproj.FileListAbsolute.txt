@@ -19,3 +19,24 @@ C:\Users\mauri\Desktop\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1
 C:\Users\mauri\Desktop\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.dll
 C:\Users\mauri\Desktop\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.pdb
 C:\Users\mauri\Desktop\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.genruntimeconfig.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\appsettings.Development.json
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\appsettings.json
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\hostpolicy.dll
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\hostfxr.dll
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.exe
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.deps.json
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.runtimeconfig.json
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.runtimeconfig.dev.json
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.dll
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.pdb
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.csprojAssemblyReference.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.AssemblyInfoInputs.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.AssemblyInfo.cs
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.csproj.CoreCompileInputs.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.RazorAssemblyInfo.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.RazorAssemblyInfo.cs
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\UserSecretsAssemblyInfo.cs
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.RazorTargetAssemblyInfo.cache
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.dll
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.pdb
+C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Release\netcoreapp2.1\win-x64\ApiSGCOlimpiada.genruntimeconfig.cache

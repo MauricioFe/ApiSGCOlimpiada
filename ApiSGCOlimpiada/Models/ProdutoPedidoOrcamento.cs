@@ -16,6 +16,7 @@ namespace ApiSGCOlimpiada.Models
         public int Quantidade { get; set; }
         public double Ipi { get; set; }
         public double Icms { get; set; }
+        public double Desconto { get; set; }
         public Orcamento Orcamento { get; set; }
     }
 }

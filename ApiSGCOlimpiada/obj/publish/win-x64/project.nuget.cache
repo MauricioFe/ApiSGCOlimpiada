@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k2mgP6nzLaPlOEPDBYPkoy37nHfK6ALhcx8Yli/7TK4D3t4DRfeAsBme5EO6n09jXRmkl9k8u+b/pffxtyuAww==",
+  "dgSpecHash": "BcSVCaWIT8B+ocszOnRbJKfz1Hx1q+nhHGBo5CRQmUQ5xdPyxkImYC0AF/39kJQOnn8zKdfi4tivwjrqHBBHHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mauri\\Desktop\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
+  "projectFilePath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compras\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mauri\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",

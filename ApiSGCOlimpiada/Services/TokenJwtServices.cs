@@ -35,7 +35,7 @@ namespace ApiSGCOlimpiada.Services
                     audience: "ServerDino",
                     claims: claims,
                     signingCredentials: credentials,
-                    expires: DateTime.Now.AddMinutes(30)
+                    expires: DateTime.Now.AddHours(2)
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

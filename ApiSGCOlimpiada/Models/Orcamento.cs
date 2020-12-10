@@ -15,5 +15,7 @@ namespace ApiSGCOlimpiada.Models
         public double TotalProdutos { get; set; }
         public string Anexo { get; set; }
         public DateTime Data { get; set; }
+        public string FormaPagamento { get; set; }
+        public double ValorFrete { get; set; }
     }
 }
