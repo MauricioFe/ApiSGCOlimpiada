@@ -23,7 +23,6 @@ C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\Api
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Debug\netcoreapp2.1\ApiSGCOlimpiada.runtimeconfig.dev.json
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Debug\netcoreapp2.1\ApiSGCOlimpiada.dll
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Debug\netcoreapp2.1\ApiSGCOlimpiada.pdb
-C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.csprojAssemblyReference.cache
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.AssemblyInfoInputs.cache
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.AssemblyInfo.cs
 C:\Users\mauri\Desktop\Treinamento\Projeto Solicitação de compras\Projetos\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.csproj.CoreCompileInputs.cache

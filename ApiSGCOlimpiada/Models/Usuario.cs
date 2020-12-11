@@ -13,5 +13,6 @@ namespace ApiSGCOlimpiada.Models
         public string Senha { get; set; }
         public int FuncaoId { get; set; }
         public Funcao Funcao { get; set; }
+        public string Token { get; set; }
     }
 }

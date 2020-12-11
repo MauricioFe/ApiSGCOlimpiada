@@ -73,7 +73,8 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Erro ao realizar login. Verifique suas credenciais" });
             var token = TokenJwtServices.GerarToken(usuarioLogado);
             usuarioLogado.Senha = "";
-            return Ok(new { usuario = usuarioLogado, token = token });
+            usuarioLogado.Token = token;
+            return Ok(usuarioLogado);
         }
         [Authorize]
         [HttpPut("{id}")]
