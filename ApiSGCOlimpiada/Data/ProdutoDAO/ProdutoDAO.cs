@@ -163,7 +163,6 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn.Close();
             }
         }
-
         public bool Remove(long id)
         {
             try
