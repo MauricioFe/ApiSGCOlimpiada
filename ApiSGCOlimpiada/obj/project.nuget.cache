@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fF1n+ZkZUeK1wCn+XNWwk4r3JQ1giXnfNHMcrLjduwmR+Kh/bQaknPFAU9eSxH+7gp9AJhuTHvOejtsV5mO1VA==",
+  "dgSpecHash": "xhO1Nn8ZN0fTy0KXKdIYFssups7A/8DYwVh6R3fB6sT9YK2HwV4azfic1FayZYLvXQkMpGh55t4h46soMn+MXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\mauri\\Desktop\\Treinamento\\Projeto Solicitação de compras\\Projetos\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
   "expectedPackageFiles": [
@@ -202,6 +202,10 @@
     "C:\\Users\\mauri\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\ssh.net\\2016.1.0\\ssh.net.2016.1.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\sshnet.security.cryptography\\1.2.0\\sshnet.security.cryptography.1.2.0.nupkg.sha512",
+    "C:\\Users\\mauri\\.nuget\\packages\\swashbuckle.aspnetcore\\2.1.0\\swashbuckle.aspnetcore.2.1.0.nupkg.sha512",
+    "C:\\Users\\mauri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\2.1.0\\swashbuckle.aspnetcore.swagger.2.1.0.nupkg.sha512",
+    "C:\\Users\\mauri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\2.1.0\\swashbuckle.aspnetcore.swaggergen.2.1.0.nupkg.sha512",
+    "C:\\Users\\mauri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\2.1.0\\swashbuckle.aspnetcore.swaggerui.2.1.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

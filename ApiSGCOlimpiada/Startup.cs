@@ -27,6 +27,7 @@ using ApiSGCOlimpiada.Data.UsuarioDAO;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ApiSGCOlimpiada
 {
@@ -43,6 +44,17 @@ namespace ApiSGCOlimpiada
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Swagger Implementation",
+                    Description = "Api de gerênciamento de compras",
+                    TermsOfService = "None"
+                });
+            });
+
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();
             services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
@@ -92,6 +104,11 @@ namespace ApiSGCOlimpiada
         {
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiSGCOlimpiada V1");
+            });
             app.UseMvc();
         }
     }
