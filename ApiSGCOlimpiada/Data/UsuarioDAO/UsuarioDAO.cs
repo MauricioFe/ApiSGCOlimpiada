@@ -54,7 +54,8 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Usuarios where id = {id}", conn);
+                cmd = new MySqlCommand($"Select usuarios.id,nome, email, senha, funcaoId, f.funcao, f.id as idFuncao from Usuarios" +
+                    $" inner join funcao as f on f.id = usuarios.funcaoId where id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -66,7 +67,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                     usuario.Nome = item["Nome"].ToString();
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
-                    usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    usuario.Funcao = new Funcao();
+                    usuario.Funcao.Id = Convert.ToInt64(item["IdFuncao"]);
+                    usuario.Funcao.funcao = item["funcao"].ToString();
                 }
                 return usuario;
             }
@@ -88,7 +91,8 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 List<Usuario> usuarios = new List<Usuario>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Usuarios", conn);
+                cmd = new MySqlCommand($"Select usuarios.id,nome, email, senha, funcaoId, f.funcao, f.id as idFuncao from Usuarios" +
+                    $" inner join funcao as f on f.id = usuarios.funcaoId ", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -100,6 +104,9 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                     usuario.Email = item["Email"].ToString();
                     usuario.Senha = item["Senha"].ToString();
                     usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    usuario.Funcao = new Funcao();
+                    usuario.Funcao.Id = Convert.ToInt64(item["IdFuncao"]);
+                    usuario.Funcao.funcao = item["funcao"].ToString();
                     usuarios.Add(usuario);
                 }
                 return usuarios;

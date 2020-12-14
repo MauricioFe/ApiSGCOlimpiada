@@ -27,7 +27,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Insert into Responsaveis values(null, '{responsavel.Nome}', '{responsavel.Cargo}', {responsavel.EscolaId})", conn);
+                cmd = new MySqlCommand($"Insert into Responsaveis values(null, '{responsavel.Nome}', '{responsavel.Email}', '{responsavel.Cargo}', {responsavel.EscolaId})", conn);
                 int rows = cmd.ExecuteNonQuery();
                 if (rows != -1)
                 {
@@ -53,7 +53,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Id = {id}", conn);
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.email ,r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -63,6 +63,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                     responsavel = new Responsavel();
                     responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
                     responsavel.Nome = item["responsavelNome"].ToString();
+                    responsavel.Email = item["email"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
                     responsavel.Escola = new Escola();
                     responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
@@ -94,7 +95,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 List<Responsavel> responsaveis = new List<Responsavel>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Nome LIKE '%{search}%' or e.Nome LIKE '%{search}%'", conn);
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.email ,r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id where r.Nome LIKE '%{search}%' or e.Nome LIKE '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -105,6 +106,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                     responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
                     responsavel.Nome = item["responsavelNome"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
+                    responsavel.Email = item["email"].ToString();
                     responsavel.Escola = new Escola();
                     responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
                     responsavel.Escola.Id = Convert.ToInt64(item["Id"]);
@@ -137,7 +139,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 List<Responsavel> responsaveis = new List<Responsavel>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id", conn);
+                cmd = new MySqlCommand($"select e.*, r.Id as ResponsavelId, r.Nome as responsavelNome, r.email , r.Cargo, r.EscolasId From Escolas e Inner join Responsaveis r on r.EscolasId = e.id", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -146,6 +148,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                     Responsavel responsavel = new Responsavel();
                     responsavel.Id = Convert.ToInt64(item["ResponsavelId"]);
                     responsavel.Nome = item["responsavelNome"].ToString();
+                    responsavel.Email = item["Email"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
                     responsavel.Escola = new Escola();
                     responsavel.EscolaId = Convert.ToInt64(item["EscolasId"]);
@@ -203,7 +206,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Update Responsaveis set Nome = '{responsavel.Nome}', Cargo = '{responsavel.Cargo}', " +
+                cmd = new MySqlCommand($"Update Responsaveis set Nome = '{responsavel.Nome}', Email = '{responsavel.Email}', Cargo = '{responsavel.Cargo}', " +
                     $"EscolasId = {responsavel.EscolaId} where id = {id}", conn);
                 int rows = cmd.ExecuteNonQuery();
                 if (rows != -1)

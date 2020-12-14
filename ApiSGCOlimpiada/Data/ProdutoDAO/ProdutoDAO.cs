@@ -54,7 +54,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 List<Produto> produtos = new List<Produto>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Produtos where codigoProtheus LIKE '{search}%' or descricao like '%{search}%'", conn);
+                cmd = new MySqlCommand($"Select produtos.id, produtos.CodigoProtheus, produtos.Descricao, produtos.gruposId," +
+                    $" grupos.id as idGrupos, grupos.CodigoProtheus as protheusGrupo, grupos.Descricao as descricaoGrupo" +
+                    $" from Produtos inner join grupos on produtos.gruposId = grupos.id " +
+                    $" where codigoProtheus LIKE '{search}%' or descricao like '%{search}%'", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -66,6 +69,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
                     produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                    produto.Grupo = new Grupo();
+                    produto.Grupo.Id = Convert.ToInt64(item["idGrupos"]);
+                    produto.Grupo.CodigoProtheus = Convert.ToInt64(item["protheusGrupo"]);
+                    produto.Grupo.Descricao = item["descricaoGrupo"].ToString();
                     produtos.Add(produto);
                 }
                 return produtos;
@@ -86,7 +93,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Produtos where id = {id}", conn);
+                cmd = new MySqlCommand($"Select produtos.id, produtos.CodigoProtheus, produtos.Descricao, produtos.gruposId," +
+                    $" grupos.id as idGrupos, grupos.CodigoProtheus as protheusGrupo, grupos.Descricao as descricaoGrupo" +
+                    $" from Produtos inner join grupos on produtos.gruposId = grupos.id where id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -98,6 +107,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
                     produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                    produto.Grupo = new Grupo();
+                    produto.Grupo.Id = Convert.ToInt64(item["idGrupos"]);
+                    produto.Grupo.CodigoProtheus = Convert.ToInt64(item["protheusGrupo"]);
+                    produto.Grupo.Descricao = item["descricaoGrupo"].ToString();
                 }
                 return produto;
             }
@@ -119,7 +132,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 List<Produto> produtos = new List<Produto>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Select * from Produtos", conn);
+                cmd = new MySqlCommand($"Select produtos.id, produtos.CodigoProtheus, produtos.Descricao, produtos.gruposId," +
+                    $" grupos.id as idGrupos, grupos.CodigoProtheus as protheusGrupo, grupos.Descricao as descricaoGrupo" +
+                    $" from Produtos inner join grupos on produtos.gruposId = grupos.id", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -130,6 +145,10 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                     produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
                     produto.Descricao = item["Descricao"].ToString();
                     produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                    produto.Grupo = new Grupo();
+                    produto.Grupo.Id = Convert.ToInt64(item["idGrupos"]);
+                    produto.Grupo.CodigoProtheus = Convert.ToInt64(item["protheusGrupo"]);
+                    produto.Grupo.Descricao = item["descricaoGrupo"].ToString();
                     produtos.Add(produto);
                 }
                 return produtos;
