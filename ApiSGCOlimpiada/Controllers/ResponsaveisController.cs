@@ -63,13 +63,8 @@ namespace ApiSGCOlimpiada.Controllers
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Responsavel não encontrado" });
 
-            Responsavel responsavelUpdated = new Responsavel();
-            responsavelUpdated.Id = id;
-            responsavelUpdated.Nome = responsavel.Nome;
-            responsavelUpdated.Cargo = responsavel.Cargo;
-            responsavelUpdated.EscolaId = responsavel.EscolaId;
-            if (dao.Update(responsavelUpdated, id))
-                return CreatedAtRoute("GetResponsavel", new { id = responsavelUpdated.Id }, responsavelUpdated);
+            if (dao.Update(responsavel, id))
+                return CreatedAtRoute("GetResponsavel", new { id = responsavel.Id }, responsavel);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
