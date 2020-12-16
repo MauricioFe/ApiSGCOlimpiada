@@ -63,14 +63,8 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Ocupação não encontrada" });
-
-            Ocupacao ocupacaoUpdated = new Ocupacao();
-            ocupacaoUpdated.Id = id;
-            ocupacaoUpdated.Nome = ocupacao.Nome;
-            ocupacaoUpdated.Numero = ocupacao.Numero;
-
-            if (dao.Update(ocupacaoUpdated, id))
-                return CreatedAtRoute("GetOcupacao", new { id = ocupacaoUpdated.Id }, ocupacaoUpdated);
+            if (dao.Update(ocupacao, id))
+                return CreatedAtRoute("GetOcupacao", new { id = ocupacao.Id }, ocupacao);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 

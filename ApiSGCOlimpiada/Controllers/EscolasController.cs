@@ -53,17 +53,8 @@ namespace ApiSGCOlimpiada.Controllers
 
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Escola não encontrada" });
-            Escola escolaUpdated = new Escola();
-            escolaUpdated.Id = id;
-            escolaUpdated.Nome = escola.Nome;
-            escolaUpdated.Bairro = escola.Bairro;
-            escolaUpdated.Cep = escola.Cep;
-            escolaUpdated.Cidade = escola.Cidade;
-            escolaUpdated.Estado = escola.Estado;
-            escolaUpdated.Logradouro = escola.Logradouro;
-            escolaUpdated.Numero = escola.Numero;
-            if (dao.Update(escolaUpdated, id))
-                return CreatedAtRoute("GetEscola", new { id = escolaUpdated.Id }, escolaUpdated);
+            if (dao.Update(escola, id))
+                return CreatedAtRoute("GetEscola", new { id = escola.Id }, escola);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 

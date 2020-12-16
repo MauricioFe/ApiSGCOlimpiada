@@ -87,13 +87,10 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-            Funcao funcaoUpdated = new Funcao();
-            funcaoUpdated.Id = id;
-            funcaoUpdated.funcao = funcao.funcao;
             try
             {
-                dao.Update(funcaoUpdated, id);
-                return CreatedAtRoute("GetFuncao", new { id = funcaoUpdated.Id }, funcaoUpdated);
+                dao.Update(funcao, id);
+                return CreatedAtRoute("GetFuncao", new { id = funcao.Id }, funcao);
             }
             catch (Exception)
             {

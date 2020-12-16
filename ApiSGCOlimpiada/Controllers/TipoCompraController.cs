@@ -66,11 +66,8 @@ namespace ApiSGCOlimpiada.Controllers
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Tipo de compra não encontrado" });
 
-            TipoCompra tipoCompraUpdated = new TipoCompra();
-            tipoCompraUpdated.Id = id;
-            tipoCompraUpdated.Descricao = tipoCompra.Descricao;
-            if (dao.Update(tipoCompraUpdated, id))
-                return CreatedAtRoute("GetTipoCompra", new { id = tipoCompraUpdated.Id }, tipoCompraUpdated);
+            if (dao.Update(tipoCompra, id))
+                return CreatedAtRoute("GetTipoCompra", new { id = tipoCompra.Id }, tipoCompra);
             return BadRequest(new { Message = "Erro interno no servidor" });
 
         }

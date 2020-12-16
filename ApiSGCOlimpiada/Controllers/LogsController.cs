@@ -89,14 +89,10 @@ namespace ApiSGCOlimpiada.Controllers
                       }
                   );
             }
-            Log logUpdated = new Log();
-            logUpdated.Id = id;
-            logUpdated.Descricao = log.Descricao;
-            logUpdated.UsuarioId = log.UsuarioId;
             try
             {
-                dao.Update(logUpdated, id);
-                return CreatedAtRoute("GetLog", new { id = logUpdated.Id }, logUpdated);
+                dao.Update(log, id);
+                return CreatedAtRoute("GetLog", new { id = log.Id }, log);
             }
             catch (Exception)
             {

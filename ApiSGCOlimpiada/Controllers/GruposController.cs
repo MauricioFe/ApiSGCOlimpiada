@@ -66,14 +66,8 @@ namespace ApiSGCOlimpiada.Controllers
 
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Grupo não encontrado" });
-
-            Grupo grupoUpdated = new Grupo();
-            grupoUpdated.Id = id;
-            grupoUpdated.CodigoProtheus = grupo.CodigoProtheus;
-            grupoUpdated.Descricao = grupo.Descricao;
-
-            if (dao.Update(grupoUpdated, id))
-                return CreatedAtRoute("GetGrupo", new { id = grupoUpdated.Id }, grupoUpdated);
+            if (dao.Update(grupo, id))
+                return CreatedAtRoute("GetGrupo", new { id = grupo.Id }, grupo);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 

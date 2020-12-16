@@ -58,16 +58,7 @@ namespace ApiSGCOlimpiada.Controllers
 
             if (dao.Find(solicitacaoId, produtosId) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
-
-            ProdutoPedidoOrcamento produtoPedidoOrcamentoUpdated = new ProdutoPedidoOrcamento();
-            produtoPedidoOrcamentoUpdated.SolicitacaoComprasId = solicitacaoId;
-            produtoPedidoOrcamentoUpdated.ProdutoId = produtosId;
-            produtoPedidoOrcamentoUpdated.valor = produtoPedidoOrcamento.valor;
-            produtoPedidoOrcamentoUpdated.Quantidade = produtoPedidoOrcamento.Quantidade;
-            produtoPedidoOrcamentoUpdated.Ipi = produtoPedidoOrcamento.Ipi;
-            produtoPedidoOrcamentoUpdated.Icms = produtoPedidoOrcamento.Icms;
-            produtoPedidoOrcamentoUpdated.OrcamentoId = produtoPedidoOrcamento.OrcamentoId;
-            if (dao.Update(produtoPedidoOrcamentoUpdated, solicitacaoId, produtosId))
+            if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId))
                 return new NoContentResult();
 
             return BadRequest(new { Message = "Erro interno no servidor" });

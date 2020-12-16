@@ -66,14 +66,8 @@ namespace ApiSGCOlimpiada.Controllers
 
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Produto não encontrado" });
-
-            Produto produtoUpdated = new Produto();
-            produtoUpdated.Id = id;
-            produtoUpdated.CodigoProtheus = produto.CodigoProtheus;
-            produtoUpdated.Descricao = produto.Descricao;
-            produtoUpdated.GrupoId = produto.GrupoId;
-            if (dao.Update(produtoUpdated, id))
-                return CreatedAtRoute("GetProduto", new { id = produtoUpdated.Id }, produtoUpdated);
+            if (dao.Update(produto, id))
+                return CreatedAtRoute("GetProduto", new { id = produto.Id }, produto);
 
             return BadRequest(new { Message = "Erro interno no servidor" });
         }

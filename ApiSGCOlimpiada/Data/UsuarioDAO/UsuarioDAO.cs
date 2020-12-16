@@ -55,7 +55,7 @@ namespace ApiSGCOlimpiada.Data.UsuarioDAO
                 conn = new MySqlConnection(_conn);
                 conn.Open();
                 cmd = new MySqlCommand($"Select usuarios.id,nome, email, senha, funcaoId, f.funcao, f.id as idFuncao from Usuarios" +
-                    $" inner join funcao as f on f.id = usuarios.funcaoId where id = {id}", conn);
+                    $" inner join funcao as f on f.id = usuarios.funcaoId where usuarios.id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
