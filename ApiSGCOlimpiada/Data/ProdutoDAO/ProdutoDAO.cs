@@ -124,6 +124,43 @@ namespace ApiSGCOlimpiada.Data.ProdutoDAO
                 conn.Close();
             }
         }
+        public Produto FindByProtheus(long codigoProtheus)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select produtos.id, produtos.CodigoProtheus, produtos.Descricao, produtos.gruposId," +
+                    $" grupos.id as idGrupos, grupos.CodigoProtheus as protheusGrupo, grupos.Descricao as descricaoGrupo" +
+                    $" from Produtos inner join grupos on produtos.gruposId = grupos.id where produtos.CodigoProtheus = {codigoProtheus}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Produto produto = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    produto = new Produto();
+                    produto.Id = Convert.ToInt64(item["Id"]);
+                    produto.CodigoProtheus = int.Parse(item["CodigoProtheus"].ToString());
+                    produto.Descricao = item["Descricao"].ToString();
+                    produto.GrupoId = Convert.ToInt64(item["gruposID"]);
+                    produto.Grupo = new Grupo();
+                    produto.Grupo.Id = Convert.ToInt64(item["idGrupos"]);
+                    produto.Grupo.CodigoProtheus = Convert.ToInt64(item["protheusGrupo"]);
+                    produto.Grupo.Descricao = item["descricaoGrupo"].ToString();
+                }
+                return produto;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
         public IEnumerable<Produto> GetAll()
         {
