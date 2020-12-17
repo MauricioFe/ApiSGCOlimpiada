@@ -26,7 +26,8 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into ProdutoPedidoOrcamento values ({produtoPedidoOrcamento.ProdutoId}, " +
-                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.OrcamentoId}, {produtoPedidoOrcamento.valor}, {produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
+                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.OrcamentoId}, {produtoPedidoOrcamento.valor}, " +
+                    $"{produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
                     $" {produtoPedidoOrcamento.Icms})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
@@ -128,7 +129,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 cmd = new MySqlCommand($"Update produtoPedidoOrcamento set produtosId = {produtoPedidoOrcamento.ProdutoId}, " +
                     $"solictacaoComprasId = '{produtoPedidoOrcamento.SolicitacaoComprasId}', valor = {produtoPedidoOrcamento.valor}, quantidade = {produtoPedidoOrcamento.Quantidade}," +
                     $"ipi = {produtoPedidoOrcamento.Ipi}, icms = {produtoPedidoOrcamento.Icms}, orcamentosId={produtoPedidoOrcamento.OrcamentoId}" +
-                    $" where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId}", conn);
+                    $" where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId}, ", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)

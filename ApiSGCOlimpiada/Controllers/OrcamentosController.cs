@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using ApiSGCOlimpiada.Data.SolicitacaoCompraDAO;
 
 namespace ApiSGCOlimpiada.Controllers
 {
@@ -19,11 +20,12 @@ namespace ApiSGCOlimpiada.Controllers
     public class OrcamentosController : ControllerBase
     {
         private readonly IOrcamentoDAO dao;
-        public static IConfiguration _config;
-        public OrcamentosController(IOrcamentoDAO dao, IConfiguration config)
+        private readonly ISolicitacaoCompraDAO solicitacao;
+
+        public OrcamentosController(IOrcamentoDAO dao, ISolicitacaoCompraDAO solicitacao)
         {
             this.dao = dao;
-            _config = config;
+            this.solicitacao = solicitacao;
         }
 
         [HttpGet]
@@ -42,13 +44,14 @@ namespace ApiSGCOlimpiada.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] Orcamento orcamento, [FromForm] IFormFile arquivo)
+        public async Task<IActionResult> Create([FromForm] Orcamento orcamento, IFormFile arquivo)
         {
             if (string.IsNullOrEmpty(orcamento.Fornecedor) && string.IsNullOrEmpty(orcamento.Cnpj)
                 && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && orcamento.ValorTotal == 0
                 && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0 && string.IsNullOrEmpty(orcamento.FormaPagamento))
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos");
+            long idSolicitacao = solicitacao.GetAll().Last().Id;
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, idSolicitacao);
             if (fileName == null)
                 return BadRequest(new { Message = "Erro ao fazer upload" });
             orcamento.Anexo = fileName;
@@ -57,14 +60,14 @@ namespace ApiSGCOlimpiada.Controllers
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromForm] Orcamento orcamento, [FromForm] IFormFile arquivo, long id)
+        public async Task<IActionResult> PutAsync([FromForm] Orcamento orcamento, long id)
         {
             if (string.IsNullOrEmpty(orcamento.Fornecedor) && string.IsNullOrEmpty(orcamento.Cnpj)
                && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && orcamento.ValorTotal == 0
                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-
-            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos");
+            var arquivo = Request.Form.Files[0];
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, orcamento.Id);
             if (fileName == null)
                 return BadRequest(new { Message = "Erro ao fazer upload" });
             orcamento.Anexo = fileName;

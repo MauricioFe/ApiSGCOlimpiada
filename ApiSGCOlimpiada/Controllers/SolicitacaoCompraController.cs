@@ -67,7 +67,7 @@ namespace ApiSGCOlimpiada.Controllers
         {
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Solicitação de compra não encontrada" });
-            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos");
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", "notaFiscal", id);
             if (fileName == null)
                 return BadRequest(new { Message = "Erro ao fazer upload" });
             if (dao.AnexarNotaFiscal(fileName, id))

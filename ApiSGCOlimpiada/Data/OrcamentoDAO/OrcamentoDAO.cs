@@ -25,8 +25,8 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"insert into orcamentos values (null, '{orcamento.Fornecedor}', '{orcamento.Cnpj}', {orcamento.ValorTotal}," +
-                    $"{orcamento.TotalIpi}, {orcamento.TotalProdutos}, '{orcamento.Anexo}', '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}')", conn);
+                cmd = new MySqlCommand($"insert into orcamentos values (null, '{orcamento.Fornecedor}', '{orcamento.Cnpj}', {orcamento.ValorTotal.ToString().Replace(",", ".")}," +
+                    $"{orcamento.TotalIpi.ToString().Replace(",", ".")}, {orcamento.TotalProdutos.ToString().Replace(",", ".")}, '{orcamento.Anexo}', '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}', '{orcamento.FormaPagamento}', {orcamento.ValorFrete.ToString().Replace(",", ".")})", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
@@ -126,8 +126,9 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"Update orcamentos set fornecedor = '{orcamento.Fornecedor}', cnpj = '{orcamento.Cnpj}', valorTotal = {orcamento.ValorTotal}," +
-                    $"totalIpi = {orcamento.TotalIpi}, totalProdutos = {orcamento.TotalProdutos}, anexo = '{orcamento.Anexo}', data = '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}'" +
+                cmd = new MySqlCommand($"Update orcamentos set fornecedor = '{orcamento.Fornecedor}', cnpj = '{orcamento.Cnpj}', valorTotal = {orcamento.ValorTotal.ToString().Replace(",", ".")}," +
+                    $"totalIpi = {orcamento.TotalIpi.ToString().Replace(",", ".")}, totalProdutos = {orcamento.TotalProdutos.ToString().Replace(",", ".")}, anexo = '{orcamento.Anexo}', " +
+                    $"data = '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}', FormaPagamento = '{orcamento.FormaPagamento}', ValorFrete = {orcamento.ValorFrete.ToString().Replace(",", ".")}" +
                     $" where id = {id}", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();

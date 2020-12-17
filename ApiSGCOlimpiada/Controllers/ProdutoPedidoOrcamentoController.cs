@@ -45,7 +45,7 @@ namespace ApiSGCOlimpiada.Controllers
                 && produtoPedidoOrcamento.OrcamentoId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Add(produtoPedidoOrcamento))
-                return new NoContentResult();
+                return new ObjectResult(produtoPedidoOrcamento);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
         [HttpPut("{solicitacaoId}/{produtosId}")]
@@ -59,7 +59,7 @@ namespace ApiSGCOlimpiada.Controllers
             if (dao.Find(solicitacaoId, produtosId) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId))
-                return new NoContentResult();
+                return new ObjectResult(produtoPedidoOrcamento);
 
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
