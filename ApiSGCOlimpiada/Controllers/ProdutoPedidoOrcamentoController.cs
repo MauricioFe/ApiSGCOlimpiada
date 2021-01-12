@@ -48,8 +48,8 @@ namespace ApiSGCOlimpiada.Controllers
                 return new ObjectResult(produtoPedidoOrcamento);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
-        [HttpPut("{solicitacaoId}/{produtosId}")]
-        public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtosId)
+        [HttpPut("{solicitacaoId}/{produtosId}/{orcamentosId}")]
+        public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtosId, long orcamentosId)
         {
             if (produtoPedidoOrcamento.SolicitacaoComprasId == 0 && produtoPedidoOrcamento.ProdutoId == 0
                 && produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
@@ -58,7 +58,7 @@ namespace ApiSGCOlimpiada.Controllers
 
             if (dao.Find(solicitacaoId, produtosId) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
-            if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId))
+            if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId, orcamentosId))
                 return new ObjectResult(produtoPedidoOrcamento);
 
             return BadRequest(new { Message = "Erro interno no servidor" });

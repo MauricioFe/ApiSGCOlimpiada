@@ -26,9 +26,9 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into ProdutoPedidoOrcamento values ({produtoPedidoOrcamento.ProdutoId}, " +
-                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.OrcamentoId}, {produtoPedidoOrcamento.valor}, " +
-                    $"{produtoPedidoOrcamento.Quantidade}, {produtoPedidoOrcamento.Ipi}," +
-                    $" {produtoPedidoOrcamento.Icms})", conn);
+                    $"{produtoPedidoOrcamento.SolicitacaoComprasId}, {produtoPedidoOrcamento.OrcamentoId}, {produtoPedidoOrcamento.valor.ToString().Replace(",", ".")}, " +
+                    $"{produtoPedidoOrcamento.Quantidade.ToString().Replace(",", ".")}, {produtoPedidoOrcamento.Ipi.ToString().Replace(",", ".")}," +
+                    $" {produtoPedidoOrcamento.Icms.ToString().Replace(",", ".")}, {produtoPedidoOrcamento.Desconto.ToString().Replace(",", ".")}", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
@@ -120,16 +120,16 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             }
         }
 
-        public bool Update(ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtoId)
+        public bool Update(ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtoId, long orcamentoId)
         {
 
             try
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"Update produtoPedidoOrcamento set produtosId = {produtoPedidoOrcamento.ProdutoId}, " +
-                    $"solictacaoComprasId = '{produtoPedidoOrcamento.SolicitacaoComprasId}', valor = {produtoPedidoOrcamento.valor}, quantidade = {produtoPedidoOrcamento.Quantidade}," +
-                    $"ipi = {produtoPedidoOrcamento.Ipi}, icms = {produtoPedidoOrcamento.Icms}, orcamentosId={produtoPedidoOrcamento.OrcamentoId}" +
-                    $" where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId}, ", conn);
+                    $"solictacaoComprasId = '{produtoPedidoOrcamento.SolicitacaoComprasId}', valor = {produtoPedidoOrcamento.valor.ToString().Replace(",", ".")}, quantidade = {produtoPedidoOrcamento.Quantidade.ToString().Replace(",", ".")}," +
+                    $"ipi = {produtoPedidoOrcamento.Ipi.ToString().Replace(",", ".")}, icms = {produtoPedidoOrcamento.Icms.ToString().Replace(",", ".")}, orcamentosId={produtoPedidoOrcamento.OrcamentoId}" +
+                    $" where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId}, and orcamentosId = {orcamentoId} ", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
