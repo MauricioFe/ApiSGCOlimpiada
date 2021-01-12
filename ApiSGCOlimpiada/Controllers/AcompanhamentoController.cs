@@ -39,7 +39,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Acompanhamento acompanhamento)
         {
-            if (string.IsNullOrEmpty(acompanhamento.Observacao) || string.IsNullOrEmpty(acompanhamento.Date.ToString()) || 
+            if (string.IsNullOrEmpty(acompanhamento.Date.ToString()) || 
                 acompanhamento.StatusId == 0 || acompanhamento.UsuarioId == 0 || acompanhamento.SolicitacaoCompraId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
