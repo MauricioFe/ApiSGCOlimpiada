@@ -9,6 +9,7 @@ namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
     public interface IAcompanhamentoDAO
     {
         IEnumerable<Acompanhamento> GetAll();
+        IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamento();
         Acompanhamento Find(long id);
         bool Add(Acompanhamento acompanhamento);
         bool Update(Acompanhamento acompanhamento, long id);

@@ -61,6 +61,11 @@ namespace ApiSGCOlimpiada.Controllers
                 return CreatedAtRoute("GetAcompanhamento", new { id = acompanhamento.Id }, acompanhamento);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
+        [HttpGet("solicitacao")]
+        public IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamento()
+        {
+            return dao.GetSolicitacaoAcompanhamento();
+        }
     }
 }
 
