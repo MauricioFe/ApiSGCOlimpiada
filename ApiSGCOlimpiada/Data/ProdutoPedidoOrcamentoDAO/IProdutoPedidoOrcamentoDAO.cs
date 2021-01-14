@@ -10,6 +10,8 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
     {
         IEnumerable<ProdutoPedidoOrcamento> GetAll();
         IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao);
+        IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao);
+        IEnumerable<ProdutoPedidoOrcamento> GetProdutoOrcamentoSolicitacao(long idSolicitacao);
         ProdutoPedidoOrcamento Find(long solicitacaoId, long produtoId);
         bool Add(ProdutoPedidoOrcamento solicitacaoCompra);
         bool Update(ProdutoPedidoOrcamento solicitacaoCompra, long solicitacaoId, long produtoId, long orcamentoId);
