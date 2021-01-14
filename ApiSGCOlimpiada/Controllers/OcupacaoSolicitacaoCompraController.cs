@@ -57,5 +57,11 @@ namespace ApiSGCOlimpiada.Controllers
                 return new ObjectResult(ocupacaoSolicitacaoCompra);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
+        [HttpGet("solicitacao/{id}")]
+        public IEnumerable<OcupacaoSolicitacaoCompra> GetSolicitacaoOcupacao(long id)
+        {
+            return dao.GetSolicitacaoOcupacao(id);
+        }
+
     }
 }

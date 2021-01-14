@@ -12,5 +12,6 @@ namespace ApiSGCOlimpiada.Data.OcupacaoSolicitacaoCompraDAO
         OcupacaoSolicitacaoCompra Find(long ocupacoesId, long solicitacaoCompraId);
         bool Add(OcupacaoSolicitacaoCompra ocupacaoSolicitacaoCompra);
         bool Update(OcupacaoSolicitacaoCompra ocupacaoSolicitacaoCompra, long ocupacoesId, long solicitacaoCompraId);
+        IEnumerable<OcupacaoSolicitacaoCompra> GetSolicitacaoOcupacao(long solicitacaoID);
     }
 }
