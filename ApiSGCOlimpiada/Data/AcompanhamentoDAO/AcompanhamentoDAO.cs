@@ -188,6 +188,60 @@ namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
                 conn.Close();
             }
         }
+        public IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamentoPendente()
+        {
+            try
+            {
+                List<Acompanhamento> acompanhamentos = new List<Acompanhamento>();
+                conn = new MySqlConnection(_conn);
+                cmd = new MySqlCommand($"SELECT ac.id as acId, ac.data as dataAcompanhamento, ac.observacao, ac.statusId, ac.UsuariosId, ac.solicitacaoComprasId," +
+                    $" sc.id as scId, sc.Data, sc.ResponsavelEntrega, sc.Justificativa, sc.Anexo, sc.TipoComprasId, sc.EscolasID, " +
+                    $"u.nome as usuario, u.id as uId, u.email, u.funcaoId, st.descricao as status, st.id as statusID FROM " +
+                    $"sgc_olimpiada.solicitacaocompras as sc inner join acompanhamento as ac on ac.SolicitacaoComprasId = sc.id " +
+                    $"inner join status as st on st.id = ac.StatusId inner join usuarios as u on u.id = ac.UsuariosId Where st.id = 1 or" +
+                    $" st.id = 3 or st.id = 4 or st.id = 5; ", conn); conn.Open();
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Acompanhamento acompanhamento = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    acompanhamento = new Acompanhamento();
+                    acompanhamento.Id = Convert.ToInt64(item["acId"]);
+                    acompanhamento.Date = Convert.ToDateTime(item["dataAcompanhamento"]);
+                    acompanhamento.Observacao = item["observacao"].ToString();
+                    acompanhamento.UsuarioId = Convert.ToInt64(item["usuariosId"]);
+                    acompanhamento.SolicitacaoCompraId = Convert.ToInt64(item["solicitacaoComprasId"]);
+                    acompanhamento.StatusId = Convert.ToInt64(item["statusId"]);
+                    acompanhamento.SolicitacaoCompra = new SolicitacaoCompra();
+                    acompanhamento.SolicitacaoCompra.Id = Convert.ToInt64(item["scId"]);
+                    acompanhamento.SolicitacaoCompra.Data = Convert.ToDateTime(item["data"]);
+                    acompanhamento.SolicitacaoCompra.ResponsavelEntrega = item["ResponsavelEntrega"].ToString();
+                    acompanhamento.SolicitacaoCompra.Justificativa = item["Justificativa"].ToString();
+                    acompanhamento.SolicitacaoCompra.TipoCompraId = Convert.ToInt64(item["TipoComprasId"]);
+                    acompanhamento.SolicitacaoCompra.EscolaId = Convert.ToInt64(item["EscolasId"]);
+                    acompanhamento.Usuario = new Usuario();
+                    acompanhamento.Usuario.Id = Convert.ToInt64(item["uId"]);
+                    acompanhamento.Usuario.Nome = item["usuario"].ToString();
+                    acompanhamento.Usuario.Email = item["email"].ToString();
+                    acompanhamento.Usuario.FuncaoId = Convert.ToInt32(item["funcaoId"]);
+                    acompanhamento.Status = new Status();
+                    acompanhamento.Status.Id = Convert.ToInt64(item["statusID"]);
+                    acompanhamento.Status.Descricao = item["status"].ToString();
+                    acompanhamentos.Add(acompanhamento);
+                }
+                return acompanhamentos;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
     }
 }

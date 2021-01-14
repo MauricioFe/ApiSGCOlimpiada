@@ -66,6 +66,12 @@ namespace ApiSGCOlimpiada.Controllers
         {
             return dao.GetSolicitacaoAcompanhamento();
         }
+
+        [HttpGet("solicitacao/pendente")]
+        public IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamentoPendente()
+        {
+            return dao.GetSolicitacaoAcompanhamentoPendente();
+        }
     }
 }
 
