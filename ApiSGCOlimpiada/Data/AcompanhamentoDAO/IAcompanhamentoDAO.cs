@@ -11,7 +11,7 @@ namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
         IEnumerable<Acompanhamento> GetAll();
         IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamento();
         IEnumerable<Acompanhamento> GetSolicitacaoAcompanhamentoPendente();
-        Acompanhamento Find(long id);
+        Acompanhamento FindBySolicitacaoId(long id);
         bool Add(Acompanhamento acompanhamento);
         bool Update(Acompanhamento acompanhamento, long id);
     }

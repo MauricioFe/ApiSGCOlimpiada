@@ -154,9 +154,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 List<ProdutoPedidoOrcamento> produtoPedidoOrcamentos = new List<ProdutoPedidoOrcamento>();
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"select p.Id as idProduto, p.CodigoProtheus, p.Descricao, p.GruposId, g.descricao as descGrupo, g.codigoProtheus as codGrupo, g.id as idGrupo," +
-                    $"ppo.OrcamentosId, ppo.SolicitacaoComprasId, ppo.ProdutosId, ppo.Desconto, ppo.ICMS, ppo.IPI, ppo.Quantidade, ppo.valor, " +
-                    $"o.Id as idOrcamento, o.Anexo, o.CNPJ, o.Data, o.FormaPagamento, o.Fornecedor, o.TotalIPI, o.TotalProdutos, o.ValorFrete, o.ValorTotal " +
+                cmd = new MySqlCommand($"select p.Id as idProduto, p.CodigoProtheus, p.Descricao, p.GruposId, g.descricao as descGrupo, g.codigoProtheus as codGrupo, g.id as idGrupo " +
                     $"from produtos as p inner join produtopedidoorcamento as ppo on ppo.ProdutosId = p.id inner join orcamentos as o on ppo.orcamentosID = o.id " +
                     $"inner join solicitacaocompras as sc on ppo.SolicitacaoComprasId = sc.id inner join grupos as g on p.gruposId = g.id where SolicitacaoComprasId = {idSolicitacao} group by produtosId", conn);
                 conn.Open();
@@ -167,24 +165,6 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
-                    produtoPedidoOrcamento.ProdutoId = Convert.ToInt64(item["ProdutosId"]);
-                    produtoPedidoOrcamento.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
-                    produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
-                    produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["Quantidade"]);
-                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["Ipi"]);
-                    produtoPedidoOrcamento.Icms = Convert.ToDouble(item["Icms"]);
-                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["OrcamentosId"]);
-                    produtoPedidoOrcamento.Orcamento = new Orcamento();
-                    produtoPedidoOrcamento.Orcamento.Id = Convert.ToInt64(item["IdOrcamento"]);
-                    produtoPedidoOrcamento.Orcamento.Anexo = item["Anexo"].ToString();
-                    produtoPedidoOrcamento.Orcamento.Cnpj = item["CNPJ"].ToString();
-                    produtoPedidoOrcamento.Orcamento.Fornecedor = item["Fornecedor"].ToString();
-                    produtoPedidoOrcamento.Orcamento.Data = Convert.ToDateTime(item["Data"]);
-                    produtoPedidoOrcamento.Orcamento.FormaPagamento = item["FormaPagamento"].ToString();
-                    produtoPedidoOrcamento.Orcamento.TotalIpi = Convert.ToDouble(item["TotalIPI"]);
-                    produtoPedidoOrcamento.Orcamento.TotalProdutos = Convert.ToDouble(item["TotalProdutos"]);
-                    produtoPedidoOrcamento.Orcamento.ValorTotal = Convert.ToDouble(item["ValorTotal"]);
-                    produtoPedidoOrcamento.Orcamento.ValorFrete = Convert.ToDouble(item["ValorFrete"]);
                     produtoPedidoOrcamento.Produto = new Produto();
                     produtoPedidoOrcamento.Produto.Id = Convert.ToInt64(item["IdProduto"]);
                     produtoPedidoOrcamento.Produto.CodigoProtheus = Convert.ToInt64(item["CodigoProtheus"]);

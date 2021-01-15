@@ -30,7 +30,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpGet("{id}", Name = "GetAcompanhamento")]
         public IActionResult GetAcompanhamentoById(long id)
         {
-            var acompanhamento = dao.Find(id);
+            var acompanhamento = dao.FindBySolicitacaoId(id);
             if (acompanhamento == null)
                 return NotFound(new { Message = "Acompanhamento não encontrada" });
             return new ObjectResult(acompanhamento);
@@ -54,7 +54,7 @@ namespace ApiSGCOlimpiada.Controllers
             if (string.IsNullOrEmpty(acompanhamento.Observacao) || string.IsNullOrEmpty(acompanhamento.Date.ToString()) ||
                  acompanhamento.StatusId == 0 || acompanhamento.UsuarioId == 0 || acompanhamento.SolicitacaoCompraId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            if (dao.Find(id) == null)
+            if (dao.FindBySolicitacaoId(id) == null)
                 return NotFound(new { Message = "Acompanhamento não encontrada" });
 
             if (dao.Update(acompanhamento, id))
