@@ -48,12 +48,12 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             }
         }
 
-        public ProdutoPedidoOrcamento Find(long solicitacaoId, long produtoId)
+        public ProdutoPedidoOrcamento Find(long solicitacaoId, long produtoId, long orcamentoId)
         {
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"Select * from produtoPedidoOrcamento where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId}", conn);
+                cmd = new MySqlCommand($"Select * from produtoPedidoOrcamento where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId} and orcamentosId = {orcamentoId}", conn);
                 conn.Open();
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
@@ -302,6 +302,31 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool Remove(long solicitacaoId, long produtoId, long orcamentoId)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                cmd = new MySqlCommand($"Delete from ProdutoPedidoOrcamento where solicitacaoComprasId = {solicitacaoId} and produtosId = {produtoId} and orcamentosId = {orcamentoId}", conn);
+                conn.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
             finally
             {

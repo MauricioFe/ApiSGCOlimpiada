@@ -28,10 +28,10 @@ namespace ApiSGCOlimpiada.Controllers
             return dao.GetAll();
         }
 
-        [HttpGet("{solicitacaoId}/{produtosId}", Name = "GetProdutoPedidoOrcamento")]
-        public IActionResult GetProdutoPedidoOrcamentoById(long solicitacaoId, long produtosId)
+        [HttpGet("{solicitacaoId}/{produtosId}/{orcamentoId}", Name = "GetProdutoPedidoOrcamento")]
+        public IActionResult GetProdutoPedidoOrcamentoById(long solicitacaoId, long produtosId, long orcamentoId)
         {
-            var ProdutoOrcamentoPedido = dao.Find(solicitacaoId, produtosId);
+            var ProdutoOrcamentoPedido = dao.Find(solicitacaoId, produtosId, orcamentoId);
             if (ProdutoOrcamentoPedido == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             return new ObjectResult(ProdutoOrcamentoPedido);
@@ -56,11 +56,20 @@ namespace ApiSGCOlimpiada.Controllers
                 && produtoPedidoOrcamento.OrcamentoId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
-            if (dao.Find(solicitacaoId, produtosId) == null)
+            if (dao.Find(solicitacaoId, produtosId, orcamentosId) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId, orcamentosId))
                 return new ObjectResult(produtoPedidoOrcamento);
 
+            return BadRequest(new { Message = "Erro interno no servidor" });
+        }
+        [HttpDelete("{solicitacaoId}/{produtosId}/{orcamentosId}")]
+        public IActionResult Delete(long solicitacaoId, long produtosId, long orcamentosId)
+        {
+            if (dao.Find(solicitacaoId, produtosId, orcamentosId) == null)
+                return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
+            if (dao.Remove(solicitacaoId, produtosId, orcamentosId))
+                return Ok(new { Message = "Excluído com sucesso" });
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
