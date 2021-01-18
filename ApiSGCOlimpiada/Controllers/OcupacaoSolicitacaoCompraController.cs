@@ -57,6 +57,16 @@ namespace ApiSGCOlimpiada.Controllers
                 return new ObjectResult(ocupacaoSolicitacaoCompra);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
+        [HttpDelete("{ocupacoesId}/{solicitacaoId}")]
+        public IActionResult DeleteAsync(long ocupacoesId, long solicitacaoId)
+        {
+            
+            if (dao.Find(ocupacoesId, solicitacaoId) == null)
+                return NotFound(new { Message = "Solicitação de compra não encontrada" });
+            if (dao.Remove(ocupacoesId, solicitacaoId))
+                return Ok(new { Message = "Excluído com sucesso" });
+            return BadRequest(new { Message = "Erro interno no servidor" });
+        }
         [HttpGet("solicitacao/{id}")]
         public IEnumerable<OcupacaoSolicitacaoCompra> GetSolicitacaoOcupacao(long id)
         {

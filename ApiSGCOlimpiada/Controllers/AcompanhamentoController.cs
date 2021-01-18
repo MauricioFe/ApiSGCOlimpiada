@@ -39,7 +39,7 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Acompanhamento acompanhamento)
         {
-            if (string.IsNullOrEmpty(acompanhamento.Date.ToString()) || 
+            if (string.IsNullOrEmpty(acompanhamento.Date.ToString()) ||
                 acompanhamento.StatusId == 0 || acompanhamento.UsuarioId == 0 || acompanhamento.SolicitacaoCompraId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
@@ -51,9 +51,6 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Acompanhamento acompanhamento, long id)
         {
-            if (string.IsNullOrEmpty(acompanhamento.Observacao) || string.IsNullOrEmpty(acompanhamento.Date.ToString()) ||
-                 acompanhamento.StatusId == 0 || acompanhamento.UsuarioId == 0 || acompanhamento.SolicitacaoCompraId == 0)
-                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.FindBySolicitacaoId(id) == null)
                 return NotFound(new { Message = "Acompanhamento não encontrada" });
 

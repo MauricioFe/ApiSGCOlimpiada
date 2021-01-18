@@ -138,8 +138,8 @@ namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"Update acompanhamento set observacao = '{acompanhamento.Observacao}', " +
-                    $" data = '{acompanhamento.Date.ToString("yyyy-MM-dd HH:mm")}',statusId = {acompanhamento.StatusId}, usuarioId = {acompanhamento.UsuarioId}," +
-                    $" solicitacaoCompraId = {acompanhamento.SolicitacaoCompraId}  where id = {id}", conn);
+                    $" data = '{acompanhamento.Date.ToString("yyyy-MM-dd HH:mm")}',statusId = {acompanhamento.StatusId}, usuariosId = {acompanhamento.UsuarioId}," +
+                    $" solicitacaoComprasId = {acompanhamento.SolicitacaoCompraId}  where id = {id}", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)

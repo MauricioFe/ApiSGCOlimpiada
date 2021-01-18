@@ -187,5 +187,30 @@ namespace ApiSGCOlimpiada.Data.OcupacaoSolicitacaoCompraDAO
                 conn.Close();
             }
         }
+
+        public bool Remove(long ocupacoesId, long solicitacaoCompraId)
+        {
+            try
+            {
+                conn = new MySqlConnection(_conn);
+                cmd = new MySqlCommand($"Delete from OcupacoesSolicitacaoCompras where ocupacoesId = {ocupacoesId} and solicitacaoComprasId = {solicitacaoCompraId}", conn);
+                conn.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
