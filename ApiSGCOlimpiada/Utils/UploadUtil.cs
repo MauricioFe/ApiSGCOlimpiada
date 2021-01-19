@@ -12,8 +12,14 @@ namespace ApiSGCOlimpiada.Utils
     {
         public static async Task<string> UploadAnexosPdfAsync(IFormFile arquivo, string path, string fornecedor, long idSolicitacao)
         {
+
+            if (arquivo == null)
+            {
+                return null;
+            }
             string[] permittedExtensions = { ".pdf" };
             var extension = Path.GetExtension(arquivo.FileName).ToLowerInvariant();
+
             if (arquivo != null && !string.IsNullOrEmpty(extension) && permittedExtensions.Contains(extension))
             {
                 try
@@ -42,6 +48,8 @@ namespace ApiSGCOlimpiada.Utils
                 Console.WriteLine("Arquivo veio nulo, ou não é da extenção pdf");
                 return null;
             }
+
+
         }
     }
 }

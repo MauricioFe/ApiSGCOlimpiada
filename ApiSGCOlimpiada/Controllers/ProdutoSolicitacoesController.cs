@@ -35,13 +35,10 @@ namespace ApiSGCOlimpiada.Controllers
                 return NotFound(new { Message = "ProdutoSolicitacao não encontrado" });
             return new ObjectResult(produtoSolicitacao);
         }
-        [HttpGet("{idSolicitacao}", Name = "GetProdutoSolicitacaoBySolicitacao")]
-        public IActionResult FindByIdSolicitacao(int idSolicitacao)
+        [HttpGet("solicitacao/{idSolicitacao}", Name = "GetProdutoSolicitacaoBySolicitacao")]
+        public IEnumerable<ProdutoSolicitacao> FindByIdSolicitacao(long idSolicitacao)
         {
-            var produtoSolicitacao = dao.FindBySolicitacao(idSolicitacao);
-            if (produtoSolicitacao == null)
-                return NotFound(new { Message = "ProdutoSolicitacao não encontrado" });
-            return new ObjectResult(produtoSolicitacao);
+            return dao.FindBySolicitacao(idSolicitacao);
         }
         [HttpPost]
         public IActionResult Create([FromBody] ProdutoSolicitacao produtoSolicitacao)

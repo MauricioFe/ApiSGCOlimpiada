@@ -47,13 +47,10 @@ namespace ApiSGCOlimpiada.Controllers
         public async Task<IActionResult> Create([FromForm] Orcamento orcamento, IFormFile arquivo)
         {
             if (string.IsNullOrEmpty(orcamento.Fornecedor) && string.IsNullOrEmpty(orcamento.Cnpj)
-                && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && orcamento.ValorTotal == 0
-                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0 && string.IsNullOrEmpty(orcamento.FormaPagamento))
+                && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && string.IsNullOrEmpty(orcamento.FormaPagamento))
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             long idSolicitacao = solicitacao.GetAll().Last().Id;
             var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, idSolicitacao);
-            if (fileName == null)
-                return BadRequest(new { Message = "Erro ao fazer upload" });
             orcamento.Anexo = fileName;
             if (dao.Add(orcamento))
                 return CreatedAtRoute("GetOrcamento", new { id = orcamento.Id }, orcamento);

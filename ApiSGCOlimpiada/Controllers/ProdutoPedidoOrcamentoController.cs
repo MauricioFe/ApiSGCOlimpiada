@@ -28,10 +28,10 @@ namespace ApiSGCOlimpiada.Controllers
             return dao.GetAll();
         }
 
-        [HttpGet("{solicitacaoId}/{produtosId}/{orcamentoId}", Name = "GetProdutoPedidoOrcamento")]
-        public IActionResult GetProdutoPedidoOrcamentoById(long solicitacaoId, long produtosId, long orcamentoId)
+        [HttpGet("{id}", Name = "GetProdutoPedidoOrcamento")]
+        public IActionResult GetProdutoPedidoOrcamentoById(long id)
         {
-            var ProdutoOrcamentoPedido = dao.Find(solicitacaoId, produtosId, orcamentoId);
+            var ProdutoOrcamentoPedido = dao.Find(id);
             if (ProdutoOrcamentoPedido == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             return new ObjectResult(ProdutoOrcamentoPedido);
@@ -40,53 +40,51 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento)
         {
-            if (produtoPedidoOrcamento.SolicitacaoComprasId == 0 && produtoPedidoOrcamento.ProdutoId == 0
-                && produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
+            if (produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
                 && produtoPedidoOrcamento.OrcamentoId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Add(produtoPedidoOrcamento))
                 return new ObjectResult(produtoPedidoOrcamento);
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
-        [HttpPut("{solicitacaoId}/{produtosId}/{orcamentosId}")]
-        public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long solicitacaoId, long produtosId, long orcamentosId)
+        [HttpPut("{id}")]
+        public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long id)
         {
-            if (produtoPedidoOrcamento.SolicitacaoComprasId == 0 && produtoPedidoOrcamento.ProdutoId == 0
-                && produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
+            if (produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
                 && produtoPedidoOrcamento.OrcamentoId == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
-            if (dao.Find(solicitacaoId, produtosId, orcamentosId) == null)
+            if (dao.Find(id) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
-            if (dao.Update(produtoPedidoOrcamento, solicitacaoId, produtosId, orcamentosId))
+            if (dao.Update(produtoPedidoOrcamento, id))
                 return new ObjectResult(produtoPedidoOrcamento);
 
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
-        [HttpDelete("{solicitacaoId}/{produtosId}/{orcamentosId}")]
-        public IActionResult Delete(long solicitacaoId, long produtosId, long orcamentosId)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
         {
-            if (dao.Find(solicitacaoId, produtosId, orcamentosId) == null)
+            if (dao.Find(id) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
-            if (dao.Remove(solicitacaoId, produtosId, orcamentosId))
+            if (dao.Remove(id))
                 return Ok(new { Message = "Excluído com sucesso" });
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
-        [HttpGet("produtoSolicitacao/{idSolicitacao}")]
-        public IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao)
-        {
-            return dao.GetProdutosSolicitacao(idSolicitacao);
-        }
-        [HttpGet("orcamentoSolicitacao/{idSolicitacao}")]
-        public IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao)
-        {
-            return dao.GetOrcamentoSolicitacao(idSolicitacao);
-        }
-        [HttpGet("produtoOrcamentoSolicitacao/{idSolicitacao}")]
-        public IEnumerable<ProdutoPedidoOrcamento> GetProdutoOrcamentoSolicitacao(long idSolicitacao)
-        {
-            return dao.GetProdutoOrcamentoSolicitacao(idSolicitacao);
-        }
+        //[HttpGet("produtoSolicitacao/{idSolicitacao}")]
+        //public IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao)
+        //{
+        //    return dao.GetProdutosSolicitacao(idSolicitacao);
+        //}
+        //[HttpGet("orcamentoSolicitacao/{idSolicitacao}")]
+        //public IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao)
+        //{
+        //    return dao.GetOrcamentoSolicitacao(idSolicitacao);
+        //}
+        //[HttpGet("produtoOrcamentoSolicitacao/{idSolicitacao}")]
+        //public IEnumerable<ProdutoPedidoOrcamento> GetProdutoOrcamentoSolicitacao(long idSolicitacao)
+        //{
+        //    return dao.GetProdutoOrcamentoSolicitacao(idSolicitacao);
+        //}
     }
 }
