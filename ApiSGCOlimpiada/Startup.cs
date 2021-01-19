@@ -28,6 +28,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
+using ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO;
 
 namespace ApiSGCOlimpiada
 {
@@ -70,6 +71,7 @@ namespace ApiSGCOlimpiada
             services.AddTransient<ISolicitacaoCompraDAO, SolicitacaoCompraDAO>();
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
+            services.AddTransient<IProdutoSolicitacoesDAO, ProdutoSolicitacoesDAO>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
