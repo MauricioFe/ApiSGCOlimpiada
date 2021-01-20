@@ -238,14 +238,97 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             }
         }
 
-        public IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao)
+        public IEnumerable<ProdutoPedidoOrcamento> GetSolicitacao(long idSolicitacao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<ProdutoPedidoOrcamento> produtoSolicitacoes = new List<ProdutoPedidoOrcamento>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"select ps.id as psId, ps.SolicitacaoComprasId, ps.ProdutosId, p.Id as IdProduto, " +
+                    $"p.descricao, p.codigoProtheus, p.gruposId, g.id as idGrupo, g.CodigoProtheus as grupoProtheus, " +
+                    $"g.Descricao as descGrupo, sc.Id as idSolicitacao, sc.ResponsavelEntrega, sc.Data, sc.Justificativa,  " +
+                    $"sc.Anexo, sc.TipoComprasId, sc.EscolasId, e.Id as idEscola, e.Nome, e.Cep, e.Logradouro, e.bairro, " +
+                    $" e.cidade, e.estado, e.numero, tc.id as idTipoCompra, tc.descricao as descTipoCompra, ppo.Desconto, ppo.ICMS," +
+                    $" ppo.id as ppoId, ppo.IPI, ppo.OrcamentosId, ppo.ProdutoSolicitacoesId, ppo.Quantidade, ppo.valor, o.id as idOrcamento, " +
+                    $" o.Anexo as anexoOrcamento, o.CNPJ, o.Data as dataOrcamento, o.FormaPagamento, o.Fornecedor, o.TotalIPI, o.TotalProdutos, o.ValorFrete, " +
+                    $" o.ValorTotal  From produtosolicitacoes as ps  Inner Join produtos as p on ps.ProdutosId = p.Id  " +
+                    $"inner join grupos as g on p.GruposId = g.id inner join solicitacaocompras as sc on ps.SolicitacaoComprasId = sc.id " +
+                    $" inner join escolas as e on sc.EscolasId = e.id inner join tipocompras as tc on sc.TipoComprasId = tc.id " +
+                    $" inner join produtopedidoorcamento as ppo on ppo.ProdutoSolicitacoesId = ps.id " +
+                    $" inner join orcamentos as o on ppo.OrcamentosId = o.id where solicitacaoComprasId = { idSolicitacao }", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                ProdutoPedidoOrcamento produtoPedidoOrcamento = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
+                    produtoPedidoOrcamento.Id = Convert.ToInt64(item["ppoId"]);
+                    produtoPedidoOrcamento.Desconto = Convert.ToDouble(item["Desconto"]);
+                    produtoPedidoOrcamento.Icms = Convert.ToDouble(item["icms"]);
+                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["ipi"]);
+                    produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["quantidade"]);
+                    produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
+                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["orcamentosId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacoesId = Convert.ToInt64(item["produtoSolicitacoesId"]);
+                    produtoPedidoOrcamento.Orcamento = new Orcamento();
+                    produtoPedidoOrcamento.Orcamento.Id = Convert.ToInt64(item["idOrcamento"]);
+                    produtoPedidoOrcamento.Orcamento.TotalIpi = Convert.ToDouble(item["totalIpi"]);
+                    produtoPedidoOrcamento.Orcamento.ValorFrete = Convert.ToDouble(item["ValorFrete"]);
+                    produtoPedidoOrcamento.Orcamento.TotalProdutos = Convert.ToDouble(item["totalProdutos"]);
+                    produtoPedidoOrcamento.Orcamento.ValorTotal = Convert.ToDouble(item["totalProdutos"]);
+                    produtoPedidoOrcamento.Orcamento.Data = Convert.ToDateTime(item["dataOrcamento"]);
+                    produtoPedidoOrcamento.Orcamento.Anexo = item["anexoOrcamento"].ToString();
+                    produtoPedidoOrcamento.Orcamento.Cnpj = item["cnpj"].ToString();
+                    produtoPedidoOrcamento.Orcamento.FormaPagamento = item["FormaPagamento"].ToString();
+                    produtoPedidoOrcamento.Orcamento.Fornecedor = item["Fornecedor"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao = new ProdutoSolicitacao();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Id = Convert.ToInt64(item["psId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.ProdutosId = Convert.ToInt64(item["produtosId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto = new Produto();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Id = Convert.ToInt64(item["IdPRoduto"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.CodigoProtheus = Convert.ToInt64(item["codigoProtheus"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Descricao = item["Descricao"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.GrupoId = Convert.ToInt64(item["gruposId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo = new Grupo();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Id = Convert.ToInt64(item["IdPRoduto"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.CodigoProtheus = Convert.ToInt64(item["grupoProtheus"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Descricao = item["descGrupo"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra = new SolicitacaoCompra();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Id = Convert.ToInt64(item["idSolicitacao"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.EscolaId = Convert.ToInt64(item["EscolasId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.TipoCompraId = Convert.ToInt64(item["tipoComprasId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Data = Convert.ToDateTime(item["data"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Justificativa = item["justificativa"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.ResponsavelEntrega = item["ResponsavelEntrega"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.TipoCompra = new TipoCompra();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.TipoCompra.Id = Convert.ToInt64(item["IdtipoCompra"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.TipoCompra.Descricao = item["descTipoCompra"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola = new Escola();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Id = Convert.ToInt64(item["IdEscola"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Nome = item["Nome"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Cep = item["cep"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Logradouro = item["Logradouro"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Bairro = item["Bairro"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Numero = item["numero"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Estado = item["estado"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoCompra.Escola.Cidade = item["cidade"].ToString();
+                    produtoSolicitacoes.Add(produtoPedidoOrcamento);
+                }
+                return produtoSolicitacoes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

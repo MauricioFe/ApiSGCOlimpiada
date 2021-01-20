@@ -71,11 +71,11 @@ namespace ApiSGCOlimpiada.Controllers
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
 
-        //[HttpGet("produtoSolicitacao/{idSolicitacao}")]
-        //public IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao)
-        //{
-        //    return dao.GetProdutosSolicitacao(idSolicitacao);
-        //}
+        [HttpGet("solicitacao/{idSolicitacao}")]
+        public IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao)
+        {
+            return dao.GetSolicitacao(idSolicitacao);
+        }
         //[HttpGet("orcamentoSolicitacao/{idSolicitacao}")]
         //public IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao)
         //{
