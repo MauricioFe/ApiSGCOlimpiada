@@ -150,5 +150,49 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                 conn.Close();
             }
         }
+        public IEnumerable<Orcamento> GetOrcamentoBySolicitacao(long idSolicitacao)
+        {
+            try
+            {
+                List<Orcamento> orcamentoSolicitacoes = new List<Orcamento>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"SELECT o.id AS idOrcamento, o.Anexo, o.CNPJ, o.Data AS dataOrcamento, o.FormaPagamento, o.Fornecedor, " +
+                    $"o.TotalIPI, o.TotalProdutos, o.ValorFrete, o.ValorTotal FROM produtosolicitacoes AS ps " +
+                    $"INNER JOIN produtos AS p ON ps.ProdutosId = p.Id INNER JOIN grupos AS g ON p.GruposId = g.id " +
+                    $"INNER JOIN solicitacaocompras AS sc ON ps.SolicitacaoComprasId = sc.id INNER JOIN escolas AS e ON sc.EscolasId = e.id " +
+                    $"INNER JOIN tipocompras AS tc ON sc.TipoComprasId = tc.id INNER JOIN produtopedidoorcamento AS ppo ON ppo.ProdutoSolicitacoesId = ps.id " +
+                    $"INNER JOIN orcamentos AS o ON ppo.OrcamentosId = o.id WHERE solicitacaoComprasId = { idSolicitacao } group by o.id", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                Orcamento orcamento = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    orcamento = new Orcamento();
+                    orcamento.Id = Convert.ToInt64(item["idOrcamento"]);
+                    orcamento.TotalIpi = Convert.ToDouble(item["totalIpi"]);
+                    orcamento.ValorFrete = Convert.ToDouble(item["ValorFrete"]);
+                    orcamento.TotalProdutos = Convert.ToDouble(item["totalProdutos"]);
+                    orcamento.ValorTotal = Convert.ToDouble(item["totalProdutos"]);
+                    orcamento.Data = Convert.ToDateTime(item["dataOrcamento"]);
+                    orcamento.Anexo = item["anexoOrcamento"].ToString();
+                    orcamento.Cnpj = item["cnpj"].ToString();
+                    orcamento.FormaPagamento = item["FormaPagamento"].ToString();
+                    orcamento.Fornecedor = item["Fornecedor"].ToString();
+                    orcamentoSolicitacoes.Add(orcamento);
+                }
+                return orcamentoSolicitacoes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
