@@ -67,6 +67,7 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                     orcamento.TotalIpi = Convert.ToDouble(item["TotalIpi"]);
                     orcamento.TotalProdutos = Convert.ToDouble(item["TotalProdutos"]);
                     orcamento.Anexo = item["anexo"].ToString();
+                    orcamento.FormaPagamento = item["FormaPagamento"].ToString();
                     orcamento.Data = Convert.ToDateTime(item["data"]);
                 }
                 return orcamento;
@@ -105,6 +106,7 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                     orcamento.TotalProdutos = Convert.ToDouble(item["TotalProdutos"]);
                     orcamento.Anexo = item["anexo"].ToString();
                     orcamento.Data = Convert.ToDateTime(item["data"]);
+                    orcamento.FormaPagamento = item["FormaPagamento"].ToString();
                     orcamentos.Add(orcamento);
                 }
                 return orcamentos;

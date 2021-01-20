@@ -64,8 +64,6 @@ namespace ApiSGCOlimpiada.Controllers
                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, orcamento.Id);
-            if (fileName == null)
-                return BadRequest(new { Message = "Erro ao fazer upload" });
             orcamento.Anexo = fileName;
 
             if (dao.Find(id) == null)
