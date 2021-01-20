@@ -176,7 +176,7 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                     orcamento.TotalProdutos = Convert.ToDouble(item["totalProdutos"]);
                     orcamento.ValorTotal = Convert.ToDouble(item["totalProdutos"]);
                     orcamento.Data = Convert.ToDateTime(item["dataOrcamento"]);
-                    orcamento.Anexo = item["anexoOrcamento"].ToString();
+                    orcamento.Anexo = item["anexo"].ToString();
                     orcamento.Cnpj = item["cnpj"].ToString();
                     orcamento.FormaPagamento = item["FormaPagamento"].ToString();
                     orcamento.Fornecedor = item["Fornecedor"].ToString();

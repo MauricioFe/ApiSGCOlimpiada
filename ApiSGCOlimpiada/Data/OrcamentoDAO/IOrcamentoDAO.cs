@@ -12,5 +12,6 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
         Orcamento Find(long id);
         bool Add(Orcamento orcamento);
         bool Update(Orcamento orcamento, long id);
+        IEnumerable<Orcamento> GetOrcamentoBySolicitacao(long idSolicitacao);
     }
 }
