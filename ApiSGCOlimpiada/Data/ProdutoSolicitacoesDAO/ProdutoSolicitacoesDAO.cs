@@ -62,7 +62,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
                     $"sc.EscolasId, e.Id as idEscolas, e.Nome, e.Cep, e.Logradouro, e.bairro, e.cidade, e.estado, e.numero, " +
                     $"tc.id as idTipoCompra, tc.descricao as descTipoCompra From produtosolicitacoes as ps Inner Join produtos as p on ps.ProdutosId = p.Id " +
                     $"inner join grupos as g on p.GruposId = g.id inner join solicitacaocompras as sc on ps.SolicitacaoComprasId = sc.id " +
-                    $"inner join escolas as e on sc.EscolasId = e.id inner join tipocompras as tc on sc.TipoComprasId = tc.id where psid = {id}", conn);
+                    $"inner join escolas as e on sc.EscolasId = e.id inner join tipocompras as tc on sc.TipoComprasId = tc.id where ps.id = {id}", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -92,7 +92,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
                     produtoSolicitacao.SolicitacaoCompra.TipoCompra.Id = Convert.ToInt64(item["IdtipoCompra"]);
                     produtoSolicitacao.SolicitacaoCompra.TipoCompra.Descricao = item["descTipoCompra"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola = new Escola();
-                    produtoSolicitacao.SolicitacaoCompra.Escola.Id = Convert.ToInt64(item["IdEscola"]);
+                    produtoSolicitacao.SolicitacaoCompra.Escola.Id = Convert.ToInt64(item["IdEscolas"]);
                     produtoSolicitacao.SolicitacaoCompra.Escola.Nome = item["Nome"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola.Cep = item["cep"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola.Logradouro = item["Logradouro"].ToString();
@@ -126,7 +126,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
                 cmd = new MySqlCommand($"select ps.id as psId, ps.SolicitacaoComprasId, ps.ProdutosId,p.Id as IdProduto, p.descricao, " +
                     $"p.codigoProtheus, p.gruposId, g.id as idGrupo, g.CodigoProtheus as grupoProtheus, g.Descricao as descGrupo, " +
                     $"sc.Id as idSolicitacao, sc.ResponsavelEntrega, sc.Data, sc.Justificativa, sc.Anexo, sc.TipoComprasId, " +
-                    $"sc.EscolasId, e.Id as idEscola, e.Nome, e.Cep, e.Logradouro, e.bairro, e.cidade, e.estado, e.numero, " +
+                    $"sc.EscolasId, e.Id as idEscolas, e.Nome, e.Cep, e.Logradouro, e.bairro, e.cidade, e.estado, e.numero, " +
                     $"tc.id as idTipoCompra, tc.descricao as descTipoCompra From produtosolicitacoes as ps Inner Join produtos as p on ps.ProdutosId = p.Id " +
                     $"inner join grupos as g on p.GruposId = g.id inner join solicitacaocompras as sc on ps.SolicitacaoComprasId = sc.id " +
                     $"inner join escolas as e on sc.EscolasId = e.id inner join tipocompras as tc on sc.TipoComprasId = tc.id where ps.SolicitacaoComprasId = {solicitacaoId}", conn);
@@ -160,7 +160,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
                     produtoSolicitacao.SolicitacaoCompra.TipoCompra.Id = Convert.ToInt64(item["IdtipoCompra"]);
                     produtoSolicitacao.SolicitacaoCompra.TipoCompra.Descricao = item["descTipoCompra"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola = new Escola();
-                    produtoSolicitacao.SolicitacaoCompra.Escola.Id = Convert.ToInt64(item["IdEscola"]);
+                    produtoSolicitacao.SolicitacaoCompra.Escola.Id = Convert.ToInt64(item["IdEscolas"]);
                     produtoSolicitacao.SolicitacaoCompra.Escola.Nome = item["Nome"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola.Cep = item["cep"].ToString();
                     produtoSolicitacao.SolicitacaoCompra.Escola.Logradouro = item["Logradouro"].ToString();
@@ -193,7 +193,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
                 cmd = new MySqlCommand($"select ps.id as psId, ps.SolicitacaoComprasId, ps.ProdutosId,p.Id as IdProduto, p.descricao, " +
                     $"p.codigoProtheus, p.gruposId, g.id as idGrupo, g.CodigoProtheus as grupoProtheus, g.Descricao as descGrupo, " +
                     $"sc.Id as idSolicitacao, sc.ResponsavelEntrega, sc.Data, sc.Justificativa, sc.Anexo, sc.TipoComprasId, " +
-                    $"sc.EscolasId, e.Id as idEscola, e.Nome, e.Cep, e.Logradouro, e.bairro, e.cidade, e.estado, e.numero, " +
+                    $"sc.EscolasId, e.Id as idEscolas, e.Nome, e.Cep, e.Logradouro, e.bairro, e.cidade, e.estado, e.numero, " +
                     $"tc.id as idTipoCompra, tc.descricao as descTipoCompra From produtosolicitacoes as ps Inner Join produtos as p on ps.ProdutosId = p.Id " +
                     $"inner join grupos as g on p.GruposId = g.id inner join solicitacaocompras as sc on ps.SolicitacaoComprasId = sc.id " +
                     $"inner join escolas as e on sc.EscolasId = e.id inner join tipocompras as tc on sc.TipoComprasId = tc.id", conn);
@@ -255,7 +255,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"Delete form ProdutoSolicitacoes where id = {id}", conn);
+                cmd = new MySqlCommand($"Delete from ProdutoSolicitacoes where id = {id}", conn);
                 int rows = cmd.ExecuteNonQuery();
                 if (rows != -1)
                 {
