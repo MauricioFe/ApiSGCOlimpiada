@@ -40,9 +40,6 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento)
         {
-            if (produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
-                && produtoPedidoOrcamento.OrcamentoId == 0)
-                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             if (dao.Add(produtoPedidoOrcamento))
                 return new ObjectResult(produtoPedidoOrcamento);
             return BadRequest(new { Message = "Erro interno no servidor" });
@@ -50,10 +47,6 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] ProdutoPedidoOrcamento produtoPedidoOrcamento, long id)
         {
-            if (produtoPedidoOrcamento.valor == 0 && produtoPedidoOrcamento.Quantidade == 0
-                && produtoPedidoOrcamento.OrcamentoId == 0)
-                return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "ProdutoPedidoOrcamento não encontrado" });
             if (dao.Update(produtoPedidoOrcamento, id))

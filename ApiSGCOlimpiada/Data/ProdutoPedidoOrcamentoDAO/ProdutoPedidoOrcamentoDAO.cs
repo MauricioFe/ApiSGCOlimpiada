@@ -25,17 +25,17 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             try
             {
                 conn = new MySqlConnection(_conn);
-                cmd = new MySqlCommand($"insert into ProdutoPedidoOrcamento values (null, {produtoPedidoOrcamento.valor.ToString("F2").Replace(",", ".")}, " +
-                    $"{produtoPedidoOrcamento.Quantidade.ToString().Replace(",", ".")}, {produtoPedidoOrcamento.Ipi.ToString("F2").Replace(",", ".")}, " +
-                    $"{produtoPedidoOrcamento.Icms.ToString("F2").Replace(",", ".")}, {produtoPedidoOrcamento.Desconto.ToString("F2").Replace(",", ".")}, " +
-                    $"{produtoPedidoOrcamento.ProdutoSolicitacoesId},{produtoPedidoOrcamento.OrcamentoId})", conn);
+                cmd = new MySqlCommand($"INSERT INTO produtopedidoorcamento (valor, Quantidade, IPI, ICMS, Desconto, ProdutoSolicitacoesId, OrcamentosId) " +
+                    $"select * from (select {produtoPedidoOrcamento.valor.ToString().Replace(",", ".")} as valor, " +
+                    $"{produtoPedidoOrcamento.Quantidade.ToString().Replace(",", ".")} as quantidade, " +
+                    $"{produtoPedidoOrcamento.Ipi.ToString().Replace(",", ".")} as ipi, {produtoPedidoOrcamento.Icms.ToString().Replace(",", ".")} as icms, " +
+                    $"{produtoPedidoOrcamento.Desconto.ToString().Replace(",", ".")} as desconto, {produtoPedidoOrcamento.ProdutoSolicitacoesId} as ProdutoSolicitacoesId, " +
+                    $"{produtoPedidoOrcamento.OrcamentoId} as orcamentosId) as bacon " +
+                    $"where not exists(select produtosolicitacoesId from produtopedidoorcamento " +
+                    $"where produtosolicitacoesId = {produtoPedidoOrcamento.ProdutoSolicitacoesId} and orcamentosId = {produtoPedidoOrcamento.OrcamentoId}) limit 1", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
-                if (rows > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
             catch (Exception e)
             {
