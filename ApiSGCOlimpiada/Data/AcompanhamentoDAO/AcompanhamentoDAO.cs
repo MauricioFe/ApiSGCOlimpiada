@@ -222,7 +222,7 @@ namespace ApiSGCOlimpiada.Data.AcompanhamentoDAO
                     $"u.nome as usuario, u.id as uId, u.email, u.funcaoId, st.descricao as status, st.id as statusID FROM " +
                     $"sgc_olimpiada.solicitacaocompras as sc inner join acompanhamento as ac on ac.SolicitacaoComprasId = sc.id " +
                     $"inner join status as st on st.id = ac.StatusId inner join usuarios as u on u.id = ac.UsuariosId Where st.id = 1 or" +
-                    $" st.id = 3 or st.id = 4 or st.id = 5; ", conn); conn.Open();
+                    $" st.id = 4 or st.id = 5 or st.id = 7 or st.id = 6; ", conn); conn.Open();
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
