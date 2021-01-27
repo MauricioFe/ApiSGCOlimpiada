@@ -17,7 +17,7 @@ namespace ApiSGCOlimpiada.Services
             this.To(this._newUser)
                 .From(new MailRecipient("projetomymoney@gmail.com", "Teste de envio de email"))
                 .Subject($"Realizando teste de envio de email {this._newUser}")
-                .View("~/Views/Mail/NewUser.cshtml", this._newUser);
+                .View("~/Views/testeEmail.cshtml", this._newUser);
         }
     }
 }

@@ -52,3 +52,12 @@ D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada
 D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.dll
 D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.pdb
 D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.genruntimeconfig.cache
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Debug\netcoreapp2.1\ApiSGCOlimpiada.Views.dll
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\bin\Debug\netcoreapp2.1\ApiSGCOlimpiada.Views.pdb
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.TagHelpers.input.cache
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.TagHelpers.output.cache
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.RazorCoreGenerate.cache
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\Razor\Views\testeEmail.cshtml.g.cs
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.RazorTargetAssemblyInfo.cs
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.Views.pdb
+D:\drive\Treinamento\Projeto Solicitação de compras\HomeOffice\ApiSGCOlimpiada\ApiSGCOlimpiada\obj\Debug\netcoreapp2.1\ApiSGCOlimpiada.csproj.CopyComplete
