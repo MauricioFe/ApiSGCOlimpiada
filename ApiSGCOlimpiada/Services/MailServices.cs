@@ -19,7 +19,7 @@ namespace ApiSGCOlimpiada.Services
             address.Add(data.Email);
             this.To(address)
                 .From(new MailRecipient("olimpiada@gmail.com", "Envio da solicitação de compra"))
-                .Subject($"Realizando teste de envio de email {this.data}")
+                .Subject($"Realizando teste de envio de email")
                 .View("~/Views/testeEmail.cshtml", this.data);
         }
     }
