@@ -21,9 +21,10 @@ namespace ApiSGCOlimpiada.Controllers
             this._mailer = mailer;
         }
         [HttpPost]
-        public async Task<IActionResult> SendMail(Responsavel usuario)
+        public async Task<IActionResult> SendMail(EmailModel dados)
         {
-            await this._mailer.SendAsync(new MailServices(new Responsavel { Nome = usuario.Nome, Email = usuario.Email, }));
+
+            await this._mailer.SendAsync(new MailServices(dados));
             return Ok();
         }
     }

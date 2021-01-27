@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace ApiSGCOlimpiada.Services
 {
-    public class MailServices : Mailable<Responsavel>
+    public class MailServices : Mailable<EmailModel>
     {
-        private Responsavel responsaveis;
+        private EmailModel data;
 
-        public MailServices(Responsavel responsaveis) => this.responsaveis = responsaveis;
+        public MailServices(EmailModel data) => this.data = data;
 
         public override void Build()
         {
-            this.To(this.responsaveis)
+            this.To(this.data)
                 .From(new MailRecipient("projetomymoney@gmail.com", "Teste de envio de email"))
-                .Subject($"Realizando teste de envio de email {this.responsaveis}")
-                .View("~/Views/testeEmail.cshtml", this.responsaveis);
+                .Subject($"Realizando teste de envio de email {this.data}")
+                .View("~/Views/testeEmail.cshtml", this.data);
         }
     }
 }
