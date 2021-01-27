@@ -1,0 +1,61 @@
+﻿@model ApiSGCOlimpiada.Services.NewUserMailableViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td align="center" valign="top">
+                            <h1>Bem vindo: @Model.Name</h1>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td>
+                            <p>
+                                Bem vindo @Model.Name!
+                            </p>
+                            <p>
+                                Estou feliz que o email tenha sido enviado com sucesso espero conseguir finalizar o projeto o quanto antes. Me confirma no wpp se deu certo
+                                Por favor, clique <a href="@Html.DisplayFor(m => m.CallbackUrl)">aqui</a> para confirmar seu e-mail. Ou copie e cole no navegador o link abaixo:
+                            </p>
+                            <p>
+                                <a href="@Html.DisplayFor(m => m.CallbackUrl)">@Html.DisplayFor(m => m.CallbackUrl)}</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td align="left">
+                            <p>
+                                <a href="https://mauriciofe.github.io">Portfólio Mauricio</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

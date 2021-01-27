@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
 using ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO;
+using Coravel;
 
 namespace ApiSGCOlimpiada
 {
@@ -55,7 +56,7 @@ namespace ApiSGCOlimpiada
                     TermsOfService = "None"
                 });
             });
-
+            services.AddMailer(this.Configuration);
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();
             services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
