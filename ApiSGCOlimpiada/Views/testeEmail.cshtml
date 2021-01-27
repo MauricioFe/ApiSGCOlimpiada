@@ -1,4 +1,4 @@
-﻿@model ApiSGCOlimpiada.Models
+﻿@model ApiSGCOlimpiada.Models.EmailModel
 
 @{
     Layout = null;
@@ -17,40 +17,45 @@
             <td align="center">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
-                        <td align="center" valign="top">
-                            <h1>Bem vindo: @Model.Name</h1>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td>
+                        <td align="left" valign="top">
                             <p>
-                                Bem vindo @Model.Name!
+                                Prezados, boa tarde!
+
+                                Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a contratação do curso para o competidor
+                                @Model.Competidor, da ocupação @Model.Ocupacao, em processo de preparação para a Seletiva Nacional 2021, conforme dados abaixo:
                             </p>
                             <p>
-                                Estou feliz que o email tenha sido enviado com sucesso espero conseguir finalizar o projeto o quanto antes. Me confirma no wpp se deu certo
-                                Por favor, clique <a href="@Html.DisplayFor(m => m.CallbackUrl)">aqui</a> para confirmar seu e-mail. Ou copie e cole no navegador o link abaixo:
+                                Autorizamos também o instrutor treinador @Model.avaliador realizar o pagamento via Cartão de Crédito e
+                                posteriormente solicitar o reembolso via  ‘Relatório de Despesas’.
                             </p>
+                            <br>
+                            <strong>
+                                No histórico deste e-mail.
+                            </strong>
+
+                            <ul>
+                                <li>Unidade Organizacional: @Model.CodUnidadeOrganizacional / Centro de Responsabilidade: @Model.CentroResponsabilidade.</li>
+                                <li>Classe de Valor: @Model.ClasseValor</li>
+                                <li> CNPJ: @Model.Cnpj</li>
+                                <li>Unidade Organizacional: @Model.UnidadeOrganizacional</li>
+                                <li>Orçamento: @Model.Orcamento</li>
+                                <li>Valor: @Model.Valor</li>
+                            </ul>
+                            <strong>Dados para emissão da Nota Fiscal:</strong>
+                            <p>SERVICO NACIONAL DE APRENDIZAGEM INDUSTRIAL – DR/MG</p>
+                            <p>CNPJ: 03.773.700/0001-07     IE: 0620145160040</p>
+                            <p>Endereço: Av. do Contorno, 4456 - Funcionários | Belo Horizonte - MG - CEP 30110-028</p>
+                            <p><strong>Observação:</strong>Após a realização do Relatório de Despesas, enviar a cópia do processo (formulário e nota fiscal) para o e-mail olimpiada@fiemg.com.br, para emissão do pedido de compras.</p>
+                            <p>Solicitamos o apoio do gerente <strong>@Model.Name</strong> para assinatura/autorização do documento, via centro de responsabilidade da Olimpíada do Conhecimento.</p>
+
+                            <strong>ATENÇÂO</strong>
+                            <br />
                             <p>
-                                <a href="@Html.DisplayFor(m => m.CallbackUrl)">@Html.DisplayFor(m => m.CallbackUrl)}</a>
+                                A GET - Coordenação da Olimpíada se limita em autorizar o lançamento das despesas com o projeto para o centro de responsabilidade próprio (@Model.CodUnidadeOrganizacional/ @Model.CentroResponsabilidade). 
+                                Caberá aos demais funcionários realizarem os procedimentos padrão para a execução e conferência dos documentos (formulários, recibos, notas, etc.), 
+                                conforme Instruções Normativas vigentes.
+                                <br />Atenciosamente,
                             </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td align="left">
-                            <p>
-                                <a href="https://mauriciofe.github.io">Portfólio Mauricio</a>
                         </td>
                     </tr>
                 </table>

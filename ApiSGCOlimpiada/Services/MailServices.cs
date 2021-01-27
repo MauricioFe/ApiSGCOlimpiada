@@ -15,8 +15,10 @@ namespace ApiSGCOlimpiada.Services
 
         public override void Build()
         {
-            this.To(this.data)
-                .From(new MailRecipient("projetomymoney@gmail.com", "Teste de envio de email"))
+            List<string> address = new List<string>();
+            address.Add(data.Email);
+            this.To(address)
+                .From(new MailRecipient("olimpiada@gmail.com", "Envio da solicitação de compra"))
                 .Subject($"Realizando teste de envio de email {this.data}")
                 .View("~/Views/testeEmail.cshtml", this.data);
         }
