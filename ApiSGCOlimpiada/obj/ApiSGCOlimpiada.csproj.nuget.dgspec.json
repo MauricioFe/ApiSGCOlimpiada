@@ -40,6 +40,10 @@
         "netcoreapp2.1": {
           "targetAlias": "netcoreapp2.1",
           "dependencies": {
+            "Coravel": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Coravel.Mailer": {
               "target": "Package",
               "version": "[1.0.3, )"

@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.1": {
       "ApiSGCOlimpiada/1.0.0": {
         "dependencies": {
+          "Coravel": "2.1.0",
           "Coravel.Mailer": "1.0.3",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "2.1.2",
@@ -54,6 +55,22 @@
         },
         "compile": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Coravel/2.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Memory": "2.1.1",
+          "Microsoft.Extensions.Hosting.Abstractions": "2.1.1",
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Coravel.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Coravel.dll": {}
         }
       },
       "Coravel.Mailer/1.0.3": {
@@ -3673,6 +3690,13 @@
       "sha512": "sha512-jAy3uHN1U9DpoT/TgLqDTEhlccn/4doOVxhSmmNsnoSsGfHT9Lwr634ac9D0YFujAhNw61nWF4UIpHyzv0aQww==",
       "path": "bouncycastle.netcore/1.8.3",
       "hashPath": "bouncycastle.netcore.1.8.3.nupkg.sha512"
+    },
+    "Coravel/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yTN0OnJENoQr2UIZIL14t0YSk7/Z0FVllVyoemm6FCH10ibYw+OSjpqmjCVTipUEqQhmv+VR9WvrsfPA/c3ndw==",
+      "path": "coravel/2.1.0",
+      "hashPath": "coravel.2.1.0.nupkg.sha512"
     },
     "Coravel.Mailer/1.0.3": {
       "type": "package",

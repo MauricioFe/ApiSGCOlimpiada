@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "s1a7mQ925zds7fSZEa+9mPHj84zkZBWscJ18325XY0Mf97HnpQ2zlg/xMc4v3XrrTIayTCeDOx9kb/SypSX9TA==",
+  "dgSpecHash": "GrSZF3/We18p9Ck/PJHaskYpWcUR2x4b+6rNrxTVcXYXMv3/BRFBYy6xmzWBq7fUKPXnIzvf0pcGsBhWo+sbTg==",
   "success": true,
   "projectFilePath": "D:\\drive\\Treinamento\\Projeto Solicitação de compras\\HomeOffice\\ApiSGCOlimpiada\\ApiSGCOlimpiada\\ApiSGCOlimpiada.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mauri\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
+    "C:\\Users\\mauri\\.nuget\\packages\\coravel\\2.1.0\\coravel.2.1.0.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\coravel.mailer\\1.0.3\\coravel.mailer.1.0.3.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
     "C:\\Users\\mauri\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",

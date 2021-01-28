@@ -16,6 +16,20 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
+      "Coravel/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Memory": "2.1.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "2.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Coravel.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Coravel.dll": {}
+        }
+      },
       "Coravel.Mailer/1.0.3": {
         "type": "package",
         "dependencies": {
@@ -4849,6 +4863,18 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "lib/xamarinios/BouncyCastle.Crypto.dll",
         "lib/xamarinios/BouncyCastle.Crypto.xml"
+      ]
+    },
+    "Coravel/2.1.0": {
+      "sha512": "yTN0OnJENoQr2UIZIL14t0YSk7/Z0FVllVyoemm6FCH10ibYw+OSjpqmjCVTipUEqQhmv+VR9WvrsfPA/c3ndw==",
+      "type": "package",
+      "path": "coravel/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "coravel.2.1.0.nupkg.sha512",
+        "coravel.nuspec",
+        "lib/netstandard2.0/Coravel.dll"
       ]
     },
     "Coravel.Mailer/1.0.3": {
@@ -13161,6 +13187,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "Coravel >= 2.1.0",
       "Coravel.Mailer >= 1.0.3",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.1.2",
@@ -13210,6 +13237,10 @@
       "netcoreapp2.1": {
         "targetAlias": "netcoreapp2.1",
         "dependencies": {
+          "Coravel": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "Coravel.Mailer": {
             "target": "Package",
             "version": "[1.0.3, )"

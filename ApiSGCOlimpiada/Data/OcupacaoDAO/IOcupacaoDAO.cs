@@ -9,6 +9,7 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
     public interface IOcupacaoDAO
     {
         IEnumerable<Ocupacao> GetAll();
+        List<Ocupacao> GetBySolicitacao(long idSolicitacao);
         Ocupacao Find(long id);
         List<Ocupacao> FindBySearch(string search);
         bool Add(Ocupacao ocupacao);

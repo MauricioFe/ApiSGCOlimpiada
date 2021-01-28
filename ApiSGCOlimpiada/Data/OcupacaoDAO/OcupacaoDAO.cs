@@ -193,5 +193,36 @@ namespace ApiSGCOlimpiada.Data.OcupacaoDAO
             }
         }
 
+        public List<Ocupacao> GetBySolicitacao(long idSolicitacao)
+        {
+            try
+            {
+                List<Ocupacao> ocupacaos = new List<Ocupacao>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"Select o.id, o.nome, o.numero from Ocupacoes as o inner join ocupacoessolicitacaocompras as osc on osc.ocupacoesId = o.id inner join solicitacaoCompras as sc on osc.solicitacaoComprasId = sc.id where sc.id = {idSolicitacao}", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Ocupacao ocupacao = new Ocupacao();
+                    ocupacao.Id = Convert.ToInt64(item["Id"]);
+                    ocupacao.Nome = item["Nome"].ToString();
+                    ocupacao.Numero = item["Numero"].ToString();
+                    ocupacaos.Add(ocupacao);
+                }
+                return ocupacaos;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

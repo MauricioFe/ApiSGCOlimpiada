@@ -19,13 +19,15 @@
                     <tr>
                         <td align="left" valign="top">
                             <p>
-                                Prezados, boa tarde!
-
-                                Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a contratação do curso para o competidor, da ocupação, em processo de preparação para a Seletiva Nacional 2021, conforme dados abaixo:
-                            </p>
-                            <p>
-                                Autorizamos também o instrutor treinador @Model.Acompanhamento.Usuario.Nome realizar o pagamento via Cartão de Crédito e
-                                posteriormente solicitar o reembolso via  ‘Relatório de Despesas’.
+                                Prezado(a) @Model.Responsaveis.Find(r => r.Cargo == "Gerente").Nome,
+                                Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a aquisição de
+                                Equipamentos de Informática através do
+                                @Model.Acompanhamento.SolicitacaoCompra.Escola.Nome
+                                que serão utilizados no treinamento das ocupações:
+                                @foreach (var item in Model.Ocupacoes)
+                                {
+                                    <span>#@item.Numero - @item.Nome;</span>
+                                }
                             </p>
                             <br>
                             <strong>
@@ -34,24 +36,35 @@
 
                             <ul>
                                 <li>Unidade Organizacional: @Model.CodUnidadeOrganizacional / Centro de Responsabilidade: @Model.CentroResponsabilidade.</li>
-                                <li>Classe de Valor: @Model.ClasseValor</li>
-                                <li> CNPJ: @Model.Orcamentos[0].Cnpj</li>
-                                <li>Unidade Organizacional: @Model.UnidadeOrganizacional</li>
-                                <li>Orçamento: @Model.Orcamentos[0].Anexo</li>
-                                <li>Valor: @Model.Orcamentos[0].ValorTotal</li>
+                                <li>Projeto: @Model.ClasseValor</li>
+                                <li>CNPJ: @Model.Orcamento.Cnpj</li>
+                                <li>Conta Contábil: @Model.ContaContábil</li>
+                                <li>
+                                    Ocupação:
+                                    @foreach (var item in Model.Ocupacoes)
+                                    {
+                                        <span>#@item.Numero - @item.Nome;</span>
+
+                                    }
+                                </li>
+                                <li>itens: Em anexo</li>
+                                <li>Valor: R$ @Model.Orcamento.ValorTotal.ToString("F2")</li>
+                                <li>
+                                    Endereço: @Model.Acompanhamento.SolicitacaoCompra.Escola.Logradouro, @Model.Acompanhamento.SolicitacaoCompra.Escola.Numero - @Model.Acompanhamento.SolicitacaoCompra.Escola.Bairro, @Model.Acompanhamento.SolicitacaoCompra.Escola.Cidade - @Model.Acompanhamento.SolicitacaoCompra.Escola.Estado
+                                </li>
+                                <li>Responsável pelo recebimento: @Model.Acompanhamento.SolicitacaoCompra.ResponsavelEntrega</li>
                             </ul>
-                            <strong>Dados para emissão da Nota Fiscal:</strong>
-                            <p>SERVICO NACIONAL DE APRENDIZAGEM INDUSTRIAL – DR/MG</p>
-                            <p>CNPJ: 03.773.700/0001-07     IE: 0620145160040</p>
-                            <p>Endereço: Av. do Contorno, 4456 - Funcionários | Belo Horizonte - MG - CEP 30110-028</p>
-                            <p><strong>Observação:</strong> Após a realização do Relatório de Despesas, enviar a cópia do processo (formulário e nota fiscal) para o e-mail olimpiada@fiemg.com.br, para emissão do pedido de compras.</p>
-                            <p>Solicitamos o apoio do gerente <strong>@Model.Responsaveis.Find(r => r.Cargo == "Gerente").Nome</strong> para assinatura/autorização do documento, via centro de responsabilidade da Olimpíada do Conhecimento.</p>
+
+                            <p>
+                                Solicitamos o apoio da escola para a operacionalização do processo de compras, via centro de responsabilidade da Olimpíada do Conhecimento.
+                                Enviar para o e-mail: olimpiada@fiemg.com.br , cópia do processo de Solicitação de Pagamento, para controle.
+                            </p>
 
                             <strong>ATENÇÂO</strong>
                             <br />
                             <p>
-                                A GET - Coordenação da Olimpíada se limita em autorizar o lançamento das despesas com o projeto para o centro de responsabilidade próprio (@Model.CodUnidadeOrganizacional/ @Model.CentroResponsabilidade). 
-                                Caberá aos demais funcionários realizarem os procedimentos padrão para a execução e conferência dos documentos (formulários, recibos, notas, etc.), 
+                                A GET - Coordenação da Olimpíada se limita em autorizar o lançamento das despesas com o projeto para o centro de responsabilidade próprio (@Model.CodUnidadeOrganizacional/ @Model.CentroResponsabilidade).
+                                Caberá aos demais funcionários realizarem os procedimentos padrão para a execução e conferência dos documentos (formulários, recibos, notas, etc.),
                                 conforme Instruções Normativas vigentes.
                                 <br />Atenciosamente,
                             </p>
