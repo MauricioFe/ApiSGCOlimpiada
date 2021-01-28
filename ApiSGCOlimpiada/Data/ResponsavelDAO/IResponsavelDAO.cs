@@ -9,6 +9,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
     public interface IResponsavelDAO
     {
         IEnumerable<Responsavel> GetAll();
+        IEnumerable<Responsavel> GetBySolicitacao(long idSolicitacao);
         Responsavel Find(long id);
         List<Responsavel> FindBySearch(string search);
         bool Add(Responsavel responsavel);

@@ -167,7 +167,40 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null; 
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public IEnumerable<Responsavel> GetBySolicitacao(long idSoliciatacao)
+        {
+            try
+            {
+                List<Responsavel> responsaveis = new List<Responsavel>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"select r.Id, r.nome, r.email, r.cargo, r.escolasId from responsaveis as r inner join  escolas as e on r.EscolasId = e.id inner join solicitacaoCompras as sc on sc.escolasid = e.id where sc.id = {idSoliciatacao}; ", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Responsavel responsavel = new Responsavel();
+                    responsavel.Id = Convert.ToInt64(item["id"]);
+                    responsavel.Nome = item["responsavelNome"].ToString();
+                    responsavel.Email = item["Email"].ToString();
+                    responsavel.Cargo = item["Cargo"].ToString();
+                    responsavel.EscolaId = Convert.ToInt64(item["escolasId"]);
+                    responsaveis.Add(responsavel);
+                }
+                return responsaveis;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
             finally
             {
