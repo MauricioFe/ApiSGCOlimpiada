@@ -39,7 +39,7 @@ namespace ApiSGCOlimpiada.Controllers
             data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
             data.Orcamentos = (List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao);
             data.Responsaveis = (List<Responsavel>)_daoResponsavel.GetBySolicitacao(idSolicitacao);
-            await this._mailer.SendAsync(new MailServices(dados));
+            await this._mailer.SendAsync(new MailServices(data));
             return Ok();
         }
     }

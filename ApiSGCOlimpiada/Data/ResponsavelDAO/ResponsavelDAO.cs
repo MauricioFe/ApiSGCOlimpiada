@@ -189,7 +189,7 @@ namespace ApiSGCOlimpiada.Data.ResponsavelDAO
                 {
                     Responsavel responsavel = new Responsavel();
                     responsavel.Id = Convert.ToInt64(item["id"]);
-                    responsavel.Nome = item["responsavelNome"].ToString();
+                    responsavel.Nome = item["nome"].ToString();
                     responsavel.Email = item["Email"].ToString();
                     responsavel.Cargo = item["Cargo"].ToString();
                     responsavel.EscolaId = Convert.ToInt64(item["escolasId"]);

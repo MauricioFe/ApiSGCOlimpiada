@@ -30,6 +30,7 @@ using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
 using ApiSGCOlimpiada.Data.ProdutoSolicitacoesDAO;
 using Coravel;
+using ApiSGCOlimpiada.Data.EmailDAO;
 
 namespace ApiSGCOlimpiada
 {
@@ -73,6 +74,7 @@ namespace ApiSGCOlimpiada
             services.AddTransient<IStatusDAO, StatusDAO>();
             services.AddTransient<ITipoCompraDAO, TipoCompraDAO>();
             services.AddTransient<IProdutoSolicitacoesDAO, ProdutoSolicitacoesDAO>();
+            services.AddTransient<IEmailDAO, EmailDAO>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {

@@ -21,11 +21,10 @@
                             <p>
                                 Prezados, boa tarde!
 
-                                Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a contratação do curso para o competidor
-                                @Model.Competidor, da ocupação @Model.Ocupacao, em processo de preparação para a Seletiva Nacional 2021, conforme dados abaixo:
+                                Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a contratação do curso para o competidor, da ocupação, em processo de preparação para a Seletiva Nacional 2021, conforme dados abaixo:
                             </p>
                             <p>
-                                Autorizamos também o instrutor treinador @Model.avaliador realizar o pagamento via Cartão de Crédito e
+                                Autorizamos também o instrutor treinador @Model.Acompanhamento.Usuario.Nome realizar o pagamento via Cartão de Crédito e
                                 posteriormente solicitar o reembolso via  ‘Relatório de Despesas’.
                             </p>
                             <br>
@@ -36,17 +35,17 @@
                             <ul>
                                 <li>Unidade Organizacional: @Model.CodUnidadeOrganizacional / Centro de Responsabilidade: @Model.CentroResponsabilidade.</li>
                                 <li>Classe de Valor: @Model.ClasseValor</li>
-                                <li> CNPJ: @Model.Cnpj</li>
+                                <li> CNPJ: @Model.Orcamentos[0].Cnpj</li>
                                 <li>Unidade Organizacional: @Model.UnidadeOrganizacional</li>
-                                <li>Orçamento: @Model.Orcamento</li>
-                                <li>Valor: @Model.Valor</li>
+                                <li>Orçamento: @Model.Orcamentos[0].Anexo</li>
+                                <li>Valor: @Model.Orcamentos[0].ValorTotal</li>
                             </ul>
                             <strong>Dados para emissão da Nota Fiscal:</strong>
                             <p>SERVICO NACIONAL DE APRENDIZAGEM INDUSTRIAL – DR/MG</p>
                             <p>CNPJ: 03.773.700/0001-07     IE: 0620145160040</p>
                             <p>Endereço: Av. do Contorno, 4456 - Funcionários | Belo Horizonte - MG - CEP 30110-028</p>
                             <p><strong>Observação:</strong> Após a realização do Relatório de Despesas, enviar a cópia do processo (formulário e nota fiscal) para o e-mail olimpiada@fiemg.com.br, para emissão do pedido de compras.</p>
-                            <p>Solicitamos o apoio do gerente <strong>@Model.Name</strong> para assinatura/autorização do documento, via centro de responsabilidade da Olimpíada do Conhecimento.</p>
+                            <p>Solicitamos o apoio do gerente <strong>@Model.Responsaveis.Find(r => r.Cargo == "Gerente").Nome</strong> para assinatura/autorização do documento, via centro de responsabilidade da Olimpíada do Conhecimento.</p>
 
                             <strong>ATENÇÂO</strong>
                             <br />
