@@ -8,6 +8,6 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
 {
     public interface IEmailDAO
     {
-        IEnumerable<EmailModel> GetDadosSolicitacao(long idSolicitacao);
+        EmailModel GetDadosSolicitacao(long idSolicitacao);
     }
 }

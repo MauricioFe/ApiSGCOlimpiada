@@ -21,20 +21,20 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
         MySqlCommand cmd;
         MySqlDataAdapter adapter;
         DataTable dt;
-        public IEnumerable<EmailModel> GetDadosSolicitacao(long idSolicitacao)
+        public EmailModel GetDadosSolicitacao(long idSolicitacao)
         {
-            List<EmailModel> dataList = new List<EmailModel>();
             try
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"SELECT ac.id AS acId, ac.data AS dataAcompanhamento, ac.observacao, ac.statusId, ac.UsuariosId,ac.solicitacaoComprasId, sc.id AS scId, sc.Data, sc.ResponsavelEntrega, sc.Justificativa, sc.Anexo, sc.TipoComprasId, sc.EscolasID, e.id AS idEscolas, e.Nome AS escola, e.Cep, e.logradouro, e.bairro, e.numero, e.estado, e.cidade, r.id AS idResponsavel, r.nome AS responsavel, r.email AS emailResponsavel, r.cargo, r.escolasId AS escolaIdR, u.nome AS usuario, u.id AS uId, u.email,u.funcaoId,  st.descricao AS status, st.id AS statusID FROM sgc_olimpiada.solicitacaocompras AS sc INNER JOIN Acompanhamento AS ac ON ac.SolicitacaoComprasId = sc.id INNER JOIN escolas AS e ON sc.escolasId = e.id INNER JOIN responsaveis AS r ON r.escolasId = e.id INNER JOIN status AS st ON st.id = ac.StatusId INNER JOIN usuarios AS u ON u.id = ac.UsuariosId where sc.id = {idSolicitacao}; ", conn);
+                cmd = new MySqlCommand($"SELECT ac.id AS acId, ac.data AS dataAcompanhamento, ac.observacao, ac.statusId, ac.UsuariosId,ac.solicitacaoComprasId, sc.id AS scId, sc.Data, sc.ResponsavelEntrega, sc.Justificativa, sc.Anexo, sc.TipoComprasId, sc.EscolasID, e.id AS idEscolas, e.Nome AS escola, e.Cep, e.logradouro, e.bairro, e.numero, e.estado, e.cidade, u.nome AS usuario, u.id AS uId, u.email,u.funcaoId,  st.descricao AS status, st.id AS statusID FROM sgc_olimpiada.solicitacaocompras AS sc INNER JOIN Acompanhamento AS ac ON ac.SolicitacaoComprasId = sc.id INNER JOIN escolas AS e ON sc.escolasId = e.id INNER JOIN status AS st ON st.id = ac.StatusId INNER JOIN usuarios AS u ON u.id = ac.UsuariosId where sc.id = {idSolicitacao}; ", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
+                EmailModel data = null;
                 foreach (DataRow item in dt.Rows)
                 {
-                    EmailModel data = new EmailModel();
+                    data = new EmailModel();
                     data.Acompanhamento = new Acompanhamento();
                     data.Acompanhamento.Id = Convert.ToInt64(item["acId"]);
                     data.Acompanhamento.Date = Convert.ToDateTime(item["dataAcompanhamento"]);
@@ -58,12 +58,6 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
                     data.Acompanhamento.SolicitacaoCompra.Escola.Numero = item["Numero"].ToString();
                     data.Acompanhamento.SolicitacaoCompra.Escola.Estado = item["Estado"].ToString();
                     data.Acompanhamento.SolicitacaoCompra.Escola.Cidade = item["Cidade"].ToString();
-                    data.Responsavel = new Responsavel();
-                    data.Responsavel.Id = Convert.ToInt64(item["idResponsavel"]);
-                    data.Responsavel.Nome = item["responsavel"].ToString();
-                    data.Responsavel.Email = item["emailResponsavel"].ToString();
-                    data.Responsavel.Cargo = item["cargo"].ToString();
-                    data.Responsavel.EscolaId = Convert.ToInt64(item["escolaIdR"]);
                     data.Acompanhamento.Usuario = new Usuario();
                     data.Acompanhamento.Usuario.Id = Convert.ToInt64(item["uId"]);
                     data.Acompanhamento.Usuario.Nome = item["usuario"].ToString();
@@ -73,7 +67,7 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
                     data.Acompanhamento.Status.Id = Convert.ToInt64(item["statusID"]);
                     data.Acompanhamento.Status.Descricao = item["status"].ToString();
                 }
-                return dataList;
+                return data;
             }
             catch (Exception ex)
             {

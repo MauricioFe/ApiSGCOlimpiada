@@ -1,4 +1,6 @@
-﻿using ApiSGCOlimpiada.Models;
+﻿using ApiSGCOlimpiada.Data.EmailDAO;
+using ApiSGCOlimpiada.Data.OrcamentoDAO;
+using ApiSGCOlimpiada.Models;
 using ApiSGCOlimpiada.Services;
 using Coravel.Mailer.Mail.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -15,15 +17,24 @@ namespace ApiSGCOlimpiada.Controllers
     public class EnviarEmailController : ControllerBase
     {
         private readonly IMailer _mailer;
+        private readonly IEmailDAO _dao;
+        private readonly IOrcamentoDAO _daoOrcamento;
 
-        public EnviarEmailController(IMailer mailer)
+        public EnviarEmailController(IMailer mailer, IEmailDAO dao, IOrcamentoDAO daoOrcamento)
         {
             this._mailer = mailer;
+            this._dao = dao;
+            this._daoOrcamento = daoOrcamento;
         }
-        [HttpPost]
-        public async Task<IActionResult> SendMail(EmailModel dados)
+        [HttpPost("{idSolicitacao}")]
+        public async Task<IActionResult> SendMail([FromBody] EmailModel dados, long idSolicitacao)
         {
-
+            EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
+            data.CentroResponsabilidade = dados.CentroResponsabilidade;
+            data.ClasseValor = dados.ClasseValor;
+            data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
+            data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
+            data.Orcamentos = (List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao);
             await this._mailer.SendAsync(new MailServices(dados));
             return Ok();
         }
