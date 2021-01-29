@@ -45,18 +45,8 @@ namespace ApiSGCOlimpiada
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSwaggerGen(s =>
-            {
-                s.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "Swagger Implementation",
-                    Description = "Api de gerênciamento de compras",
-                    TermsOfService = "None"
-                });
-            });
+        { 
+            services.AddControllers();
             services.AddMailer(this.Configuration);
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();
@@ -105,16 +95,20 @@ namespace ApiSGCOlimpiada
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseSwagger();
-            app.UseSwaggerUI(s =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+            app.UseAuthentication();
+
+            app.UseEndpoints(endpoints =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiSGCOlimpiada V1");
+                endpoints.MapControllers();
             });
-            app.UseMvc();
+
+
         }
     }
 }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>9e660b1b-40c7-43c8-b3a6-3ed7ca130459</UserSecretsId>
   </PropertyGroup>
 
@@ -10,13 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coravel" Version="2.1.0" />
-    <PackageReference Include="Coravel.Mailer" Version="1.0.3" />
+    <PackageReference Include="Coravel.Mailer" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="MySql.Data" Version="8.0.22" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
