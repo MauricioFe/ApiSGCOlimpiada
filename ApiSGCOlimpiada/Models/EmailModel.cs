@@ -11,7 +11,7 @@ namespace ApiSGCOlimpiada.Models
         public string CentroResponsabilidade { get; set; }
         public string ClasseValor { get; set; }
         public string UnidadeOrganizacional { get; set; }
-        public string ContaContábil { get; set; }
+        public string ContaContabil { get; set; }
         public List<Responsavel> Responsaveis { get; set; }
         public Orcamento Orcamento { get; set; }
         public List<Ocupacao> Ocupacoes { get; set; }
