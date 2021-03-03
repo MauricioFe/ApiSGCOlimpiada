@@ -27,15 +27,15 @@ namespace ApiSGCOlimpiada.Controllers
             return dao.GetAll();
         }
 
-        [HttpGet("{id}", Name = "GetProduto")]
-        public IActionResult GetProdutoById(long id)
-        {
-            var produto = dao.Find(id);
-            if (produto == null)
-                return NotFound(new { Message = "Produto não encontrado" });
+        //[HttpGet("{id}", Name = "GetProduto")]
+        //public IActionResult GetProdutoById(long id)
+        //{
+        //    var produto = dao.Find(id);
+        //    if (produto == null)
+        //        return NotFound(new { Message = "Produto não encontrado" });
 
-            return new ObjectResult(produto);
-        }
+        //    return new ObjectResult(produto);
+        //}
         [HttpGet("{codigoProtheus}")]
         public IActionResult GetProdutoByCodigoProtheus(long codigoProtheus)
         {

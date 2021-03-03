@@ -63,8 +63,9 @@ namespace ApiSGCOlimpiada.Controllers
                && string.IsNullOrEmpty(orcamento.Data.ToString("dd/MM/yyyy HH:mm")) && orcamento.ValorTotal == 0
                && orcamento.TotalIpi == 0 && orcamento.TotalProdutos == 0)
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
-            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, orcamento.Id);
-            orcamento.Anexo = fileName;
+            long idSolicitacao = solicitacao.GetAll().Last().Id;
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, idSolicitacao);
+            orcamento.Anexo = fileName.Substring(16);
 
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Orçamento não encontrado" });
@@ -78,6 +79,23 @@ namespace ApiSGCOlimpiada.Controllers
         public IEnumerable<Orcamento> GetByIdSolicitacao(long id)
         {
             return dao.GetOrcamentoBySolicitacao(id);
+        }
+
+        [HttpGet("download/{filename}")]
+        public async Task<IActionResult> Download(string filename)
+        {
+            if (filename == null)
+                return Content("filepart not present");
+
+            var path = Path.Combine($@"{Directory.GetCurrentDirectory()}\AnexoOrcamentos", filename);
+
+            var memory = new MemoryStream();
+            using var stream = new FileStream(path, FileMode.Open);
+            await stream.CopyToAsync(memory);
+
+            memory.Position = 0;
+            var file = File(memory, "application/pdf", Path.GetFileName(path));
+            return file;
         }
     }
 }

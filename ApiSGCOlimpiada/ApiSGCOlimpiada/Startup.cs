@@ -29,6 +29,7 @@ using ApiSGCOlimpiada.Data.EmailDAO;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Coravel;
 
 namespace ApiSGCOlimpiada
 {
@@ -44,6 +45,7 @@ namespace ApiSGCOlimpiada
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMailer(this.Configuration);
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();
             services.AddTransient<IAcompanhamentoDAO, AcompanhamentoDAO>();
