@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>4729f5f4-2198-44e4-bc8e-4475b578d613</UserSecretsId>
+    <ApplicationIcon>Brasão-Dourado.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
