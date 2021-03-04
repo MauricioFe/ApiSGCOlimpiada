@@ -15,4 +15,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\imagem1.png" />
+    <None Include="wwwroot\images\imagem2.png" />
+  </ItemGroup>
+
 </Project>

@@ -65,7 +65,10 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
             long idSolicitacao = solicitacao.GetAll().Last().Id;
             var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", orcamento.Fornecedor, idSolicitacao);
-            orcamento.Anexo = fileName.Substring(16);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                orcamento.Anexo = fileName.Substring(16);
+            }
 
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Orçamento não encontrado" });

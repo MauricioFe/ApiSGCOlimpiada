@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,15 +37,35 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpPost("{idSolicitacao}")]
         public async Task<IActionResult> SendMail([FromBody] EmailModel dados, long idSolicitacao)
         {
+            List<Orcamento> orcamentos = ((List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao));
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
             data.ClasseValor = dados.ClasseValor;
             data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
             data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
-            var find = ((List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao)).Min(r => r.ValorTotal);
-            data.Orcamento = ((List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao)).Find(r => r.ValorTotal == find);
+            var find = orcamentos.Min(r => r.ValorTotal);
+            data.Orcamento = orcamentos.Find(r => r.ValorTotal == find);
             data.Responsaveis = (List<Responsavel>)_daoResponsavel.GetBySolicitacao(idSolicitacao);
             data.Ocupacoes = _daoOcupacao.GetBySolicitacao(idSolicitacao);
+            foreach (var item in orcamentos)
+            {
+                if (!string.IsNullOrEmpty(item.Anexo))
+                {
+                    var path = Path.Combine($@"{Directory.GetCurrentDirectory()}\AnexoOrcamentos", item.Anexo);
+                    var memory = new MemoryStream();
+                    using var stream = new FileStream(path, FileMode.Open);
+                    await stream.CopyToAsync(memory);
+                    memory.Position = 0;
+                    byte[] bacon = memory.ToArray();
+                    memory.Close();
+                    data.orcamentoAnexos = new List<byte[]>();
+                    data.orcamentoAnexos.Add(bacon);
+                }
+                else
+                {
+                    data.orcamentoAnexos = null;
+                }
+            }
             await this._mailer.SendAsync(new MailServices(data));
             return Ok();
         }
