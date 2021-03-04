@@ -69,15 +69,5 @@ namespace ApiSGCOlimpiada.Controllers
         {
             return dao.GetSolicitacao(idSolicitacao);
         }
-        //[HttpGet("orcamentoSolicitacao/{idSolicitacao}")]
-        //public IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao)
-        //{
-        //    return dao.GetOrcamentoSolicitacao(idSolicitacao);
-        //}
-        //[HttpGet("produtoOrcamentoSolicitacao/{idSolicitacao}")]
-        //public IEnumerable<ProdutoPedidoOrcamento> GetProdutoOrcamentoSolicitacao(long idSolicitacao)
-        //{
-        //    return dao.GetProdutoOrcamentoSolicitacao(idSolicitacao);
-        //}
     }
 }

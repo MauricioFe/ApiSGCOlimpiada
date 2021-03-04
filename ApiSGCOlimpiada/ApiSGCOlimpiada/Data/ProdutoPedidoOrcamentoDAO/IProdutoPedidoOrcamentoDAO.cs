@@ -9,9 +9,6 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
     public interface IProdutoPedidoOrcamentoDAO
     {
         IEnumerable<ProdutoPedidoOrcamento> GetAll();
-        //IEnumerable<ProdutoPedidoOrcamento> GetProdutosSolicitacao(long idSolicitacao);
-        //IEnumerable<ProdutoPedidoOrcamento> GetOrcamentoSolicitacao(long idSolicitacao);
-        //IEnumerable<ProdutoPedidoOrcamento> GetProdutoOrcamentoSolicitacao(long idSolicitacao);
         IEnumerable<ProdutoPedidoOrcamento> GetSolicitacao(long idSolicitacao);
         ProdutoPedidoOrcamento Find(long id);
         bool Add(ProdutoPedidoOrcamento solicitacaoCompra);

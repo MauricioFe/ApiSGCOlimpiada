@@ -1,6 +1,7 @@
 ﻿using ApiSGCOlimpiada.Data.EmailDAO;
 using ApiSGCOlimpiada.Data.OcupacaoDAO;
 using ApiSGCOlimpiada.Data.OrcamentoDAO;
+using ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO;
 using ApiSGCOlimpiada.Data.ResponsavelDAO;
 using ApiSGCOlimpiada.Models;
 using ApiSGCOlimpiada.Services;
@@ -24,20 +25,23 @@ namespace ApiSGCOlimpiada.Controllers
         private readonly IOrcamentoDAO _daoOrcamento;
         private readonly IResponsavelDAO _daoResponsavel;
         private readonly IOcupacaoDAO _daoOcupacao;
+        private readonly IProdutoPedidoOrcamentoDAO _daoProdutoCompras;
 
         public EnviarEmailController(IMailer mailer, IEmailDAO dao, IOrcamentoDAO daoOrcamento,
-            IResponsavelDAO daoResponsavel, IOcupacaoDAO daoOcupacao)
+            IResponsavelDAO daoResponsavel, IOcupacaoDAO daoOcupacao, IProdutoPedidoOrcamentoDAO daoProdutoCompras)
         {
             this._mailer = mailer;
             this._dao = dao;
             this._daoOrcamento = daoOrcamento;
             this._daoResponsavel = daoResponsavel;
             this._daoOcupacao = daoOcupacao;
+            this._daoProdutoCompras = daoProdutoCompras;
         }
         [HttpPost("{idSolicitacao}")]
         public async Task<IActionResult> SendMail([FromBody] EmailModel dados, long idSolicitacao)
         {
-            List<Orcamento> orcamentos = ((List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao));
+            List<Orcamento> orcamentos = (List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao);
+            List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetSolicitacao(idSolicitacao);
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
             data.ClasseValor = dados.ClasseValor;
@@ -66,8 +70,24 @@ namespace ApiSGCOlimpiada.Controllers
                     data.orcamentoAnexos = null;
                 }
             }
+
+
+
             await this._mailer.SendAsync(new MailServices(data));
             return Ok();
+        }
+
+        [HttpGet("teste/{idSolicitacao}")]
+        public List<List<ProdutoPedidoOrcamento>> getBacon(long idSolicitacao)
+        {
+            List<Orcamento> orcamentos = (List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao);
+            List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetSolicitacao(idSolicitacao);
+            List<List<ProdutoPedidoOrcamento>> produtosCompras2 = new List<List<ProdutoPedidoOrcamento>>();
+            foreach (var item in orcamentos)
+            {
+                produtosCompras2.Add(produtosCompras.FindAll(p => p.OrcamentoId == item.Id));
+            }
+            return produtosCompras2;
         }
     }
 }

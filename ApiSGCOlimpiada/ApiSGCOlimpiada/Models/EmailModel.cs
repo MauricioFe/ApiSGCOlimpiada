@@ -17,5 +17,11 @@ namespace ApiSGCOlimpiada.Models
         public Orcamento Orcamento { get; set; }
         public List<Ocupacao> Ocupacoes { get; set; }
         public Acompanhamento Acompanhamento { get; set; }
+        public List<ProdutoPedidoOrcamento> ProdutosCompras { get; set; }
+
+        public static explicit operator List<object>(EmailModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
