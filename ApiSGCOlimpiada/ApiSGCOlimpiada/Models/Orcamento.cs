@@ -17,5 +17,6 @@ namespace ApiSGCOlimpiada.Models
         public DateTime Data { get; set; }
         public string FormaPagamento { get; set; }
         public double ValorFrete { get; set; }
+        public char OrderFlag { get; set; }
     }
 }

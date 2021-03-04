@@ -330,5 +330,57 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 conn.Close();
             }
         }
+
+        public IEnumerable<ProdutoPedidoOrcamento> GetDadosProddutoBySolicitacao(long idSolicitacao)
+        {
+            try
+            {
+                List<ProdutoPedidoOrcamento> produtoSolicitacoes = new List<ProdutoPedidoOrcamento>();
+                conn = new MySqlConnection(_conn);
+                conn.Open();
+                cmd = new MySqlCommand($"select * from produtosolicitacoes ps inner join produtos p on ps.ProdutosId = p.id left join orcamento1 o1 on o1.ProdutoSolicitacoesId = ps.id left join orcamento2 o2 on o2.ProdutoSolicitacoesId = ps.id left join orcamento3 o3 on o3.ProdutoSolicitacoesId = ps.id where ps.SolicitacaoComprasId = { idSolicitacao }", conn);
+                adapter = new MySqlDataAdapter(cmd);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                ProdutoPedidoOrcamento produtoPedidoOrcamento = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
+                    produtoPedidoOrcamento.Id = Convert.ToInt64(item["ppoId"]);
+                    produtoPedidoOrcamento.Desconto = Convert.ToDouble(item["Desconto"]);
+                    produtoPedidoOrcamento.Icms = Convert.ToDouble(item["icms"]);
+                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["ipi"]);
+                    produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["quantidade"]);
+                    produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
+                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["orcamentosId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacoesId = Convert.ToInt64(item["produtoSolicitacoesId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao = new ProdutoSolicitacao();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Id = Convert.ToInt64(item["psId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.ProdutosId = Convert.ToInt64(item["produtosId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto = new Produto();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Id = Convert.ToInt64(item["IdPRoduto"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.CodigoProtheus = Convert.ToInt64(item["codigoProtheus"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Descricao = item["Descricao"].ToString();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.GrupoId = Convert.ToInt64(item["gruposId"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo = new Grupo();
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Id = Convert.ToInt64(item["IdPRoduto"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.CodigoProtheus = Convert.ToInt64(item["grupoProtheus"]);
+                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Descricao = item["descGrupo"].ToString();
+                    
+                    produtoSolicitacoes.Add(produtoPedidoOrcamento);
+                }
+                return produtoSolicitacoes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

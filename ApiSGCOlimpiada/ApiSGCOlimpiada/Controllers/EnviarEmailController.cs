@@ -80,13 +80,9 @@ namespace ApiSGCOlimpiada.Controllers
         [HttpGet("teste/{idSolicitacao}")]
         public List<List<ProdutoPedidoOrcamento>> getBacon(long idSolicitacao)
         {
-            List<Orcamento> orcamentos = (List<Orcamento>)_daoOrcamento.GetOrcamentoBySolicitacao(idSolicitacao);
-            List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetSolicitacao(idSolicitacao);
-            List<List<ProdutoPedidoOrcamento>> produtosCompras2 = new List<List<ProdutoPedidoOrcamento>>();
-            foreach (var item in orcamentos)
-            {
-                produtosCompras2.Add(produtosCompras.FindAll(p => p.OrcamentoId == item.Id));
-            }
+           
+            List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetDadosProddutoBySolicitacao(idSolicitacao);
+           
             return produtosCompras2;
         }
     }

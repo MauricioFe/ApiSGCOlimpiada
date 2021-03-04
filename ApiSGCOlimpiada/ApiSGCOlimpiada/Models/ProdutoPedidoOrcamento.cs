@@ -13,6 +13,7 @@ namespace ApiSGCOlimpiada.Models
         public double Ipi { get; set; }
         public double Icms { get; set; }
         public double Desconto { get; set; }
+        public decimal TotalItem { get; set; }
         public Orcamento Orcamento { get; set; }
         public ProdutoSolicitacao ProdutoSolicitacao { get; set; }
         public long ProdutoSolicitacoesId { get; set; }

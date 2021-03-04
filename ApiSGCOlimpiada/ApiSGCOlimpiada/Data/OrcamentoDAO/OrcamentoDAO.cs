@@ -26,7 +26,7 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
             {
                 conn = new MySqlConnection(_conn);
                 cmd = new MySqlCommand($"insert into orcamentos values (null, '{orcamento.Fornecedor}', '{orcamento.Cnpj}', {orcamento.ValorTotal.ToString().Replace(",", ".")}," +
-                    $"{orcamento.TotalIpi.ToString().Replace(",", ".")}, {orcamento.TotalProdutos.ToString().Replace(",", ".")}, '{orcamento.Anexo}', '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}', '{orcamento.FormaPagamento}', {orcamento.ValorFrete.ToString().Replace(",", ".")})", conn);
+                    $"{orcamento.TotalIpi.ToString().Replace(",", ".")}, {orcamento.TotalProdutos.ToString().Replace(",", ".")}, '{orcamento.Anexo}', '{orcamento.Data.ToString("yyyy-MM-dd HH:mm")}', '{orcamento.FormaPagamento}', {orcamento.ValorFrete.ToString().Replace(",", ".")},'{orcamento.OrderFlag}')", conn);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0)
