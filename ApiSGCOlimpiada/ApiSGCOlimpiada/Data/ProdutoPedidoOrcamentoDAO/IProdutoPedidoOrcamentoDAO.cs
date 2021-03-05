@@ -14,6 +14,6 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
         bool Add(ProdutoPedidoOrcamento solicitacaoCompra);
         bool Update(ProdutoPedidoOrcamento solicitacaoCompra, long id);
         bool Remove(long id);
-        IEnumerable<ProdutoPedidoOrcamento> GetDadosProddutoBySolicitacao(long idSolicitacao);
+        IEnumerable<Planilha> GetDadosProdutoBySolicitacao(long idSolicitacao);
     }
 }

@@ -31,7 +31,7 @@
                             </p>
                             <br>
                             <strong>
-                               Dados para controle.
+                                Dados para controle.
                             </strong>
 
                             <ul>
@@ -47,7 +47,7 @@
                                     }
                                 </li>
                                 <li>itens: Em anexo</li>
-                                <li>Valor: R$ @Model.Orcamento.ValorTotal.ToString("F2")</li>
+                                <li>Valor: R$ @Model.Orcamento.ValorTotal.ToString("F2") - (@Model.Orcamento.Fornecedor)</li>
                                 <li>
                                     Endereço: @Model.Acompanhamento.SolicitacaoCompra.Escola.Logradouro, @Model.Acompanhamento.SolicitacaoCompra.Escola.Numero - @Model.Acompanhamento.SolicitacaoCompra.Escola.Bairro, @Model.Acompanhamento.SolicitacaoCompra.Escola.Cidade - @Model.Acompanhamento.SolicitacaoCompra.Escola.Estado
                                 </li>

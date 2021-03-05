@@ -5,6 +5,7 @@ using ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO;
 using ApiSGCOlimpiada.Data.ResponsavelDAO;
 using ApiSGCOlimpiada.Models;
 using ApiSGCOlimpiada.Services;
+using ClosedXML.Excel;
 using Coravel.Mailer.Mail.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -70,20 +71,70 @@ namespace ApiSGCOlimpiada.Controllers
                     data.orcamentoAnexos = null;
                 }
             }
+            List<Planilha> planilhas = (List<Planilha>)_daoProdutoCompras.GetDadosProdutoBySolicitacao(idSolicitacao);
 
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Produto");
+                var currentRow = 3;
+                worksheet.Columns().AdjustToContents();
+                worksheet.Rows().AdjustToContents();
+                worksheet.Cell(currentRow, 1).Value = "CodigoProtheus";
+                worksheet.Cell(currentRow, 2).Value = "Descricao";
+                worksheet.Cell(currentRow, 3).Value = "Código protheus do grupo";
+                worksheet.Cell(currentRow, 4).Value = "Grupo";
+                int cont = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    worksheet.Cell(1, 7 + cont).Value = "Orçamento " + (i + 1);
 
+                    worksheet.Cell(2, 7 + cont).Value = orcamentos[i].Fornecedor;
+                    worksheet.Cell(currentRow, 7 + cont).Value = "Valor unitário";
+                    worksheet.Cell(currentRow, 8 + cont).Value = "Quantidade";
+                    worksheet.Cell(currentRow, 9 + cont).Value = "Total Item";
+                    worksheet.Cell(currentRow, 10 + cont).Value = "Ipi";
+                    worksheet.Cell(currentRow, 11 + cont).Value = "Icms";
+                    worksheet.Cell(currentRow, 12 + cont).Value = "Desconto";
+                    cont += 7;
+                }
 
+                foreach (var item in planilhas)
+                {
+                    currentRow++;
+                    cont = 0;
+                    worksheet.Cell(currentRow, 1).Value = string.Concat("0000000", item.Produto.CodigoProtheus);
+                    worksheet.Cell(currentRow, 2).Value = item.Produto.Descricao;
+                    worksheet.Cell(currentRow, 3).Value = item.Produto.Grupo.CodigoProtheus;
+                    worksheet.Cell(currentRow, 4).Value = item.Produto.Grupo.Descricao;
+                    for (int i = 0; i < item.ProdutoPedidoOrcamentosList.Count; i++)
+                    {
+
+                        worksheet.Cell(currentRow, 7 + cont).Value = item.ProdutoPedidoOrcamentosList[i].valor;
+                        worksheet.Cell(currentRow, 8 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Quantidade;
+                        worksheet.Cell(currentRow, 9 + cont).Value = item.ProdutoPedidoOrcamentosList[i].TotalItem;
+                        worksheet.Cell(currentRow, 10 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Ipi;
+                        worksheet.Cell(currentRow, 11 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Icms;
+                        worksheet.Cell(currentRow, 12 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Desconto;
+                        worksheet.Cell(currentRow + 2, 7 + cont).Value = "Valor Final";
+                        worksheet.Cell(currentRow + 3, 7 + cont).Value = orcamentos[i].ValorTotal;
+                        cont += 7;
+                    }
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    data.planilha = content;
+                }
+            }
             await this._mailer.SendAsync(new MailServices(data));
             return Ok();
         }
-
         [HttpGet("teste/{idSolicitacao}")]
-        public List<List<ProdutoPedidoOrcamento>> getBacon(long idSolicitacao)
+        public IEnumerable<Planilha> getBacon(long idSolicitacao)
         {
-           
-            List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetDadosProddutoBySolicitacao(idSolicitacao);
-           
-            return produtosCompras2;
+            return _daoProdutoCompras.GetDadosProdutoBySolicitacao(idSolicitacao);
         }
     }
 }

@@ -27,6 +27,9 @@ namespace ApiSGCOlimpiada.Services
             Attachment attachment3 = new Attachment();
             attachment3.Bytes = data.orcamentoAnexos[0];
             attachment3.Name = "orcamento3.pdf";
+            Attachment planilha = new Attachment();
+            planilha.Bytes = data.planilha;
+            planilha.Name = "dadosProdutos.xlsx";
             List<string> address = new List<string>();
             foreach (var item in data.Responsaveis)
             {
@@ -37,6 +40,7 @@ namespace ApiSGCOlimpiada.Services
                 .Attach(attachment1)
                 .Attach(attachment2)
                 .Attach(attachment3)
+                .Attach(planilha)
                 .Subject($"Realizando teste de envio de email")
                 .View("~/Views/testeEmail.cshtml", this.data);
         }

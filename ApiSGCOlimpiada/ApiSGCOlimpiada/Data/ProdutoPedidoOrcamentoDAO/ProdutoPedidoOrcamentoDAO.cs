@@ -331,14 +331,15 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
             }
         }
 
-        public IEnumerable<ProdutoPedidoOrcamento> GetDadosProddutoBySolicitacao(long idSolicitacao)
+        public IEnumerable<Planilha> GetDadosProdutoBySolicitacao(long idSolicitacao)
         {
             try
             {
                 List<ProdutoPedidoOrcamento> produtoSolicitacoes = new List<ProdutoPedidoOrcamento>();
+                List<Planilha> planilhaList = new List<Planilha>();
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"select * from produtosolicitacoes ps inner join produtos p on ps.ProdutosId = p.id left join orcamento1 o1 on o1.ProdutoSolicitacoesId = ps.id left join orcamento2 o2 on o2.ProdutoSolicitacoesId = ps.id left join orcamento3 o3 on o3.ProdutoSolicitacoesId = ps.id where ps.SolicitacaoComprasId = { idSolicitacao }", conn);
+                cmd = new MySqlCommand($"select * from produtosolicitacoes ps inner join produtos p on ps.ProdutosId = p.id inner join grupos g on g.Id = p.GruposId left join orcamento1 o1 on o1.ProdutoSolicitacoesId = ps.id left join orcamento2 o2 on o2.ProdutoSolicitacoesId = ps.id left join orcamento3 o3 on o3.ProdutoSolicitacoesId = ps.id where ps.SolicitacaoComprasId = { idSolicitacao }; ", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -346,31 +347,58 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                 foreach (DataRow item in dt.Rows)
                 {
                     produtoPedidoOrcamento = new ProdutoPedidoOrcamento();
-                    produtoPedidoOrcamento.Id = Convert.ToInt64(item["ppoId"]);
-                    produtoPedidoOrcamento.Desconto = Convert.ToDouble(item["Desconto"]);
-                    produtoPedidoOrcamento.Icms = Convert.ToDouble(item["icms"]);
-                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item["ipi"]);
-                    produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item["quantidade"]);
-                    produtoPedidoOrcamento.valor = Convert.ToDouble(item["valor"]);
-                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item["orcamentosId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacoesId = Convert.ToInt64(item["produtoSolicitacoesId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao = new ProdutoSolicitacao();
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Id = Convert.ToInt64(item["psId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.ProdutosId = Convert.ToInt64(item["produtosId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.SolicitacaoComprasId = Convert.ToInt64(item["SolicitacaoComprasId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto = new Produto();
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Id = Convert.ToInt64(item["IdPRoduto"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.CodigoProtheus = Convert.ToInt64(item["codigoProtheus"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Descricao = item["Descricao"].ToString();
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.GrupoId = Convert.ToInt64(item["gruposId"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo = new Grupo();
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Id = Convert.ToInt64(item["IdPRoduto"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.CodigoProtheus = Convert.ToInt64(item["grupoProtheus"]);
-                    produtoPedidoOrcamento.ProdutoSolicitacao.Produto.Grupo.Descricao = item["descGrupo"].ToString();
-                    
-                    produtoSolicitacoes.Add(produtoPedidoOrcamento);
+                    ProdutoPedidoOrcamento produtoPedidoOrcamento2 = new ProdutoPedidoOrcamento();
+                    ProdutoPedidoOrcamento produtoPedidoOrcamento3 = new ProdutoPedidoOrcamento();
+                    Planilha planilha = new Planilha();
+                    planilha.Produto = new Produto();
+                    planilha.Produto.Id = Convert.ToInt64(item[3]);
+                    planilha.Produto.CodigoProtheus = Convert.ToInt64(item[4]);
+                    planilha.Produto.Descricao = item[5].ToString();
+                    planilha.Produto.GrupoId = Convert.ToInt64(item[6]);
+                    planilha.Produto.Grupo = new Grupo();
+                    planilha.Produto.Grupo.Id = Convert.ToInt64(item[7]);
+                    planilha.Produto.Grupo.CodigoProtheus = Convert.ToInt64(item[8]);
+                    planilha.Produto.Grupo.Descricao = item[9].ToString();
+
+                    produtoPedidoOrcamento.Id = Convert.ToInt64(item[10]);
+                    produtoPedidoOrcamento.valor = Convert.ToDouble(item[11]);
+                    produtoPedidoOrcamento.Quantidade = Convert.ToInt32(item[12]);
+                    produtoPedidoOrcamento.Ipi = Convert.ToDouble(item[13]);
+                    produtoPedidoOrcamento.Icms = Convert.ToDouble(item[14]);
+                    produtoPedidoOrcamento.Desconto = Convert.ToDouble(item[15]);
+                    produtoPedidoOrcamento.ProdutoSolicitacoesId = Convert.ToInt64(item[16]);
+                    produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item[17]);
+                    produtoPedidoOrcamento.TotalItem = Convert.ToDecimal(item[18]);
+
+
+                    produtoPedidoOrcamento2.Id = Convert.ToInt64(item[19]);
+                    produtoPedidoOrcamento2.valor = Convert.ToDouble(item[20]);
+                    produtoPedidoOrcamento2.Quantidade = Convert.ToInt32(item[21]);
+                    produtoPedidoOrcamento2.Ipi = Convert.ToDouble(item[22]);
+                    produtoPedidoOrcamento2.Icms = Convert.ToDouble(item[23]);
+                    produtoPedidoOrcamento2.Desconto = Convert.ToDouble(item[24]);
+                    produtoPedidoOrcamento2.ProdutoSolicitacoesId = Convert.ToInt64(item[25]);
+                    produtoPedidoOrcamento2.OrcamentoId = Convert.ToInt64(item[26]);
+                    produtoPedidoOrcamento2.TotalItem = Convert.ToDecimal(item[27]);
+
+                    produtoPedidoOrcamento3.Id = Convert.ToInt64(item[28]);
+                    produtoPedidoOrcamento3.valor = Convert.ToDouble(item[29]);
+                    produtoPedidoOrcamento3.Quantidade = Convert.ToInt32(item[30]);
+                    produtoPedidoOrcamento3.Ipi = Convert.ToDouble(item[31]);
+                    produtoPedidoOrcamento3.Icms = Convert.ToDouble(item[32]);
+                    produtoPedidoOrcamento3.Desconto = Convert.ToDouble(item[33]);
+                    produtoPedidoOrcamento3.ProdutoSolicitacoesId = Convert.ToInt64(item[34]);
+                    produtoPedidoOrcamento3.OrcamentoId = Convert.ToInt64(item[35]);
+                    produtoPedidoOrcamento3.TotalItem = Convert.ToDecimal(item[36]);
+
+                    planilha.ProdutoPedidoOrcamentosList = new List<ProdutoPedidoOrcamento>();
+                    planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento);
+                    planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento2);
+                    planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento3);
+
+                    planilhaList.Add(planilha);
                 }
-                return produtoSolicitacoes;
+                return planilhaList;
             }
             catch (Exception e)
             {

@@ -12,16 +12,11 @@ namespace ApiSGCOlimpiada.Models
         public string ClasseValor { get; set; }
         public string UnidadeOrganizacional { get; set; }
         public string ContaContabil { get; set; }
-        public List<byte[]> orcamentoAnexos{ get; set; }
+        public List<byte[]> orcamentoAnexos { get; set; }
         public List<Responsavel> Responsaveis { get; set; }
         public Orcamento Orcamento { get; set; }
         public List<Ocupacao> Ocupacoes { get; set; }
         public Acompanhamento Acompanhamento { get; set; }
-        public List<ProdutoPedidoOrcamento> ProdutosCompras { get; set; }
-
-        public static explicit operator List<object>(EmailModel v)
-        {
-            throw new NotImplementedException();
-        }
+        public byte[] planilha { get; set; }
     }
 }
