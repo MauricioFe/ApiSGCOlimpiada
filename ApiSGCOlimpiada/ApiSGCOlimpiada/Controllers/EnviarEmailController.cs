@@ -77,8 +77,7 @@ namespace ApiSGCOlimpiada.Controllers
             {
                 var worksheet = workbook.Worksheets.Add("Produto");
                 var currentRow = 3;
-                worksheet.Columns().AdjustToContents();
-                worksheet.Rows().AdjustToContents();
+
                 worksheet.Cell(currentRow, 1).Value = "CodigoProtheus";
                 worksheet.Cell(currentRow, 2).Value = "Descricao";
                 worksheet.Cell(currentRow, 3).Value = "Código protheus do grupo";
@@ -95,7 +94,8 @@ namespace ApiSGCOlimpiada.Controllers
                     worksheet.Cell(currentRow, 10 + cont).Value = "Ipi";
                     worksheet.Cell(currentRow, 11 + cont).Value = "Icms";
                     worksheet.Cell(currentRow, 12 + cont).Value = "Desconto";
-                    cont += 7;
+                    worksheet.Cell(currentRow, 13 + cont).Value = "Valor do frete";
+                    cont += 8;
                 }
 
                 foreach (var item in planilhas)
@@ -115,12 +115,14 @@ namespace ApiSGCOlimpiada.Controllers
                         worksheet.Cell(currentRow, 10 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Ipi;
                         worksheet.Cell(currentRow, 11 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Icms;
                         worksheet.Cell(currentRow, 12 + cont).Value = item.ProdutoPedidoOrcamentosList[i].Desconto;
-                        worksheet.Cell(currentRow + 2, 7 + cont).Value = "Valor Final";
-                        worksheet.Cell(currentRow + 3, 7 + cont).Value = orcamentos[i].ValorTotal;
-                        cont += 7;
+                        worksheet.Cell(currentRow, 13 + cont).Value = orcamentos[i].ValorFrete;
+                        worksheet.Cell(item.ProdutoPedidoOrcamentosList.Count + 3, 7 + cont).Value = "Valor Final";
+                        worksheet.Cell(item.ProdutoPedidoOrcamentosList.Count + 4, 7 + cont).Value = orcamentos[i].ValorTotal;
+                        cont += 8;
                     }
                 }
-
+                worksheet.Columns().AdjustToContents();
+                worksheet.Rows().AdjustToContents();
                 using (var stream = new MemoryStream())
                 {
                     workbook.SaveAs(stream);
