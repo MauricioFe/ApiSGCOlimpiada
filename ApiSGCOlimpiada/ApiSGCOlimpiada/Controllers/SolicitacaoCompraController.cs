@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace ApiSGCOlimpiada.Controllers
 {
@@ -62,18 +63,36 @@ namespace ApiSGCOlimpiada.Controllers
 
             return BadRequest(new { Message = "Erro interno no servidor" });
         }
-        [HttpPatch("{id}/notafiscal")]
+        [HttpPatch("notafiscal/{id}")]
         public async Task<IActionResult> AnexarNotaFiscal([FromForm] IFormFile arquivo, long id)
         {
             if (dao.Find(id) == null)
                 return NotFound(new { Message = "Solicitação de compra não encontrada" });
-            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "AnexoOrcamentos", "notaFiscal", id);
+            var fileName = await Utils.UploadUtil.UploadAnexosPdfAsync(arquivo, "NotasFiscais", "notaFiscal_solicitacao", id);
             if (fileName == null)
                 return BadRequest(new { Message = "Erro ao fazer upload" });
+            fileName = fileName.Substring(13);
             if (dao.AnexarNotaFiscal(fileName, id))
                 return new NoContentResult();
 
             return BadRequest(new { Message = "Erro interno no servidor" });
+        }
+
+        [HttpGet("download")]
+        public async Task<IActionResult> Download([FromQuery(Name = "arquivo")]string filename)
+        {
+            if (filename == null)
+                return Content("filepart not present");
+
+            var path = Path.Combine($@"{Directory.GetCurrentDirectory()}\NotasFiscais", filename);
+
+            var memory = new MemoryStream();
+            using var stream = new FileStream(path, FileMode.Open);
+            await stream.CopyToAsync(memory);
+
+            memory.Position = 0;
+            var file = File(memory, "application/pdf", Path.GetFileName(path));
+            return file;
         }
     }
 }
