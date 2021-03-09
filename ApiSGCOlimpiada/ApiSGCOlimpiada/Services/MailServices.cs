@@ -17,7 +17,6 @@ namespace ApiSGCOlimpiada.Services
 
         public override void Build()
         {
-
             Attachment attachment1 = new Attachment();
             attachment1.Bytes = data.orcamentoAnexos[0];
             attachment1.Name = "orcamento1.pdf";
