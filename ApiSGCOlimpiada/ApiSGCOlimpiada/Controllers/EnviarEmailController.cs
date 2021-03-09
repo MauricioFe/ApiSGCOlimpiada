@@ -156,7 +156,8 @@ namespace ApiSGCOlimpiada.Controllers
             string message = await this._mailer.RenderAsync(new DownloadEmail(data));
             var Renderer = new IronPdf.HtmlToPdf();
             var PDF = Renderer.RenderHtmlAsPdf(message);
-            return File(PDF.BinaryData, "application/pdf", @"EmailPdf\emailSolicitacao.pdf");
+            var path = Path.Combine($@"{Directory.GetCurrentDirectory()}\EmailPdf", $"emailSolicitacao{DateTime.Now}.pdf");
+            return File(PDF.BinaryData, "application/pdf", path);
         }
     }
 }
