@@ -30,6 +30,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Coravel;
+using System.Globalization;
 
 namespace ApiSGCOlimpiada
 {
@@ -45,6 +46,7 @@ namespace ApiSGCOlimpiada
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CultureInfo.CurrentCulture = new CultureInfo("pt-BR");
             services.AddMailer(this.Configuration);
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<IFuncaoDAO, FuncaoDAO>();

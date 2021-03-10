@@ -46,6 +46,7 @@ namespace ApiSGCOlimpiada.Controllers
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
             data.ClasseValor = dados.ClasseValor;
+            data.ContaContabil = dados.ContaContabil;
             data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
             data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
             var find = orcamentos.Min(r => r.ValorTotal);
@@ -147,6 +148,7 @@ namespace ApiSGCOlimpiada.Controllers
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
             data.ClasseValor = dados.ClasseValor;
+            data.ContaContabil = dados.ContaContabil;
             data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
             data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
             var find = orcamentos.Min(r => r.ValorTotal);

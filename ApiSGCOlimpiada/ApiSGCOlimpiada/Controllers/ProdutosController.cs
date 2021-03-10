@@ -36,7 +36,7 @@ namespace ApiSGCOlimpiada.Controllers
 
         //    return new ObjectResult(produto);
         //}
-        [HttpGet("{codigoProtheus}")]
+        [HttpGet("{codigoProtheus}", Name = "GetProduto")]
         public IActionResult GetProdutoByCodigoProtheus(long codigoProtheus)
         {
             var produto = dao.FindByProtheus(codigoProtheus);
@@ -61,7 +61,7 @@ namespace ApiSGCOlimpiada.Controllers
                 return BadRequest(new { Message = "Todos os campos são obrigatórios" });
 
             if (dao.Add(produto))
-                return CreatedAtRoute("GetProduto", new { id = produto.Id }, produto);
+                return CreatedAtRoute("GetProduto", new { codigoProtheus = produto.CodigoProtheus }, produto);
 
             return BadRequest(new { Message = "Erro interno no servidor" });
 
