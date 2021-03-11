@@ -21,10 +21,10 @@ namespace ApiSGCOlimpiada.Services
             attachment1.Bytes = data.orcamentoAnexos[0];
             attachment1.Name = "orcamento1.pdf";
             Attachment attachment2 = new Attachment();
-            attachment2.Bytes = data.orcamentoAnexos[0];
+            attachment2.Bytes = data.orcamentoAnexos[1];
             attachment2.Name = "orcamento2.pdf";
             Attachment attachment3 = new Attachment();
-            attachment3.Bytes = data.orcamentoAnexos[0];
+            attachment3.Bytes = data.orcamentoAnexos[2];
             attachment3.Name = "orcamento3.pdf";
             Attachment planilha = new Attachment();
             planilha.Bytes = data.planilha;

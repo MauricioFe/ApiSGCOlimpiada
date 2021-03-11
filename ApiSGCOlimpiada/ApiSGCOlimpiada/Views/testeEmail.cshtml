@@ -21,7 +21,7 @@
                             <p>
                                 Prezado(a) @Model.Responsaveis.Find(r => r.Cargo == "Gerente").Nome,
                                 Está autorizado o lançamento das despesas para a Olimpíada do Conhecimento, referente a aquisição de
-                                Equipamentos de Informática através do
+                                @Model.Acompanhamento.SolicitacaoCompra.TipoCompra.Descricao através do
                                 @Model.Acompanhamento.SolicitacaoCompra.Escola.Nome
                                 que serão utilizados no treinamento das ocupações:
                                 @foreach (var item in Model.Ocupacoes)

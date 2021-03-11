@@ -53,6 +53,7 @@ namespace ApiSGCOlimpiada.Controllers
             data.Orcamento = orcamentos.Find(r => r.ValorTotal == find);
             data.Responsaveis = (List<Responsavel>)_daoResponsavel.GetBySolicitacao(idSolicitacao);
             data.Ocupacoes = _daoOcupacao.GetBySolicitacao(idSolicitacao);
+            data.orcamentoAnexos = new List<byte[]>();
             foreach (var item in orcamentos)
             {
                 if (!string.IsNullOrEmpty(item.Anexo))
@@ -64,7 +65,6 @@ namespace ApiSGCOlimpiada.Controllers
                     memory.Position = 0;
                     byte[] bacon = memory.ToArray();
                     memory.Close();
-                    data.orcamentoAnexos = new List<byte[]>();
                     data.orcamentoAnexos.Add(bacon);
                 }
                 else
