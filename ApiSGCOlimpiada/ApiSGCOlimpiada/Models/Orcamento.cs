@@ -10,13 +10,13 @@ namespace ApiSGCOlimpiada.Models
         public long Id { get; set; }
         public string Fornecedor { get; set; }
         public string Cnpj { get; set; }
-        public double ValorTotal { get; set; }
-        public double TotalIpi { get; set; }
-        public double TotalProdutos { get; set; }
+        public decimal ValorTotal { get; set; }
+        public decimal TotalIpi { get; set; }
+        public decimal TotalProdutos { get; set; }
         public string Anexo { get; set; }
         public DateTime Data { get; set; }
         public string FormaPagamento { get; set; }
-        public double ValorFrete { get; set; }
+        public decimal ValorFrete { get; set; }
         public char OrderFlag { get; set; }
     }
 }

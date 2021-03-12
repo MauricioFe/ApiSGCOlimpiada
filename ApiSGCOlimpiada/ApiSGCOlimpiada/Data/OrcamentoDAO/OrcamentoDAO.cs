@@ -63,9 +63,9 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                     orcamento.Id = Convert.ToInt64(item["id"]);
                     orcamento.Fornecedor = item["fornecedor"].ToString();
                     orcamento.Cnpj = item["cnpj"].ToString();
-                    orcamento.ValorTotal = Convert.ToDouble(item["valorTotal"]);
-                    orcamento.TotalIpi = Convert.ToDouble(item["TotalIpi"]);
-                    orcamento.TotalProdutos = Convert.ToDouble(item["TotalProdutos"]);
+                    orcamento.ValorTotal = Convert.ToDecimal(item["valorTotal"]);
+                    orcamento.TotalIpi = Convert.ToDecimal(item["TotalIpi"]);
+                    orcamento.TotalProdutos = Convert.ToDecimal(item["TotalProdutos"]);
                     orcamento.Anexo = item["anexo"].ToString();
                     orcamento.FormaPagamento = item["FormaPagamento"].ToString();
                     orcamento.Data = Convert.ToDateTime(item["data"]);
@@ -101,9 +101,9 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                     orcamento.Id = Convert.ToInt64(item["id"]);
                     orcamento.Fornecedor = item["fornecedor"].ToString();
                     orcamento.Cnpj = item["cnpj"].ToString();
-                    orcamento.ValorTotal = Convert.ToDouble(item["valorTotal"]);
-                    orcamento.TotalIpi = Convert.ToDouble(item["TotalIpi"]);
-                    orcamento.TotalProdutos = Convert.ToDouble(item["TotalProdutos"]);
+                    orcamento.ValorTotal = Convert.ToDecimal(item["valorTotal"]);
+                    orcamento.TotalIpi = Convert.ToDecimal(item["TotalIpi"]);
+                    orcamento.TotalProdutos = Convert.ToDecimal(item["TotalProdutos"]);
                     orcamento.Anexo = item["anexo"].ToString();
                     orcamento.Data = Convert.ToDateTime(item["data"]);
                     orcamento.FormaPagamento = item["FormaPagamento"].ToString();
@@ -171,10 +171,10 @@ namespace ApiSGCOlimpiada.Data.OrcamentoDAO
                 {
                     orcamento = new Orcamento();
                     orcamento.Id = Convert.ToInt64(item["idOrcamento"]);
-                    orcamento.TotalIpi = Convert.ToDouble(item["totalIpi"]);
-                    orcamento.ValorFrete = Convert.ToDouble(item["ValorFrete"]);
-                    orcamento.TotalProdutos = Convert.ToDouble(item["totalProdutos"]);
-                    orcamento.ValorTotal = Convert.ToDouble(item["totalProdutos"]);
+                    orcamento.TotalIpi = Convert.ToDecimal(item["totalIpi"]);
+                    orcamento.ValorFrete = Convert.ToDecimal(item["ValorFrete"]);
+                    orcamento.TotalProdutos = Convert.ToDecimal(item["totalProdutos"]);
+                    orcamento.ValorTotal = Convert.ToDecimal(item["totalProdutos"]);
                     orcamento.Data = Convert.ToDateTime(item["dataOrcamento"]);
                     orcamento.Anexo = item["anexo"].ToString();
                     orcamento.Cnpj = item["cnpj"].ToString();
