@@ -84,7 +84,7 @@ namespace ApiSGCOlimpiada.Controllers
                 worksheet.Cell(currentRow, 3).Value = "Código protheus do grupo";
                 worksheet.Cell(currentRow, 4).Value = "Grupo";
                 int cont = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < orcamentos.Count; i++)
                 {
                     worksheet.Cell(1, 7 + cont).Value = "Orçamento " + (i + 1);
 

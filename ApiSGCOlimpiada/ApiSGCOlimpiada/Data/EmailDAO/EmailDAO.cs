@@ -27,7 +27,7 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
             {
                 conn = new MySqlConnection(_conn);
                 conn.Open();
-                cmd = new MySqlCommand($"SELECT ac.id AS acId, ac.data AS dataAcompanhamento, ac.observacao, ac.statusId, ac.UsuariosId,ac.solicitacaoComprasId, sc.id AS scId, sc.Data, sc.ResponsavelEntrega, sc.Justificativa, sc.Anexo, sc.TipoComprasId, sc.EscolasID, e.id AS idEscolas, e.Nome AS escola, e.Cep, e.logradouro, e.bairro, e.numero, e.estado, e.cidade, u.nome AS usuario, u.id AS uId, u.email,u.funcaoId,  st.descricao AS status, st.id AS statusID FROM sgc_olimpiada.solicitacaocompras AS sc INNER JOIN Acompanhamento AS ac ON ac.SolicitacaoComprasId = sc.id INNER JOIN escolas AS e ON sc.escolasId = e.id INNER JOIN status AS st ON st.id = ac.StatusId INNER JOIN usuarios AS u ON u.id = ac.UsuariosId where sc.id = {idSolicitacao}; ", conn);
+                cmd = new MySqlCommand($"SELECT ac.id AS acId, ac.data AS dataAcompanhamento, ac.observacao, ac.statusId, ac.UsuariosId,ac.solicitacaoComprasId, sc.id AS scId, sc.Data, sc.ResponsavelEntrega, sc.Justificativa, sc.Anexo, sc.TipoComprasId, sc.EscolasID, e.id AS idEscolas, e.Nome AS escola, e.Cep, e.logradouro, e.bairro, e.numero, e.estado, e.cidade, u.nome AS usuario, u.id AS uId, u.email,u.funcaoId,  st.descricao AS status, st.id AS statusID, tc.Descricao, tc.id as tcId FROM sgc_olimpiada.solicitacaocompras AS sc INNER JOIN Acompanhamento AS ac ON ac.SolicitacaoComprasId = sc.id INNER JOIN escolas AS e ON sc.escolasId = e.id INNER JOIN status AS st ON st.id = ac.StatusId INNER JOIN usuarios AS u ON u.id = ac.UsuariosId inner join TipoCompras as tc on tc.id = sc.TipoComprasId  where sc.id = {idSolicitacao}; ", conn);
                 adapter = new MySqlDataAdapter(cmd);
                 dt = new DataTable();
                 adapter.Fill(dt);
@@ -58,6 +58,9 @@ namespace ApiSGCOlimpiada.Data.EmailDAO
                     data.Acompanhamento.SolicitacaoCompra.Escola.Numero = item["Numero"].ToString();
                     data.Acompanhamento.SolicitacaoCompra.Escola.Estado = item["Estado"].ToString();
                     data.Acompanhamento.SolicitacaoCompra.Escola.Cidade = item["Cidade"].ToString();
+                    data.Acompanhamento.SolicitacaoCompra.TipoCompra = new TipoCompra();
+                    data.Acompanhamento.SolicitacaoCompra.TipoCompra.Descricao = item["descricao"].ToString();
+                    data.Acompanhamento.SolicitacaoCompra.TipoCompra.Id = long.Parse(item["tcId"].ToString());
                     data.Acompanhamento.Usuario = new Usuario();
                     data.Acompanhamento.Usuario.Id = Convert.ToInt64(item["uId"]);
                     data.Acompanhamento.Usuario.Nome = item["usuario"].ToString();

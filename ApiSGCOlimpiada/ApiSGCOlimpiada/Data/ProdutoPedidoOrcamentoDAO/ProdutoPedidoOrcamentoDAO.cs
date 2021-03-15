@@ -370,31 +370,34 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                     produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item[17]);
                     produtoPedidoOrcamento.TotalItem = Convert.ToDecimal(item[18]);
 
+                    if (DBNull.Value != item[19])
+                    {
 
-                    produtoPedidoOrcamento2.Id = Convert.ToInt64(item[19]);
-                    produtoPedidoOrcamento2.valor = Convert.ToDecimal(item[20]);
-                    produtoPedidoOrcamento2.Quantidade = Convert.ToInt32(item[21]);
-                    produtoPedidoOrcamento2.Ipi = Convert.ToDecimal(item[22]);
-                    produtoPedidoOrcamento2.Icms = Convert.ToDecimal(item[23]);
-                    produtoPedidoOrcamento2.Desconto = Convert.ToDecimal(item[24]);
-                    produtoPedidoOrcamento2.ProdutoSolicitacoesId = Convert.ToInt64(item[25]);
-                    produtoPedidoOrcamento2.OrcamentoId = Convert.ToInt64(item[26]);
-                    produtoPedidoOrcamento2.TotalItem = Convert.ToDecimal(item[27]);
+                        produtoPedidoOrcamento2.Id = Convert.ToInt64(item[19]);
+                        produtoPedidoOrcamento2.valor = Convert.ToDecimal(item[20]);
+                        produtoPedidoOrcamento2.Quantidade = Convert.ToInt32(item[21]);
+                        produtoPedidoOrcamento2.Ipi = Convert.ToDecimal(item[22]);
+                        produtoPedidoOrcamento2.Icms = Convert.ToDecimal(item[23]);
+                        produtoPedidoOrcamento2.Desconto = Convert.ToDecimal(item[24]);
+                        produtoPedidoOrcamento2.ProdutoSolicitacoesId = Convert.ToInt64(item[25]);
+                        produtoPedidoOrcamento2.OrcamentoId = Convert.ToInt64(item[26]);
+                        produtoPedidoOrcamento2.TotalItem = Convert.ToDecimal(item[27]);
 
-                    produtoPedidoOrcamento3.Id = Convert.ToInt64(item[28]);
-                    produtoPedidoOrcamento3.valor = Convert.ToDecimal(item[29]);
-                    produtoPedidoOrcamento3.Quantidade = Convert.ToInt32(item[30]);
-                    produtoPedidoOrcamento3.Ipi = Convert.ToDecimal(item[31]);
-                    produtoPedidoOrcamento3.Icms = Convert.ToDecimal(item[32]);
-                    produtoPedidoOrcamento3.Desconto = Convert.ToDecimal(item[33]);
-                    produtoPedidoOrcamento3.ProdutoSolicitacoesId = Convert.ToInt64(item[34]);
-                    produtoPedidoOrcamento3.OrcamentoId = Convert.ToInt64(item[35]);
-                    produtoPedidoOrcamento3.TotalItem = Convert.ToDecimal(item[36]);
+                        produtoPedidoOrcamento3.Id = Convert.ToInt64(item[28]);
+                        produtoPedidoOrcamento3.valor = Convert.ToDecimal(item[29]);
+                        produtoPedidoOrcamento3.Quantidade = Convert.ToInt32(item[30]);
+                        produtoPedidoOrcamento3.Ipi = Convert.ToDecimal(item[31]);
+                        produtoPedidoOrcamento3.Icms = Convert.ToDecimal(item[32]);
+                        produtoPedidoOrcamento3.Desconto = Convert.ToDecimal(item[33]);
+                        produtoPedidoOrcamento3.ProdutoSolicitacoesId = Convert.ToInt64(item[34]);
+                        produtoPedidoOrcamento3.OrcamentoId = Convert.ToInt64(item[35]);
+                        produtoPedidoOrcamento3.TotalItem = Convert.ToDecimal(item[36]);
+                        planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento2);
+                        planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento3);
+                    }
 
                     planilha.ProdutoPedidoOrcamentosList = new List<ProdutoPedidoOrcamento>();
                     planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento);
-                    planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento2);
-                    planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento3);
 
                     planilhaList.Add(planilha);
                 }

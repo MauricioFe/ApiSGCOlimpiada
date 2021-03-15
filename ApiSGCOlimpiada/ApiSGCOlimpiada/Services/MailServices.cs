@@ -17,15 +17,12 @@ namespace ApiSGCOlimpiada.Services
 
         public override void Build()
         {
-            Attachment attachment1 = new Attachment();
-            attachment1.Bytes = data.orcamentoAnexos[0];
-            attachment1.Name = "orcamento1.pdf";
-            Attachment attachment2 = new Attachment();
-            attachment2.Bytes = data.orcamentoAnexos[1];
-            attachment2.Name = "orcamento2.pdf";
-            Attachment attachment3 = new Attachment();
-            attachment3.Bytes = data.orcamentoAnexos[2];
-            attachment3.Name = "orcamento3.pdf";
+            Attachment attachment = new Attachment();
+            for (int i = 0; i < data.orcamentoAnexos.Count; i++)
+            {
+                attachment.Bytes = data.orcamentoAnexos[i];
+                attachment.Name = $"orcamento{i}.pdf";
+            }
             Attachment planilha = new Attachment();
             planilha.Bytes = data.planilha;
             planilha.Name = "dadosProdutos.xlsx";
@@ -36,9 +33,7 @@ namespace ApiSGCOlimpiada.Services
             }
             this.To("mauricio.lacerdaml@gmail.com")
                 .From(new MailRecipient("olimpiada@gmail.com", "Envio da solicitação de compra"))
-                .Attach(attachment1)
-                .Attach(attachment2)
-                .Attach(attachment3)
+                .Attach(attachment)
                 .Attach(planilha)
                 .Subject($"Realizando teste de envio de email")
                 .View("~/Views/testeEmail.cshtml", this.data);
