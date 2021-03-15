@@ -45,10 +45,9 @@ namespace ApiSGCOlimpiada.Controllers
             List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetSolicitacao(idSolicitacao);
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
-            data.ClasseValor = dados.ClasseValor;
+            data.Projeto = dados.Projeto;
             data.ContaContabil = dados.ContaContabil;
             data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
-            data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
             var find = orcamentos.Min(r => r.ValorTotal);
             data.Orcamento = orcamentos.Find(r => r.ValorTotal == find);
             data.Responsaveis = (List<Responsavel>)_daoResponsavel.GetBySolicitacao(idSolicitacao);
@@ -147,10 +146,9 @@ namespace ApiSGCOlimpiada.Controllers
             List<ProdutoPedidoOrcamento> produtosCompras = (List<ProdutoPedidoOrcamento>)_daoProdutoCompras.GetSolicitacao(idSolicitacao);
             EmailModel data = _dao.GetDadosSolicitacao(idSolicitacao);
             data.CentroResponsabilidade = dados.CentroResponsabilidade;
-            data.ClasseValor = dados.ClasseValor;
+            data.Projeto = dados.Projeto;
             data.ContaContabil = dados.ContaContabil;
             data.CodUnidadeOrganizacional = dados.CodUnidadeOrganizacional;
-            data.UnidadeOrganizacional = dados.UnidadeOrganizacional;
             var find = orcamentos.Min(r => r.ValorTotal);
             data.Orcamento = orcamentos.Find(r => r.ValorTotal == find);
             data.Responsaveis = (List<Responsavel>)_daoResponsavel.GetBySolicitacao(idSolicitacao);

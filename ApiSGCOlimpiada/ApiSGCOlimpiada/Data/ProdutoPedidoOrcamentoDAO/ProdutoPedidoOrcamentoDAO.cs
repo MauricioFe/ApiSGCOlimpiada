@@ -369,6 +369,7 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                     produtoPedidoOrcamento.ProdutoSolicitacoesId = Convert.ToInt64(item[16]);
                     produtoPedidoOrcamento.OrcamentoId = Convert.ToInt64(item[17]);
                     produtoPedidoOrcamento.TotalItem = Convert.ToDecimal(item[18]);
+                    planilha.ProdutoPedidoOrcamentosList = new List<ProdutoPedidoOrcamento>();
 
                     if (DBNull.Value != item[19])
                     {
@@ -396,7 +397,6 @@ namespace ApiSGCOlimpiada.Data.ProdutoPedidoOrcamentoDAO
                         planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento3);
                     }
 
-                    planilha.ProdutoPedidoOrcamentosList = new List<ProdutoPedidoOrcamento>();
                     planilha.ProdutoPedidoOrcamentosList.Add(produtoPedidoOrcamento);
 
                     planilhaList.Add(planilha);

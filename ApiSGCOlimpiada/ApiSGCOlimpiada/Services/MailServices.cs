@@ -36,7 +36,7 @@ namespace ApiSGCOlimpiada.Services
                 .Attach(attachment)
                 .Attach(planilha)
                 .Subject($"Realizando teste de envio de email")
-                .View("~/Views/testeEmail.cshtml", this.data);
+                .View("~/Views/teplateEmail.cshtml", this.data);
         }
     }
 }
